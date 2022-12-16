@@ -1,0 +1,6 @@
+.l-columns-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: getGap(6);
+    height: 500px;
+}

@@ -1,0 +1,19 @@
+.c-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+    background-color: getColors("principal", 0);
+    padding: getPadding(5);
+
+    &__item{
+        margin: getMargin(6);
+        font-family: getFontFamily("alternativo");
+        color: getColors("principal", 5);
+
+        &--blanco{
+            color: getColors("blanco", 1);
+        }
+    }
+}

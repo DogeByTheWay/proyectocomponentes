@@ -1,0 +1,21 @@
+.c-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: getColors("principal", 5);
+    padding: getPadding(3);
+
+    &__item {
+        margin: getMargin(3);
+
+        &--derecha {
+            margin-left: auto;
+        }
+    }
+
+    &__logo {
+        width: 75px;
+    }
+
+}

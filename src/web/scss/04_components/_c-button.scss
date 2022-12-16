@@ -1,0 +1,7 @@
+.c-button {
+    color: getColors("rojo",5);
+    @include box-shadow(2);
+    //border-radius: getBorderRadius(2) ;
+    @include border-radius(5);
+    
+  }

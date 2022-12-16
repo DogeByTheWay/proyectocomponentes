@@ -1,0 +1,9 @@
+.c-icon {
+    color: getColors("principal", 0);
+    font-size: getFontSize("4xl");
+    margin: getMargin(5);
+
+    &--alternativo{
+        //color: getColors("alternativo", 5);
+    }
+}

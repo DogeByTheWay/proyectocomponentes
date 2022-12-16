@@ -1,0 +1,11 @@
+@mixin box-shadow($key) {
+    -webkit-box-shadow: getShadow($key);
+    -moz-box-shadow: getShadow($key);
+    box-shadow: getShadow($key);
+  }
+
+@mixin border-radius($key) {
+    -webkit-border-radius: getBorderRadius($key);
+    -moz-border-radius: getBorderRadius($key);
+    border-radius: getBorderRadius($key);
+  }
