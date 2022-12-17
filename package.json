@@ -1,0 +1,25 @@
+{
+  "name": "proyectocomponentes",
+  "version": "1.0.0",
+  "description": "Proyecto segunda evaluacion",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "tailwind": "cd ./src/web/tailwind & npx tailwindcss -i main.css -o ../css/tailwind.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DogeByTheWay/proyectocomponentes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DogeByTheWay/proyectocomponentes/issues"
+  },
+  "homepage": "https://github.com/DogeByTheWay/proyectocomponentes#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  }
+}
