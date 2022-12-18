@@ -6,10 +6,15 @@ function abrirProducto() {
     let producto= document.getElementById("producto");
     (producto.open) ? producto.close() : producto.showModal();
 }
+function abrirLogin() {
+  let login= document.getElementById("login");
+  (login.open) ? login.close() : login.showModal();
+}
 
 window.onload = () => {
     cargacesta();
     cargaproducto();
+    cargaLogin();
     document.getElementById("c-barra").onclick = function () {
         let nav = document.getElementsByClassName("c-nav")[0];
         if(nav.style.display=="block"){
@@ -19,8 +24,47 @@ window.onload = () => {
         } 
     }
     
-    document.getElementById('cestaBtn').onclick = abrirCesta;
-    document.getElementById('productoBtn').onclick = abrirProducto;
+    document.getElementById('cestaBtn').onclick = abrirCesta;   
+    document.getElementById('loginBtn').onclick = abrirLogin;
+    document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()};   
+}
+
+function cargaLogin() {
+  document.getElementById("login").innerHTML += `
+  <div class="l-container">
+    <div class="c-login">
+      <div class="l-login-tarjeta">
+        <form class="c-form">
+          <div class="c-form__input">
+            <i class="c-form__icon fas fa-user"></i>
+            <input type="text" class="c-form__text" placeholder="User name / Email">
+          </div>
+          <div class="c-form__input">
+            <i class="c-form__icon fas fa-lock"></i>
+            <input type="password" class="c-form__text" placeholder="Password">
+          </div>
+          <button class="c-form__button-login">
+            <span class="c-form__button-text">Log In Ahora</span>
+            <i class="c-form__button-icon fas fa-chevron-right"></i>
+          </button>				
+        </form>
+        <div class="c-social">
+          <h3>log in via</h3>
+          <div class="l-social">
+            <a href="#" class="c-social__icon fab fa-instagram"></a>
+            <a href="#" class="c-social__icon fab fa-facebook"></a>
+            <a href="#" class="c-social__icon fab fa-twitter"></a>
+          </div>
+        </div>
+      </div>
+      <div class="l-tarjeta-background">
+        <span class="c-tarjeta-background c-tarjeta-background--forma4"></span>
+        <span class="c-tarjeta-background c-tarjeta-background--forma3"></span>		
+        <span class="c-tarjeta-background c-tarjeta-background--forma2"></span>
+        <span class="c-tarjeta-background c-tarjeta-background--forma1"></span>
+      </div>		
+    </div>
+  </div>`;
 }
 
 function cargacesta(){
@@ -40,7 +84,7 @@ function cargacesta(){
         <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
             <div class="w-40">
-              <img class="h-24" src="./assets/1.jpg" alt="">
+              <img class="h-24" src="./assets/img/1.jpg" alt="">
             </div>
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="font-bold text-sm">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</span>
@@ -65,7 +109,7 @@ function cargacesta(){
         <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
             <div class="w-40">
-              <img class="h-24" src="./assets/2.jpg" alt="">
+              <img class="h-24" src="./assets/img/2.jpg" alt="">
             </div>
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="font-bold text-sm">PC Racing Ordenador Gaming AMD Ryzen 7 5700G/16GB/1TB SSD</span>
@@ -90,7 +134,7 @@ function cargacesta(){
         <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
             <div class="w-40">
-              <img class="h-24" src="./assets/3.jpg" alt="">
+              <img class="h-24" src="./assets/img/3.jpg" alt="">
             </div>
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="font-bold text-sm">Placa base Asus TUF GAMING B450-PLUS II</span>
@@ -111,11 +155,11 @@ function cargacesta(){
           <span class="text-center w-1/5 font-semibold text-sm">$150.00</span>
         </div>
 
-        <a href="#" class="flex font-semibold text-indigo-600 text-sm mt-10">
+        <button id="cerrarCesta" class="flex font-semibold text-indigo-600 text-sm mt-10">
       
           <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
           Continua llenando la Cesta
-        </a>
+        </button>
       </div>
 
       <div id="summary" class="w-1/4 px-8 py-10">
@@ -142,7 +186,7 @@ function cargacesta(){
             <span>Coste Total</span>
             <span>$600</span>
           </div>
-          <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
+          <button id="loginBtn" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
         </div>
       </div>
 
@@ -152,7 +196,7 @@ function cargacesta(){
 function cargaproducto(){
     document.getElementById("producto").innerHTML+=`<div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="./assets/6.jpg">
+      <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="./assets/img/6.jpg">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h2 class="text-sm title-font text-gray-500 tracking-widest">Tarjeta Grafica</h2>
         <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">ASUS GeForce RTX 2060 Dual OC EVO Edition 6GB GDDR6</h1>
