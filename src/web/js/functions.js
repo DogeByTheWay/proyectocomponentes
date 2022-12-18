@@ -17,10 +17,12 @@ window.onload = () => {
     cargaLogin();
     document.getElementById("c-barra").onclick = function () {
         let nav = document.getElementsByClassName("c-nav")[0];
-        if(nav.style.display=="block"){
+        if(nav.style.display=="inline-block"){
             nav.style='display:none;'
+            document.getElementsByTagName("body")[0].style="overflow:auto;";
         }else{
-            nav.style = 'display:block;';
+            nav.style = 'display:inline-block;';
+            document.getElementsByTagName("body")[0].style="overflow:hidden;";
         } 
     }
     
