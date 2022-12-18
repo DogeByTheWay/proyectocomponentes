@@ -686,7 +686,7 @@ table {
   margin: 12px;
 }
 .c-fondo-login-dialog {
-  background: linear-gradient(90deg, #C7C5F4, #776BCC);
+  background: linear-gradient(90deg, #dcfce7, #4ade80);
   overflow: hidden;
 }
 
@@ -697,11 +697,11 @@ table {
 }
 
 .c-login {
-  background: linear-gradient(90deg, #5D54A4, #7C78B8);
+  background: linear-gradient(90deg, #15803d, #16a34a);
   position: relative;
   height: 600px;
   width: 360px;
-  box-shadow: 0px 0px 24px #5C5696;
+  box-shadow: 0px 0px 24px darkgray;
 }
 
 .l-login-tarjeta {
@@ -736,7 +736,7 @@ table {
 .c-tarjeta-background--forma2 {
   height: 220px;
   width: 220px;
-  background: #6C63AC;
+  background: #22c55e;
   top: -172px;
   right: 0;
   border-radius: 32px;
@@ -744,7 +744,7 @@ table {
 .c-tarjeta-background--forma3 {
   height: 540px;
   width: 190px;
-  background: linear-gradient(270deg, #5D54A4, #6A679E);
+  background: linear-gradient(270deg, #166534, #4ade80);
   top: -24px;
   right: 0;
   border-radius: 32px;
@@ -752,7 +752,7 @@ table {
 .c-tarjeta-background--forma4 {
   height: 400px;
   width: 200px;
-  background: #7E7BB9;
+  background: #15803d;
   top: 420px;
   right: 50px;
   border-radius: 60px;
@@ -770,11 +770,11 @@ table {
 .c-form__icon {
   position: absolute;
   top: 30px;
-  color: #7875B5;
+  color: #22c55e;
 }
 .c-form__text {
   border: none;
-  border-bottom: 2px solid #D1D1D4;
+  border-bottom: 2px solid #dcfce7;
   background: none;
   padding: 10px;
   padding-left: 24px;
@@ -784,7 +784,7 @@ table {
 }
 .c-form__input:active, .c-form__input:focus, .c-form__input:hover {
   outline: none;
-  border-bottom-color: #6A679E;
+  border-bottom-color: #16a34a;
 }
 .c-form__button-login {
   background: #fff;
@@ -792,25 +792,25 @@ table {
   margin-top: 30px;
   padding: 16px 20px;
   border-radius: 26px;
-  border: 1px solid #D4D3E8;
+  border: 1px solid #dcfce7;
   text-transform: uppercase;
   font-weight: 700;
   display: flex;
   align-items: center;
   width: 100%;
-  color: #4C489D;
-  box-shadow: 0px 2px 2px #5C5696;
+  color: #16a34a;
+  box-shadow: 0px 2px 2px #15803d;
   cursor: pointer;
   transition: 0.2s;
 }
 .c-form__button-login:active, .c-form__button-login:focus, .c-form__button-login:hover {
-  border-color: #6A679E;
+  border-color: #4ade80;
   outline: none;
 }
 .c-form__button-icon {
   font-size: 24px;
   margin-left: auto;
-  color: #7875B5;
+  color: #15803d;
 }
 
 .c-social {
@@ -826,7 +826,7 @@ table {
   padding: 20px 10px;
   color: #fff;
   text-decoration: none;
-  text-shadow: 0px 0px 8px #7875B5;
+  text-shadow: 0px 0px 8px darkgray;
 }
 .c-social__icon:hover {
   transform: scale(1.5);

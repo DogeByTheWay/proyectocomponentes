@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 .c-fondo-login-dialog {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);	
+	background: linear-gradient(90deg, getColors('principal', 0), getColors('principal', 3));	
     overflow: hidden; 
 }
 
@@ -12,11 +12,11 @@
 }
 
 .c-login {		
-	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
+	background: linear-gradient(90deg, getColors('principal', 6), getColors('principal', 5));		
 	position: relative;	
 	height: 600px;
 	width: 360px;	
-	box-shadow: 0px 0px 24px #5C5696;
+	box-shadow: 0px 0px 24px darkgray;
 }
 
 .l-login-tarjeta {
@@ -50,7 +50,7 @@
     &--forma2 {
         height: 220px;
         width: 220px;
-        background: #6C63AC;	
+        background: getColors('principal', 4);	
         top: -172px;
         right: 0;	
         border-radius: 32px;
@@ -58,7 +58,7 @@
     &--forma3 {
         height: 540px;
         width: 190px;
-        background: linear-gradient(270deg, #5D54A4, #6A679E);
+        background: linear-gradient(270deg, getColors('principal', 7), getColors('principal', 3));
         top: -24px;
         right: 0;	
         border-radius: 32px;
@@ -66,7 +66,7 @@
     &--forma4 {
         height: 400px;
         width: 200px;
-        background: #7E7BB9;	
+        background: getColors('principal', 6);	
         top: 420px;
         right: 50px;	
         border-radius: 60px;
@@ -84,11 +84,11 @@
     &__icon {
         position: absolute;
         top: 30px;
-        color: #7875B5;
+        color: getColors('principal', 4);
     }
     &__text {
         border: none;
-        border-bottom: 2px solid #D1D1D4;
+        border-bottom: 2px solid getColors('principal', 0);
         background: none;
         padding: 10px;
         padding-left: 24px;
@@ -100,7 +100,7 @@
     &__input:focus,
     &__input:hover {
 	    outline: none;
-	    border-bottom-color: #6A679E;
+	    border-bottom-color: getColors('principal', 5);
     }
     &__button-login {
         background: #fff;
@@ -108,27 +108,27 @@
         margin-top: 30px;
         padding: 16px 20px;
         border-radius: 26px;
-        border: 1px solid #D4D3E8;
+        border: 1px solid getColors('principal', 0);
         text-transform: uppercase;
         font-weight: 700;
         display: flex;
         align-items: center;
         width: 100%;
-        color: #4C489D;
-        box-shadow: 0px 2px 2px #5C5696;
+        color: getColors('principal', 5);
+        box-shadow: 0px 2px 2px getColors('principal', 6);
         cursor: pointer;
         transition: .2s;
     }
     &__button-login:active,
     &__button-login:focus,
     &__button-login:hover {
-	    border-color: #6A679E;
+	    border-color: getColors('principal', 3);
 	    outline: none;
     }
     &__button-icon {
         font-size: 24px;
         margin-left: auto;
-        color: #7875B5;
+        color: getColors('principal', 6);
     }   
 }
 
@@ -144,7 +144,7 @@
         padding: 20px 10px;
         color: #fff;
         text-decoration: none;	
-        text-shadow: 0px 0px 8px #7875B5;
+        text-shadow: 0px 0px 8px darkgray;
     }  
     &__icon:hover {
 	transform: scale(1.5);	
