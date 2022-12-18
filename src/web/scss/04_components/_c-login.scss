@@ -2,13 +2,13 @@
 
 .c-fondo-login-dialog {
 	background: linear-gradient(90deg, #C7C5F4, #776BCC);	
+    overflow: hidden; 
 }
 
 .l-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
 }
 
 .c-login {		
