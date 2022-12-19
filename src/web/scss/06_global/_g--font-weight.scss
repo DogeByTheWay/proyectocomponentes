@@ -1,0 +1,6 @@
+@each $key in getFontWeightKeys() {
+    $value:getFontWeight($key);
+      .g--font-weight-#{$key} {
+        font-weight: $value;
+      }
+  }

@@ -73,6 +73,15 @@
     @return map-keys($font-size);
 }
 
+
+@function getFontWeight($clave){
+  @return map-get($font-weight, $clave);
+}
+
+@function getFontWeightKeys(){
+  @return map-keys($font-weight);
+}
+
   //FONT-FAMILY
 
   @function getFontFamily($clave){
