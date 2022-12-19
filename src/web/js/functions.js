@@ -90,7 +90,7 @@ function cargacesta(){
             </div>
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="g--font-family-principal text-sm">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</span>
-              <span class="g--color-principal-4 g--font-family-principal text-xs">Portatil</span>
+              <span class="g--color-principal-5 g--font-family-principal text-xs">Portatil</span>
               <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
             </div>
           </div>
@@ -115,7 +115,7 @@ function cargacesta(){
             </div>
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="g--font-family-principal text-sm">PC Racing Ordenador Gaming AMD Ryzen 7 5700G/16GB/1TB SSD</span>
-              <span class="g--color-principal-4 text-xs">PC</span>
+              <span class="g--color-principal-5 text-xs">PC</span>
               <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
             </div>
           </div>
@@ -140,7 +140,7 @@ function cargacesta(){
             </div>
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="g--font-family-principal text-sm">Placa base Asus TUF GAMING B450-PLUS II</span>
-              <span class="g--font-family-principal g--color-principal-4 text-xs">Placa Base</span>
+              <span class="g--font-family-principal g--color-principal-5 text-xs">Placa Base</span>
               <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
             </div>
           </div>
@@ -182,13 +182,13 @@ function cargacesta(){
           <label for="promo" class="g--font-family-principal inline-block mb-3 text-sm uppercase">Codigo Promocion</label>
           <input type="text" id="promo" placeholder="Introduce tu Codigo" class="p-2 text-sm w-full">
         </div>
-        <button class="g--background-color-principal-1 hover:bg-amber-600 px-5 py-2 text-sm text-white uppercase">Probar Codigo</button>
+        <button class="g--background-color-principal-5 hover:bg-amber-600 px-5 py-2 text-sm text-white uppercase">Probar Codigo</button>
         <div class="border-t mt-8">
           <div class="flex font-semibold justify-between py-6 text-sm uppercase">
             <span>Coste Total</span>
             <span>$600</span>
           </div>
-          <button id="loginBtn" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
+          <button id="loginBtn" class="g--background-color-principal-5 g--font-family-principal hover:bg-amber-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
         </div>
       </div>
 
