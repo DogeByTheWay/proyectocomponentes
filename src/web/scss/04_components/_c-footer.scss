@@ -1,16 +1,17 @@
 .c-footer{
     display: flex;
-    flex-direction: column;
+    flex-direction: in-line;
+    gap: 100px;
     justify-content: center;
-
+    align-items: center;
     text-align: center;
-    background-color: getColors("principal", 0);
-    padding: getPadding(5);
+    background-color: getColors("negro",0);
+    padding: getPadding(4);
 
     &__item{
         margin: getMargin(6);
         font-family: getFontFamily("alternativo");
-        color: getColors("principal", 5);
+        color: getColors("principal", 4);
 
         &--blanco{
             color: getColors("blanco", 1);
