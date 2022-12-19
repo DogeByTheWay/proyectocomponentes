@@ -1,7 +1,26 @@
 .c-button {
-    color: getColors("rojo",5);
-    @include box-shadow(2);
-    //border-radius: getBorderRadius(2) ;
-    @include border-radius(5);
-    
+  background-color: getColors("principal",4);
+  color: getColors("blanco",1);
+  font-weight: bold;
+  padding-top: getPadding(6);
+  padding-bottom:getPadding(6);
+  padding-left: getPadding(9);
+  padding-right:getPadding(9);
+ // font-family:getFontFamily("principal");
+    border-radius: 9999px;
+  &:hover{
+    background-color:getColors("principal",3);
+    }
+  &--size-stretch{
+    padding-top: getPadding(4);
+    padding-bottom:getPadding(4);
+    padding-left: getPadding(8);
+    padding-right:getPadding(8);
+    margin-bottom:getMargin(2);
+  }
+
+  &--secundario{
+
+  }
+      
   }
