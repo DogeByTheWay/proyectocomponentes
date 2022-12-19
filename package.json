@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "tailwind": "cd ./src/web/tailwind & npx tailwindcss -i main.css -o ../css/tailwind.css"
+    "test": "echo \"si\""
   },
   "repository": {
     "type": "git",
