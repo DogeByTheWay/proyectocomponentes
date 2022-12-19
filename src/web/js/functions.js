@@ -39,19 +39,19 @@ function cargaLogin() {
         <form class="c-form">
           <div class="c-form__input">
             <i class="c-form__icon fas fa-user"></i>
-            <input type="text" class="c-form__text" placeholder="User name / Email">
+            <input type="text" class="c-form__text" placeholder="Email">
           </div>
           <div class="c-form__input">
             <i class="c-form__icon fas fa-lock"></i>
             <input type="password" class="c-form__text" placeholder="Password">
           </div>
           <button class="c-form__button-login">
-            <span class="c-form__button-text">Log In Ahora</span>
+            <span class="c-form__button-text">Iniciar Sesión</span>
             <i class="c-form__button-icon fas fa-chevron-right"></i>
           </button>				
         </form>
         <div class="c-social">
-          <h3>log in via</h3>
+          <h3 class="g--font-family-principal">log in via</h3>
           <div class="l-social">
             <a href="#" class="c-social__icon fab fa-instagram"></a>
             <a href="#" class="c-social__icon fab fa-facebook"></a>
@@ -66,7 +66,7 @@ function cargaLogin() {
         <span class="c-tarjeta-background c-tarjeta-background--forma1"></span>
       </div>		
     </div>
-  </div>`;
+  </div>`;//g--color-principal-5 g--font-family-principal
 }
 
 function cargacesta(){
@@ -176,15 +176,15 @@ function cargacesta(){
           <select class="block p-2 text-gray-600 w-full text-sm">
             <option>Envio Standard  - $10.00</option>
           </select>
-          <p class="g--font-family-principal g--color-principal-4" >Entrega Martes, 14 de Octubre</p>
+          <p class="g--font-family-principal g--color-principal-5" >Entrega Martes, 14 de Octubre</p>
         </div>
         <div class="py-10">
           <label for="promo" class="g--font-family-principal inline-block mb-3 text-sm uppercase">Codigo Promocion</label>
           <input type="text" id="promo" placeholder="Introduce tu Codigo" class="p-2 text-sm w-full">
         </div>
-        <button class="g--background-color-principal-5 hover:bg-amber-600 px-5 py-2 text-sm text-white uppercase">Probar Codigo</button>
+        <button class="bg-amber-500 hover:bg-amber-600 px-5 py-2 text-sm text-white uppercase">Probar Codigo</button>
         <div class="border-t mt-8">
-          <div class="flex font-semibold justify-between py-6 text-sm uppercase">
+          <div class="flex g--font-family-principal justify-between py-6 text-sm uppercase">
             <span>Coste Total</span>
             <span>$600</span>
           </div>
@@ -200,26 +200,26 @@ function cargaproducto(){
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="./assets/img/6.jpg">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-        <h2 class="text-sm title-font text-gray-500 tracking-widest">Tarjeta Grafica</h2>
-        <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">ASUS GeForce RTX 2060 Dual OC EVO Edition 6GB GDDR6</h1>
+        <h2 class="text-sm g--font-family-principal g--color-principal-5 tracking-widest">Tarjeta Grafica</h2>
+        <h1 class="text-gray-900 text-3xl title-font g--font-family-principal mb-1">ASUS GeForce RTX 2060 Dual OC EVO Edition 6GB GDDR6</h1>
         <div class="flex mb-4">
           <span class="flex items-center">
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-amber-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-amber-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-amber-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-amber-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-amber-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <span class="text-gray-600 ml-3">Impacto Medioambiental</span>
+            <span class="g--font-family-principal g--color-principal-5 ml-3">Impacto Medioambiental</span>
           </span>
           <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
             <a class="text-gray-500">
@@ -254,10 +254,10 @@ function cargaproducto(){
         </div>
         <div class="flex">
           <span class="title-font font-medium text-2xl text-gray-900">$58.00</span>
-          <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Al Carrito</button>
+          <button class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-amber-600 rounded">Al Carrito</button>
         </div>
       </div>
-      <div class="flex flex-col">
+      <div class="flex flex-col g--font-family-principal">
         <div>
           <h5 class="mt-8 text-lg font-bold">Descripcion del Producto</h5>
           <hr>

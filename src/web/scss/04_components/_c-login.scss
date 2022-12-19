@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 .c-fondo-login-dialog {
-	background: linear-gradient(90deg, getColors('principal', 0), getColors('principal', 3));	
+	background: linear-gradient(90deg, getColors('principal', 0), getColors('principal', 5));	
     overflow: hidden; 
 }
 
@@ -61,7 +61,7 @@
     }
     &__icon {
         position: absolute;
-        top: 30px;
+        top: 32px;
         color: getColors('principal', 4);
     }
     &__text {
@@ -70,7 +70,7 @@
         background: none;
         padding:  getPadding(4);
         padding-left:  getPadding(9);
-        font-weight: 700;
+        font-weight: getFontWeight(3xl);
         width: 75%;
         transition: .2s;
     }
@@ -82,12 +82,13 @@
     }
     &__button-login {
         background: #fff;
-        font-size: getFontSize('s');
+        font-size: getFontSize('l');
         margin-top: getMargin(9);
         padding: getPadding(6) getPadding(7);
         border-radius: 26px;
         border: 1px solid getColors('principal', 0);
-        text-transform: uppercase;
+       //text-transform: uppercase;
+        font-family:getFontFamily('principal');
         font-weight: 700;
         display: flex;
         align-items: center;
@@ -100,7 +101,7 @@
     &__button-login:active,
     &__button-login:focus,
     &__button-login:hover {
-	    border-color: getColors('principal', 3);
+	    border-color: getColors('principal', 6);
 	    outline: none;
     }
     &__button-icon {

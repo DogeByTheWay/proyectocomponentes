@@ -1,6 +1,6 @@
 $colors: (
     "principal":(#E6FEFE,#B6F6F4, #8CE8E1, #60D7C9, #36C9B1, #289F87, #18775F,#094937, #011911),
-    "alternativo":(#FDD2A1, #F2B87D, #E59757, #D97A36, #B65A25, #92431C, #6A2A11, #461707, #190501),
+    "alternativo":(#fffbeb, #fef3c7, #fde68a, #fcd34d, #fbbf24, #f59e0b, #d97706, #b45309, #92400e),
     "rojo":(#FEE6E6, #F7B5B7, #EB8991, #DC5B6A, #D02F4A, #A4233D, #7A152E, #4A081A, #190109),
     "azul":(#d3dbf9, #adbdf8, #88a0f5, #6080f6, #325efd, #043afd, #012fd5, #032293, #01114b),
     "amarillo":(#f9f8d3, #f8f7ad, #f5f188, #f6f160, #fdf332, #f1fd04, #c0d501, #938e03, #4b4701),
@@ -13,10 +13,10 @@ $margin-values:(0px,4px,6px,8px,10px,12px,16px,20px,24px,30px,40px,48px,64px,80p
 
 $padding-values:(0px,4px,6px,8px,10px,12px,16px,20px,24px,30px,40px,48px,64px,80px,96px,128px);
 
-$font-size:("xs":12px,"s":14px,"m":16px,"l":18px,"xl":20px,"2xl":24px,"3xl":30px,"4xl":36px,);
+$font-size:("xs":12px,"s":14px,"m":16px,"l":18px,"xl":20px,"2xl":24px,"3xl":30px,"4xl":36px);
 
 
-$font-weight:("xs":12px,"s":14px,"m":16px,"l":18px,"xl":20px,"2xl":24px,"3xl":30px,"4xl":36px,);
+$font-weight:("xs":100,"s":200,"m":300,"l":400,"xl":500,"2xl":600,"3xl":700,"4xl":800);
 
 $border-radius:(0px,2px,4px,6px,8px,16px,20px,24px,32px,60px);
 
