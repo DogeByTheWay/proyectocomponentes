@@ -2,15 +2,21 @@
   background-color: getColors("principal",4);
   color: getColors("blanco",1);
   font-weight: bold;
-  padding-top: getPadding(6);
-  padding-bottom:getPadding(6);
-  padding-left: getPadding(9);
-  padding-right:getPadding(9);
+  font-size: getFontSize("m");
+  padding-top: getPadding(5);
+  padding-bottom:getPadding(5);
+  padding-left: getPadding(6);
+  padding-right:getPadding(6);
  // font-family:getFontFamily("principal");
-    border-radius: 9999px;
+    border-radius: getBorderRadius(3);
   &:hover{
     background-color:getColors("principal",3);
-    }
+  }
+  &:active{
+    box-shadow: 
+        inset 0px 0px 4px 2px getColors('gris',1),
+        inset 0px -2px 2px 0px getColors('blanco',0);
+  }
   &--size-stretch{
     padding-top: getPadding(4);
     padding-bottom:getPadding(4);
