@@ -5,16 +5,27 @@
     align-items: center;
     justify-content: center;
     background-color: getColors("principal", 5);
-    
+    font-family: 'Montserrat', sans-serif;
+    border-bottom-right-radius: getBorderRadius(3);
+    border-bottom-left-radius: getBorderRadius(3);
+    box-shadow: 
+        -2px 4px 4px getColors('gris',3),
+        2px 4px 4px getColors('gris',3);
 
     &__item {
         padding: getPadding(7);
+        
 
         &--derecha {
             margin-left: auto;
         }
         &:hover{
-            background-color: getColors("principal", 2);
+            background-color: getColors("principal",3);
+            color: getColors('blanco',0);
+        }
+        &--bottom{
+            border-bottom-right-radius: getBorderRadius(3);
+            border-bottom-left-radius: getBorderRadius(3);
         }
     }
 
