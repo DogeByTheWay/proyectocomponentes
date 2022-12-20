@@ -28,7 +28,58 @@ window.onload = () => {
     
     document.getElementById('cestaBtn').onclick = abrirCesta;   
     document.getElementById('loginBtn').onclick = abrirLogin;
+    document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
     document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()};   
+}
+
+function mostrarOrdenadores(){
+  document.getElementById("contenedorTodo").innerHTML=`
+  <section class="p-5 pl-40 pr-60">
+  <b class="g--font-size-xl">Ordenadores</b>
+<div class="l-horizontal-space-between">
+ <div class="c-card">
+    
+     <img src="assets/img/14.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+ <div class="c-card">
+    
+     <img src="assets/img/12.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+ <div class="c-card">
+    
+     <img src="assets/img/14.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>  <div class="c-card">
+    
+     <img src="assets/img/11.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+</div>   
+ 
+</section>`
+  ;
 }
 
 function cargaLogin() {
