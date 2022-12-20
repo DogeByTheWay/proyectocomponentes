@@ -80,35 +80,7 @@
 	    outline: none;
 	    border-bottom-color: getColors('principal', 5);
     }
-    &__button-login {
-        background: #fff;
-        font-size: getFontSize('l');
-        margin-top: getMargin(9);
-        padding: getPadding(6) getPadding(7);
-        border-radius: 26px;
-        border: 1px solid getColors('principal', 0);
-       //text-transform: uppercase;
-        font-family:getFontFamily('principal');
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        color: getColors('principal', 5);
-        @include box-shadow(1);
-        cursor: pointer;
-        transition: .2s;
-    }
-    &__button-login:active,
-    &__button-login:focus,
-    &__button-login:hover {
-	    border-color: getColors('principal', 6);
-	    outline: none;
-    }
-    &__button-icon {
-        font-size: getFontSize('2xl');
-        margin-left: auto;
-        color: getColors('principal', 6);
-    }   
+
 }
 
 .c-social {	
