@@ -1,0 +1,29 @@
+.c-card{
+   
+    padding-left: getPadding(4);
+    padding-right: getPadding(4);
+    padding-bottom: getPadding(4);
+    border:getBorderRadius(1) solid getColors("gris",1);
+    border-radius:getBorderRadius(4);
+    display:grid;
+    justify-items: center;
+    text-align: center;
+  
+    font-family:getFontFamily("principal");
+   box-shadow:0px 1px 4px getColors("gris",2);
+    box-shadow:0px 6px 10px getColors("gris",2);
+
+    &__img{
+        width: 170px;
+        height: 166px;
+        margin-bottom:  getMargin(4);
+    }
+    &__body{
+        display: grid;
+        gap:5px 0px;
+
+    }
+
+  
+   
+}

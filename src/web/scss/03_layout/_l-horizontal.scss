@@ -1,6 +1,7 @@
-.l-horizontal-space-arround{
+.l-horizontal-space-between{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    justify-content:space-between;
+    column-gap:15px;
+
+   
 }
