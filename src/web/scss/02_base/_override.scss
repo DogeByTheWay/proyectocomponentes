@@ -1,0 +1,22 @@
+input[type="radio"] {
+    accent-color: getColors("principal",6);
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  tbody {
+    color: getColors("gris",8)!important;
+  }
+  
+  td {
+    padding-top: getPadding(1);
+    padding-bottom: getPadding(1);
+  }
+  
+  tfoot {
+    border-top: 1px solid getColors("gris",8)!important;
+    font-weight: getFontWeight("2xl");
+  }

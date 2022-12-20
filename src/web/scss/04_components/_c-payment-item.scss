@@ -1,0 +1,15 @@
+.c-payment-item {
+    display: flex;
+    align-items: center;
+    background-color: getColors("blanco",8);
+    border-radius: getBorderRadius(5);
+    box-shadow: getBoxShadow(0);
+    padding: getPadding(6);
+
+    & label{
+        display: flex;
+        align-items: center;
+        flex: 1;
+        gap: getGap(6);
+    }
+  }

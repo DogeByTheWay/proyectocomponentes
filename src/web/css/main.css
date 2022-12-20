@@ -1,10 +1,33 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
+input[type=radio] {
+  accent-color: #18775F;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tbody {
+  color: #798684 !important;
+}
+
+td {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+tfoot {
+  border-top: 1px solid #798684 !important;
+  font-weight: 600;
+}
+
 /* Document
    ========================================================================== */
 /**
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -687,6 +710,7 @@ table {
   padding-bottom: 12px;
   padding-left: 16px;
   padding-right: 16px;
+  text-align: center;
   border-radius: 6px;
 }
 .c-button:hover {
@@ -875,6 +899,44 @@ table {
 }
 .c-social__icon:hover {
   transform: scale(1.5);
+}
+
+.c-paymentform {
+  background-color: #F4F5F5;
+  border-radius: 32px;
+  height: 812px;
+  box-shadow: 0 1px 3px getColors('gris',6);
+  width: 975px;
+  padding: 30px;
+}
+.c-paymentform__header {
+  text-align: center;
+  padding: 16px;
+}
+.c-paymentform__title {
+  font-weight: 700;
+  padding: 0px;
+}
+.c-paymentform__address {
+  border-radius: 16px;
+  background-color: #36C9B1;
+  color: #FFFFFF;
+  padding: 16px;
+}
+
+.c-payment-item {
+  display: flex;
+  align-items: center;
+  background-color: #E6E6E6;
+  border-radius: 16px;
+  box-shadow: getBoxShadow(0);
+  padding: 16px;
+}
+.c-payment-item label {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 16px;
 }
 
 .c-footer {
@@ -2891,6 +2953,98 @@ table {
 
 .g--font-weight-4xl {
   font-weight: 800;
+}
+
+.g--gap-0 {
+  gap: 0px;
+}
+
+.g--gap-1 {
+  gap: 4px;
+}
+
+.g--gap-2 {
+  gap: 6px;
+}
+
+.g--gap-3 {
+  gap: 8px;
+}
+
+.g--gap-4 {
+  gap: 10px;
+}
+
+.g--gap-5 {
+  gap: 12px;
+}
+
+.g--gap-6 {
+  gap: 16px;
+}
+
+.g--gap-7 {
+  gap: 20px;
+}
+
+.g--gap-8 {
+  gap: 24px;
+}
+
+.g--gap-9 {
+  gap: 32px;
+}
+
+.g--gap-10 {
+  gap: 40px;
+}
+
+.g--gap-11 {
+  gap: 48px;
+}
+
+.g--gap-12 {
+  gap: 64px;
+}
+
+.g--gap-13 {
+  gap: 80px;
+}
+
+.g--gap-14 {
+  gap: 96px;
+}
+
+.g--gap-15 {
+  gap: 128px;
+}
+
+.g--gap-16 {
+  gap: 160px;
+}
+
+.g--gap-17 {
+  gap: 192px;
+}
+
+.g--gap-18 {
+  gap: 224px;
+}
+
+.g--gap-19 {
+  gap: 256px;
+}
+
+.g--gap-20 {
+  gap: 320px;
+}
+
+.g--gap-21 {
+  gap: 480px;
+}
+
+.g--gap-22 {
+  gap: 640px;
 }
 
 .g--box-shadow-0 {

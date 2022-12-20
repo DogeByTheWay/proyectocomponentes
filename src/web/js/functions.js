@@ -10,12 +10,17 @@ function abrirLogin() {
   let login= document.getElementById("login");
   (login.open) ? login.close() : login.showModal();
 }
+function abrirPago() {
+  let pago= document.getElementById("pago");
+  (pago.open) ? pago.close() : pago.showModal();
+}
 
 window.onload = () => {
     cargacesta();
     cargaproducto();
     cargaLogin();
     cargarContenido();
+    cargaPago();
     document.getElementById("c-barra").onclick = function () {
         let nav = document.getElementsByClassName("c-nav")[0];
         if(nav.style.display=="inline-block"){
@@ -29,10 +34,10 @@ window.onload = () => {
     
     document.getElementById('cestaBtn').onclick = abrirCesta;   
     document.getElementById('loginBtn').onclick = abrirLogin;
+    document.getElementById('compraBtn').onclick = abrirPago;
     document.getElementById('volverMenu').onclick =function(){
       cargarContenido();
     };
-
     document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
     document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()}; 
     document.getElementById("btnIniciarSesion").onclick=function(){
@@ -289,7 +294,7 @@ function cargacesta(){
             <span>Coste Total</span>
             <span>€600</span>
           </div>
-          <button id="loginBtn" class="g--background-color-principal-5 g--font-family-principal hover:bg-amber-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
+          <button id="compraBtn" class="g--background-color-principal-5 g--font-family-principal hover:bg-amber-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
         </div>
       </div>
 
@@ -508,4 +513,57 @@ function cargarContenido(){
       </div>
   </div>
 </div>`
+}
+
+function cargaPago(){
+  document.getElementById("pago").innerHTML=`<div class="c-paymentform">
+  <div class="c-paymentform__header">
+    <h1 class="g--font-weight-3xl">Checkout</h1>
+  </div>
+  <div class="l-flex l-flex--direction-column g--gap-9">
+    <h2 class="c-paymentform__title">Address</h2>
+    <div class="c-paymentform__address">
+      Adam Johnson<br />
+      403 Oakland Ave Street, A city, Florida, 32104,<br />
+      United States of America
+    </div>
+    <h2 class="c-paymentform__title">
+      Payment Method
+    </h2>
+    <div class="c-payment-item">
+      <label for="visa"><img src="assets/img/visa.svg" width="30" />Tarjeta de credito</label>
+      <input checked id="visa" name="payment-method" type="radio" />
+    </div>
+    <div class="c-payment-item">
+      <label for="paypal"><img src="assets/img/paypal.svg" width="30" />PayPal</label>
+      <input id="paypal" name="payment-method" type="radio" />
+    </div>
+    <h2 class="c-paymentform__title">Shopping Bill</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td>Shipping fee</td>
+          <td align="right">5.43€</td>
+        </tr>
+        <tr>
+          <td>Discount 10%</td>
+          <td align="right">-1.89€</td>
+        </tr>
+        <tr>
+          <td>Price Total</td>
+          <td align="right">84.82€</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td align="right">88.36€</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="c-button c-button--size-stretch g--margin-top-1">
+      <a type="submit">Pagar</a>
+    </div>
+  </div>
+</div>`;
 }

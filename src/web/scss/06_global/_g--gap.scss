@@ -1,0 +1,6 @@
+@each $key in getGapKeys() {
+    $value:getGap($key);
+      .g--gap-#{$key} {
+        gap: $value;
+      }
+  }
