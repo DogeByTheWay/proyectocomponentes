@@ -665,6 +665,12 @@ table {
   gap: 10px 15px;
 }
 
+.l-vertical {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px 0px;
+}
+
 .c-panel {
   -webkit-box-shadow: 0 4px 6px getColors('gris',6);
   -moz-box-shadow: 0 4px 6px getColors('gris',6);
@@ -911,6 +917,20 @@ table {
 .c-card__body {
   display: grid;
   gap: 5px 0px;
+}
+
+.c-listaCarrito {
+  border: 2px solid #EFF0F0;
+  border-radius: 8px;
+  padding: 10px;
+}
+.c-listaCarrito__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: baseline;
+  column-gap: 20px;
+  padding-top: 12px;
 }
 
 .g--background-color-principal-0 {

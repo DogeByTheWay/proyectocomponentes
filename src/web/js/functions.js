@@ -34,7 +34,11 @@ window.onload = () => {
     };
 
     document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
-    document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()};   
+    document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()}; 
+    document.getElementById("btnIniciarSesion").onclick=function(){
+      document.getElementById("login").close();
+      document.getElementById("listaCesta").showModal();
+    };
 }
 
 function mostrarOrdenadores(){
@@ -129,7 +133,7 @@ function mostrarOrdenadores(){
 }
 
 function cargaLogin() {
-  document.getElementById("login").innerHTML += `
+  document.getElementById("login").innerHTML = `
   <div class="l-login-container">
     <div class="c-login">
       <div class="l-login-tarjeta">
@@ -148,7 +152,7 @@ function cargaLogin() {
           </button>				
         </form>
         <div class="c-social">
-          <h3 class="g--font-family-principal">log in via</h3>
+          <h3 class="g--font-family-principal" id="btnIniciarSesion">log in via</h3>
           <div class="l-social">
             <a href="#" class="c-social__icon fab fa-instagram"></a>
             <a href="#" class="c-social__icon fab fa-facebook"></a>
