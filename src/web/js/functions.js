@@ -29,6 +29,10 @@ window.onload = () => {
     
     document.getElementById('cestaBtn').onclick = abrirCesta;   
     document.getElementById('loginBtn').onclick = abrirLogin;
+    document.getElementById('volverMenu').onclick =function(){
+      cargarContenido();
+    };
+
     document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
     document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()};   
 }
@@ -387,7 +391,7 @@ function cargaproducto(){
 }
 
 function cargarContenido(){
-  document.getElementById("contenedorTodo").innerHTML+=
+  document.getElementById("contenedorTodo").innerHTML=
   `     <section>
   <article class="flex flex-row-reverse items-center p-5 pl-40 pr-60 ">
       <div class="text-right w-1/2">
