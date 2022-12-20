@@ -84,7 +84,7 @@ function mostrarOrdenadores(){
 
 function cargaLogin() {
   document.getElementById("login").innerHTML += `
-  <div class="l-login-center">
+  <div class="l-login-container">
     <div class="c-login">
       <div class="l-login-tarjeta">
         <form class="c-form">
