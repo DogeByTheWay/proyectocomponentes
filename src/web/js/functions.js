@@ -29,6 +29,7 @@ window.onload = () => {
     document.getElementById('cestaBtn').onclick = abrirCesta;   
     document.getElementById('loginBtn').onclick = abrirLogin;
     document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
+
     document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()};   
 }
 
@@ -308,10 +309,10 @@ function cargaproducto(){
           <button class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-amber-600 rounded">Al Carrito</button>
         </div>
       </div>
-      <div class="flex flex-col g--font-family-principal">
+      <div class="flex flex-col g--font-family-principal w-full">
         <div>
-          <h5 class="mt-8 text-lg font-bold">Descripcion del Producto</h5>
-          <hr>
+          <h5 class="mt-8 text-lg font-bold">Descripcion del Producto</h5>      
+          <hr>   
         </div>
         <div class="mt-5">
           <ul>
