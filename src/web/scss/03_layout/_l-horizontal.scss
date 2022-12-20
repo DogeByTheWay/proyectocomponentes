@@ -1,7 +1,6 @@
 .l-horizontal-space-between{
-    display: flex;
-    justify-content:space-between;
-    column-gap:15px;
 
-   
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px 15px;   
 }

@@ -15,6 +15,7 @@ window.onload = () => {
     cargacesta();
     cargaproducto();
     cargaLogin();
+    cargarContenido();
     document.getElementById("c-barra").onclick = function () {
         let nav = document.getElementsByClassName("c-nav")[0];
         if(nav.style.display=="inline-block"){
@@ -33,6 +34,7 @@ window.onload = () => {
 }
 
 function mostrarOrdenadores(){
+  document.getElementById("contenedorTodo").innerHTML="";
   document.getElementById("contenedorTodo").innerHTML=`
   <section class="p-5 pl-40 pr-60">
   <b class="g--font-size-xl">Ordenadores</b>
@@ -76,7 +78,47 @@ function mostrarOrdenadores(){
      </div>
     
  </div>
-</div>   
+
+ <div class="c-card">
+    
+     <img src="assets/img/14.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+ <div class="c-card">
+    
+     <img src="assets/img/12.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+ <div class="c-card">
+    
+     <img src="assets/img/14.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>  <div class="c-card">
+    
+     <img src="assets/img/11.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+</div>
  
 </section>`
   ;
@@ -155,8 +197,8 @@ function cargacesta(){
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">$400.00</span>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">$400.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€400.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€400.00</span>
         </div>
 
         <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
@@ -180,8 +222,8 @@ function cargacesta(){
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">$40.00</span>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">$40.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€40.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€40.00</span>
         </div>
 
         <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
@@ -204,8 +246,8 @@ function cargacesta(){
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">$150.00</span>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">$150.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€150.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€150.00</span>
         </div>
 
         <button id="cerrarCesta" class="flex g--font-family-principal g--color-principal-5  text-sm mt-10">
@@ -220,12 +262,12 @@ function cargacesta(){
       </h1>
         <div class="flex justify-between mt-10 mb-5">
           <span class="g--font-family-principal text-sm uppercase">3 Articulos</span>
-          <span class="g--font-family-principal text-sm">590$</span>
+          <span class="g--font-family-principal text-sm">590€</span>
         </div>
         <div>
           <label class="g--font-family-principal inline-block mb-3 text-sm uppercase">Metodo de envio</label>
           <select class="block p-2 text-gray-600 w-full text-sm">
-            <option>Envio Standard  - $10.00</option>
+            <option>Envio Standard  - €10.00</option>
           </select>
           <p class="g--font-family-principal g--color-principal-5" >Entrega Martes, 14 de Octubre</p>
         </div>
@@ -237,7 +279,7 @@ function cargacesta(){
         <div class="border-t mt-8">
           <div class="flex g--font-family-principal justify-between py-6 text-sm uppercase">
             <span>Coste Total</span>
-            <span>$600</span>
+            <span>€600</span>
           </div>
           <button id="loginBtn" class="g--background-color-principal-5 g--font-family-principal hover:bg-amber-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
         </div>
@@ -304,7 +346,7 @@ function cargaproducto(){
           </div>
         </div>
         <div class="flex">
-          <span class="title-font font-medium text-2xl text-gray-900">$58.00</span>
+          <span class="title-font font-medium text-2xl text-gray-900">€58.00</span>
           <button class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-amber-600 rounded">Al Carrito</button>
         </div>
       </div>
@@ -342,4 +384,120 @@ function cargaproducto(){
       </div>
     </div>
   </div>`;
+}
+
+function cargarContenido(){
+  document.getElementById("contenedorTodo").innerHTML+=
+  `     <section>
+  <article class="flex flex-row-reverse items-center p-5 pl-40 pr-60 ">
+      <div class="text-right w-1/2">
+          <h1 class="text-4xl">Compra la tecnologia que ayuda al medioambiante</h1>
+          <p class="my-5 mb-7 text-l">
+              Nuestra tienda contiene los productos que siempre has querido pero ahora de forma
+              sostenible y ofreciendo el mismo rendimiento.
+          </p>
+          <a class="c-button">Saber más</a>
+      </div>
+      <div class="w-1/2">
+          <img class="w-full" src="assets/img/refurbished.png" alt="Imagen reciclaje venta">
+      </div>
+  </article>
+</section>
+<hr>
+<section class="p-5 pl-40 pr-60">
+  <b class="g--font-size-xl">Ofertas Flash</b>
+<div class="l-horizontal-space-between">
+ <div class="c-card">
+    
+     <img src="assets/img/14.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <p class="g--color-rojo-4">-10%</p>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+ <div class="c-card">
+    
+     <img src="assets/img/12.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <p class="g--color-rojo-4">-10%</p>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+ <div class="c-card">
+    
+     <img src="assets/img/14.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <p class="g--color-rojo-4">-10%</p>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>  <div class="c-card">
+    
+     <img src="assets/img/11.jpg" class="c-card__img" >
+     <div class="c-card__body">
+       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
+       <p class="g--color-rojo-4">-10%</p>
+       <b>429€ PVPR  <del>400€</del></b>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+     </div>
+    
+ </div>
+</div>   
+ 
+</section>
+
+<div class="p-5 pl-40 pr-60">
+  <p class="text-3xl">Categorias TOP</p>
+  <br><br>
+  <div class="flex justify-between items-center space-x-4">
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+          <a href="#">
+              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
+          </a>
+          <div class="p-5">
+              <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Ordenadores</h5>
+              </a>               
+          </div>
+      </div>
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+          <a href="#">
+              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
+          </a>
+          <div class="p-5">
+              <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Almacenamiento</h5>
+              </a>      
+          </div>
+      </div>
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+          <a href="#">
+              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
+          </a>
+          <div class="p-5">
+              <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Componentes</h5>
+              </a>            
+          </div>
+      </div>
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+          <a href="#">
+              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
+          </a>
+          <div class="p-5">
+              <a href="#">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Audio, Video</h5>
+              </a>                
+          </div>
+      </div>
+  </div>
+</div>`
 }
