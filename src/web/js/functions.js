@@ -29,7 +29,6 @@ window.onload = () => {
     document.getElementById('cestaBtn').onclick = abrirCesta;   
     document.getElementById('loginBtn').onclick = abrirLogin;
     document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
-
     document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()};   
 }
 
