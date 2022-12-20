@@ -1,7 +1,7 @@
 .c-button {
   background-color: getColors("principal",4);
   color: getColors("blanco",1);
-  font-weight: bold;
+  font-weight: 600;
   font-size: getFontSize("m");
   letter-spacing: 0.15px 0.3px;
   padding-top: getPadding(5);
