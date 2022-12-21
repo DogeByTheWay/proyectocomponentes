@@ -61,6 +61,9 @@ window.onload = () => {
   document.getElementById("ordenadoresBtn").onclick = mostrarOrdenadores;
   document.getElementById("cerrarCesta").onclick = () => {
     document.getElementById("cesta").close();
+  };  
+  document.getElementById("cerrarProducto").onclick = () => {
+    document.getElementById("producto").close();
   };
   document.getElementById("btnIniciarSesion").onclick = function () {
     document.getElementById("login").close();
@@ -337,7 +340,12 @@ function cargacesta() {
 function cargaproducto() {
   document.getElementById(
     "producto"
-  ).innerHTML += `<div class="container px-5 py-24 mx-auto">
+  ).innerHTML += `  
+  <button id="cerrarProducto" class="flex outline-0 g--color-principal-5 g--font-family-principal text-sm ml-40">      
+    <svg class="fill-current mr-2 g--color-principal-5 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
+    Volver a lista de productos
+  </button>  
+  <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="./assets/img/6.jpg">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
