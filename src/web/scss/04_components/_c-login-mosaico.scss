@@ -1,0 +1,48 @@
+.c-login-mosaico {		
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 0;
+	-webkit-clip-path: inset(0 0 0 0);
+	clip-path: inset(0 0 0 0);
+
+    &__area{
+        transform: rotate(45deg);
+        position: absolute;
+
+        &--forma1 {
+            height: 520px;
+            width: 520px;
+            background: getColors('blanco', 0);	
+            top: -50px;
+            right: 120px;	
+            border-radius: 0 72px 0 0;
+        }
+        &--forma2 {
+            height: 220px;
+            width: 220px;
+            background: getColors('principal', 4);	
+            top: -172px;
+            right: 0;	
+            border-radius:getBorderRadius(9);
+        }
+        &--forma3 {
+            height: 540px;
+            width: 190px;
+            background: linear-gradient(270deg, getColors('principal', 6), getColors('principal', 3));
+            top: -24px;
+            right: 0;	
+            border-radius:getBorderRadius(9);
+        }
+        &--forma4 {
+            height: 400px;
+            width: 200px;
+            background: getColors('principal', 6);	
+            top: 420px;
+            right: 50px;	
+            border-radius:getBorderRadius(9);
+        }
+    }	
+}

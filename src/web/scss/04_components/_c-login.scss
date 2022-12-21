@@ -1,103 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
-
-.c-fondo-login-dialog {
-	background: linear-gradient(90deg, getColors('principal', 0), getColors('principal', 5));	
-    overflow: hidden; 
-}
-
-
 .c-login {		
 	background: linear-gradient(90deg, getColors('principal', 6), getColors('principal', 5));		
 	position: relative;	
 	height: 600px;
 	width: 360px;	
-    @include box-shadow(2);
+    box-shadow:getShadow(1);
 }
 
-.c-tarjeta-background {
-	transform: rotate(45deg);
-	position: absolute;
-	&--forma1 {
-		height: 520px;
-		width: 520px;
-		background: getColors('blanco', 0);	
-		top: -50px;
-		right: 120px;	
-		border-radius: 0 72px 0 0;
-	}
-    &--forma2 {
-        height: 220px;
-        width: 220px;
-        background: getColors('principal', 4);	
-        top: -172px;
-        right: 0;	
-        @include border-radius(8);
-    }
-    &--forma3 {
-        height: 540px;
-        width: 190px;
-        background: linear-gradient(270deg, getColors('principal', 6), getColors('principal', 3));
-        top: -24px;
-        right: 0;	
-        @include border-radius(8);
-    }
-    &--forma4 {
-        height: 400px;
-        width: 200px;
-        background: getColors('principal', 6);	
-        top: 420px;
-        right: 50px;	
-        @include border-radius(9);
-    }
-}
-
-.c-form {
-	width: 320px;
-	padding: getPadding(9);
-	padding-top: 156px;
-    &__input {
-        padding: 20px 0px;	
-        position: relative;	
-    }
-    &__icon {
-        position: absolute;
-        top: 32px;
-        color: getColors('principal', 4);
-    }
-    &__text {
-        border: none;
-        border-bottom: 2px solid getColors('principal', 0);
-        background: none;
-        padding:  getPadding(4);
-        padding-left:  getPadding(9);
-        font-weight: getFontWeight(3xl);
-        width: 75%;
-        transition: .2s;
-    }
-    &__input:active,
-    &__input:focus,
-    &__input:hover {
-	    outline: none;
-	    border-bottom-color: getColors('principal', 5);
-    }
-
-}
-
-.c-social {	
-	position: absolute;
-	height: 140px;
-	width: 160px;
-	text-align: center;
-	bottom: 0px;
-	right: 0px;
-	color: getColors('blanco', 0);
-    &__icon {
-        padding: 20px 10px;
-        color:  getColors('blanco', 0);
-        text-decoration: none;	
-        text-shadow: 0px 0px 8px getColors('gris', 5);
-    }  
-    &__icon:hover {
-	transform: scale(1.5);	
-    }  
+.c-fondo-login-dialog {
+	background: linear-gradient(90deg, getColors('principal', 0), getColors('principal', 5));	
+    overflow: hidden; 
 }

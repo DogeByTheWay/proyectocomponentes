@@ -1,0 +1,18 @@
+.c-social {	
+	position: absolute;
+	height: 140px;
+	width: 160px;
+	text-align: center;
+	bottom: 0px;
+	right: 0px;
+	color: getColors('blanco', 0);
+    &__icon {
+        padding: getPadding(7) getPadding(4);
+        color:  getColors('blanco', 0);
+        text-decoration: none;	
+        text-shadow: 0px 0px 8px getColors('gris', 5);
+    }  
+    &__icon:hover {
+	transform: scale(1.5);	
+    }  
+}

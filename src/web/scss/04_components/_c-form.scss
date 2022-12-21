@@ -1,0 +1,31 @@
+.c-form {
+	width: 320px;
+	padding: getPadding(9);
+	padding-top: 156px;
+    &__input {
+        padding: 20px 0px;	
+        position: relative;	
+    }
+    &__icon {
+        position: absolute;
+        top: 32px;
+        color: getColors('principal', 4);
+    }
+    &__text {
+        border: none;
+        border-bottom: 2px solid getColors('principal', 0);
+        background: none;
+        padding:  getPadding(4);
+        padding-left:  getPadding(9);
+        font-weight: getFontWeight(3xl);
+        width: 75%;
+        transition: .2s;
+    }
+    &__input:active,
+    &__input:focus,
+    &__input:hover {
+	    outline: none;
+	    border-bottom-color: getColors('principal', 5);
+    }
+
+}

@@ -15,7 +15,14 @@ function abrirPago() {
   (pago.open) ? pago.close() : pago.showModal();
 }
 
+function quitaMenu(){
+  let nav = document.getElementsByClassName("c-nav")[0];
+  nav.style='display:none;'
+  document.getElementsByTagName("body")[0].style="overflow:auto;";
+}
+
 window.onload = () => {
+  
     cargacesta();
     cargaproducto();
     cargaLogin();
@@ -29,7 +36,7 @@ window.onload = () => {
         }else{
             nav.style = 'display:inline-block;';
             document.getElementsByTagName("body")[0].style="overflow:hidden;";
-        } 
+        }
     }
     
     document.getElementById('cestaBtn').onclick = abrirCesta;   
@@ -139,7 +146,7 @@ function mostrarOrdenadores(){
 
 function cargaLogin() {
   document.getElementById("login").innerHTML = `
-  <div class="l-login-container">
+  <div class="l-flex l-flex--align-items-center l-flex--justify-content-center">
     <div class="c-login">
       <div class="l-login-tarjeta">
         <form class="c-form">
@@ -157,19 +164,19 @@ function cargaLogin() {
           </button>				
         </form>
         <div class="c-social">
-          <h3 class=" id="btnIniciarSesion">log in via</h3>
-          <div class="l-social">
+          <h3 class="g--font-family-principal" id="btnIniciarSesion">log in via</h3>
+          <div class="l-flex l-flex--align-items-center l-flex--justify-content-center">
             <a href="#" class="c-social__icon fab fa-instagram"></a>
             <a href="#" class="c-social__icon fab fa-facebook"></a>
             <a href="#" class="c-social__icon fab fa-twitter"></a>
           </div>
         </div>
       </div>
-      <div class="l-tarjeta-background">
-        <span class="c-tarjeta-background c-tarjeta-background--forma4"></span>
-        <span class="c-tarjeta-background c-tarjeta-background--forma3"></span>		
-        <span class="c-tarjeta-background c-tarjeta-background--forma2"></span>
-        <span class="c-tarjeta-background c-tarjeta-background--forma1"></span>
+      <div class="c-login-mosaico">
+        <span class="c-login-mosaico__area c-login-mosaico__area--forma4"></span>
+        <span class="c-login-mosaico__area c-login-mosaico__area--forma3"></span>		
+        <span class="c-login-mosaico__area c-login-mosaico__area--forma2"></span>
+        <span class="c-login-mosaico__area c-login-mosaico__area--forma1"></span>
       </div>		
     </div>
   </div>`;
