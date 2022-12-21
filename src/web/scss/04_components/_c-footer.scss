@@ -1,12 +1,12 @@
 .c-footer{
     display: flex;
-    flex-direction: in-line;
+    flex-direction: row;
     gap: 100px;
     justify-content: center;
     align-items: center;
     text-align: center;
     background-color: getColors("negro",0);
-    padding: getPadding(4);
+    padding: getPadding(8);
 
     &__item{
         margin: getMargin(6);
