@@ -897,11 +897,9 @@ table {
   display: flex;
   flex-direction: row;
   gap: 100px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: space-between;
+  justify-items: center;
   background-color: #242927;
-  padding: 24px;
 }
 .c-footer__item {
   margin: 16px;
