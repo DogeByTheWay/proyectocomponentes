@@ -49,7 +49,7 @@ window.onload = () => {
 function mostrarOrdenadores(){
   document.getElementById("contenedorTodo").innerHTML="";
   document.getElementById("contenedorTodo").innerHTML=`
-  <section class="p-5 pl-40 pr-60">
+  <section class="p-5 pl-40 pr-40">
   <b class="g--font-size-xl">Ordenadores</b>
 <div class="l-horizontal-space-between">
  <div class="c-card">
@@ -402,7 +402,7 @@ function cargaproducto(){
 function cargarContenido(){
   document.getElementById("contenedorTodo").innerHTML=
   `     <section>
-  <article class="flex flex-row-reverse items-center p-5 pl-40 pr-60 ">
+  <article class="flex flex-row-reverse items-center p-5 pl-40 pr-40 ">
       <div class="text-right w-1/2">
           <h1 class="text-4xl">Compra la tecnologia que ayuda al medioambiante</h1>
           <p class="my-5 mb-7 text-l">
@@ -417,10 +417,10 @@ function cargarContenido(){
   </article>
 </section>
 <hr>
-<section class="p-5 pl-40 pr-60">
+<section class="p-5 pl-40 pr-40">
   <b class="g--font-size-xl">Ofertas Flash</b>
 <div class="l-horizontal-space-between">
- <div class="c-card">
+ <div class="c-card g--background-color-gris-0">
     
      <img src="assets/img/14.jpg" class="c-card__img" >
      <div class="c-card__body">
@@ -431,7 +431,7 @@ function cargarContenido(){
      </div>
     
  </div>
- <div class="c-card">
+ <div class="c-card g--background-color-gris-0">
     
      <img src="assets/img/12.jpg" class="c-card__img" >
      <div class="c-card__body">
@@ -467,7 +467,7 @@ function cargarContenido(){
  
 </section>
 
-<div class="p-5 pl-40 pr-60">
+<div class="p-5 pl-40 pr-40">
   <p class="text-3xl">Categorias TOP</p>
   <br><br>
   <div class="flex justify-between items-center space-x-4">
