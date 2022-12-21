@@ -196,12 +196,12 @@ function cargacesta(){
           <h3 class= text-center text-gray-600 text-xs uppercase w-1/5 text-center">Precio</h3>
           <h3 class= text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
         </div>
-        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+        <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
-            <div class="w-40">
+            <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/1.jpg" alt="">
             </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
+            <div class="flex flex-col justify-between ml-4 flex-grow min-w-max">
               <span class= text-sm">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</span>
               <span class="g--color-principal-5 text-xs">Portatil</span>
               <a href="#" class= hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
@@ -221,12 +221,12 @@ function cargacesta(){
           <span class="text-center w-1/5 text-sm">€400.00</span>
         </div>
 
-        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+        <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
-            <div class="w-40">
+            <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/2.jpg" alt="">
             </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
+            <div class="flex flex-col justify-between ml-4 flex-grow min-w-max">
               <span class= text-sm">PC Racing Ordenador Gaming AMD Ryzen 7 5700G/16GB/1TB SSD</span>
               <span class="g--color-principal-5 text-xs">PC</span>
               <a href="#" class= hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
@@ -246,12 +246,12 @@ function cargacesta(){
           <span class="text-center w-1/5 text-sm">€40.00</span>
         </div>
 
-        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+        <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
-            <div class="w-40">
+            <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/3.jpg" alt="">
             </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
+            <div class="flex flex-col justify-between ml-4 flex-grow min-w-max">
               <span class= text-sm">Placa base Asus TUF GAMING B450-PLUS II</span>
               <span class= g--color-principal-5 text-xs">Placa Base</span>
               <a href="#" class= hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
