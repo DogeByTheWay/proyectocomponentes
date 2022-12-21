@@ -184,8 +184,8 @@ function cargaLogin() {
 
 function cargacesta(){
     document.getElementById("cesta").innerHTML+=`<div class="container mx-auto mt-10">
-    <div class="flex shadow-md my-10">
-      <div class="w-3/4 bg-white px-10 py-10">
+    <div class="flex shadow-md my-10 rounded-md">
+      <div class="w-3/4 bg-white px-10 py-10 rounded-l-md">
         <div class="flex justify-between border-b pb-8">
           <h1 class= g--color-principal-5 text-2xl">Cesta de la compra</h1>
           <h2 class= g--color-principal-5 text-2xl">3 Articulos</h2>
@@ -285,23 +285,23 @@ function cargacesta(){
           <span class= text-sm">590€</span>
         </div>
         <div>
-          <label class= inline-block mb-3 text-sm uppercase">Metodo de envio</label>
+          <label class="inline-block mb-3 text-sm uppercase">Metodo de envio</label>
           <select class="block p-2 text-gray-600 w-full text-sm">
             <option>Envio Standard  - €10.00</option>
           </select>
-          <p class= g--color-principal-5" >Entrega Martes, 14 de Octubre</p>
+          <p class="leading-relaxed g--color-principal-5" >Entrega Martes, 14 de Octubre</p>
         </div>
         <div class="py-10">
-          <label for="promo" class= inline-block mb-3 text-sm uppercase">Codigo Promocion</label>
+          <label for="promo" class="inline-block mb-3 text-sm uppercase">Codigo Promocion</label>
           <input type="text" id="promo" placeholder="Introduce tu Codigo" class="p-2 text-sm w-full">
         </div>
-        <button class="bg-amber-500 hover:bg-amber-600 px-5 py-2 text-sm text-white uppercase">Probar Codigo</button>
+        <button class="bg-amber-500 hover:bg-amber-600 px-5 py-2 text-sm text-white uppercase rounded-md">Probar Codigo</button>
         <div class="border-t mt-8">
           <div class="flex justify-between py-6 text-sm uppercase">
             <span>Coste Total</span>
             <span>€600</span>
           </div>
-          <button id="compraBtn" class="g--background-color-principal-5 hover:bg-amber-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
+          <button id="compraBtn" class="g--background-color-principal-5 hover:bg-emerald-700 py-3 text-sm text-white uppercase w-full rounded-md">Ir a pago</button>
         </div>
       </div>
 
