@@ -694,12 +694,6 @@ table {
   gap: 20px 0px;
 }
 
-.c-panel {
-  -webkit-box-shadow: 0 4px 6px getColors('gris',6);
-  -moz-box-shadow: 0 4px 6px getColors('gris',6);
-  box-shadow: 0 4px 6px getColors('gris',6);
-}
-
 .c-button {
   background-color: #36C9B1;
   color: #FCFCFC;
@@ -796,6 +790,7 @@ table {
   font-size: 36px;
   margin: 12px;
 }
+
 .c-fondo-login-dialog {
   background: linear-gradient(90deg, #E6FEFE, #289F87);
   overflow: hidden;
@@ -953,9 +948,6 @@ table {
   margin: 16px;
   font-family: 'Roboto', sans-serif;
   color: #36C9B1;
-}
-.c-footer__item--blanco {
-  color: #FCFCFC;
 }
 
 .c-card {
