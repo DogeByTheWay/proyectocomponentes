@@ -199,38 +199,38 @@ function cargacesta() {
     <div class="flex shadow-md my-10">
       <div class="w-3/4 bg-white px-10 py-10">
         <div class="flex justify-between border-b pb-8">
-          <h1 class= g--color-principal-5 text-2xl">Cesta de la compra</h1>
-          <h2 class= g--color-principal-5 text-2xl">3 Articulos</h2>
+          <h1 class="g--font-family-principal g--color-principal-5 text-2xl">Cesta de la compra</h1>
+          <h2 class="g--font-family-principal g--color-principal-5 text-2xl">3 Articulos</h2>
         </div>
         <div class="flex mt-10 mb-5">
-          <h3 class= text-gray-600 text-xs uppercase w-2/5">Detalle Producto</h3>
-          <h3 class= text-center text-gray-600 text-xs uppercase w-1/5 text-center">Cantidad</h3>
-          <h3 class= text-center text-gray-600 text-xs uppercase w-1/5 text-center">Precio</h3>
-          <h3 class= text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
+          <h3 class="g--font-family-principal text-gray-600 text-xs uppercase w-2/5">Detalle Producto</h3>
+          <h3 class="g--font-family-principal text-center text-gray-600 text-xs uppercase w-1/5 text-center">Cantidad</h3>
+          <h3 class="g--font-family-principal text-center text-gray-600 text-xs uppercase w-1/5 text-center">Precio</h3>
+          <h3 class="g--font-family-principal text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
         </div>
         <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
             <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/1.jpg" alt="">
             </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow min-w-max">
-              <span class= text-sm">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</span>
-              <span class="g--color-principal-5 text-xs">Portatil</span>
-              <a href="#" class= hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
+            <div class="flex flex-col justify-between ml-4 flex-grow">
+              <span class="g--font-family-principal text-sm">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</span>
+              <span class="g--font-family-principal g--color-principal-5 text-xs">Portatil</span>
+              <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
             </div>
           </div>
           <div class="flex justify-center w-1/5">
             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
 
-            <input class="mx-2 border g--color-principal-5 text-center w-8" type="text" value="1">
+            <input class="mx-2 border g--font-family-principal g--color-principal-5 text-center w-8" type="text" value="1">
 
             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>
-          <span class="text-center w-1/5 text-sm">€400.00</span>
-          <span class="text-center w-1/5 text-sm">€400.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€400.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€400.00</span>
         </div>
 
         <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
@@ -238,10 +238,10 @@ function cargacesta() {
             <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/2.jpg" alt="">
             </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow min-w-max">
-              <span class= text-sm">PC Racing Ordenador Gaming AMD Ryzen 7 5700G/16GB/1TB SSD</span>
+            <div class="flex flex-col justify-between ml-4 flex-grow">
+              <span class="g--font-family-principal text-sm">PC Racing Ordenador Gaming AMD Ryzen 7 5700G/16GB/1TB SSD</span>
               <span class="g--color-principal-5 text-xs">PC</span>
-              <a href="#" class= hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
+              <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
             </div>
           </div>
           <div class="flex justify-center w-1/5">
@@ -254,8 +254,8 @@ function cargacesta() {
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>
-          <span class="text-center w-1/5 text-sm">€40.00</span>
-          <span class="text-center w-1/5 text-sm">€40.00</span>
+          <span class="text-center g--font-family-principal w-1/5 text-sm">€40.00</span>
+          <span class="text-center g--font-family-principal w-1/5 text-sm">€40.00</span>
         </div>
 
         <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
@@ -263,10 +263,10 @@ function cargacesta() {
             <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/3.jpg" alt="">
             </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow min-w-max">
-              <span class= text-sm">Placa base Asus TUF GAMING B450-PLUS II</span>
-              <span class= g--color-principal-5 text-xs">Placa Base</span>
-              <a href="#" class= hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
+            <div class="flex flex-col justify-between ml-4 flex-grow">
+              <span class="g--font-family-principal text-sm">Placa base Asus TUF GAMING B450-PLUS II</span>
+              <span class="g--font-family-principal g--color-principal-5 text-xs">Placa Base</span>
+              <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
             </div>
           </div>
           <div class="flex justify-center w-1/5">
@@ -278,11 +278,11 @@ function cargacesta() {
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>
-          <span class="text-center w-1/5 text-sm">€150.00</span>
-          <span class="text-center w-1/5 text-sm">€150.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€150.00</span>
+          <span class="text-center w-1/5 g--font-family-principal text-sm">€150.00</span>
         </div>
 
-        <button id="cerrarCesta" class="flex g--color-principal-5  text-sm mt-10">
+        <button id="cerrarCesta" class="flex g--color-principal-5 g--font-family-principal text-sm mt-10">
       
           <svg class="fill-current mr-2 g--color-principal-5 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
           Continua llenando la Cesta
@@ -290,31 +290,30 @@ function cargacesta() {
       </div>
 
       <div id="summary" class="w-1/4 px-8 py-10">
-        <h1 class=" g--color-principal-5 text-2xl border-b pb-8">Resumen del pedido
+        <h1 class="g--font-family-principal g--color-principal-5 text-2xl border-b pb-8">Resumen del pedido
       </h1>
         <div class="flex justify-between mt-10 mb-5">
-          <span class= text-sm uppercase">3 Articulos</span>
-          <span class= text-sm">590€</span>
+          <span class="g--font-family-principal text-sm uppercase">3 Articulos</span>
+          <span class="g--font-family-principal text-sm">590€</span>
         </div>
         <div>
-          <label class="inline-block mb-3 text-sm uppercase">Metodo de envio</label>
+          <label class="g--font-family-principal inline-block mb-3 text-sm uppercase">Metodo de envio</label>
           <select class="block p-2 text-gray-600 w-full text-sm">
             <option>Envio Standard  - €10.00</option>
           </select>
-          <p class="leading-relaxed g--color-principal-5" >Entrega Martes, 14 de Octubre</p>
+          <p class="g--font-family-principal g--color-principal-5" >Entrega Martes, 14 de Octubre</p>
         </div>
         <div class="py-10">
-          <label for="promo" class="inline-block mb-3 text-sm uppercase">Codigo Promocion</label>
+          <label for="promo" class="g--font-family-principal inline-block mb-3 text-sm uppercase">Codigo Promocion</label>
           <input type="text" id="promo" placeholder="Introduce tu Codigo" class="p-2 text-sm w-full">
         </div>
-        <button class="bg-amber-500 hover:bg-amber-600 px-5 rounded py-2 text-sm text-white uppercase">Probar Codigo</button>
+        <button class="bg-amber-500 hover:bg-amber-400 px-5 rounded py-2 text-sm text-white uppercase">Probar Codigo</button>
         <div class="border-t mt-8">
-          <div class="flex justify-between py-6 text-sm uppercase">
+          <div class="flex justify-between g--font-family-principal py-6 text-sm uppercase">
             <span>Coste Total</span>
             <span>€600</span>
           </div>
-          <button id="compraBtn" class="g--background-color-principal-5 hover:bg-emerald-700 py-3 text-sm text-white uppercase w-full rounded-md">Ir a pago</button>
-          <button id="compraBtn" class="g--background-color-principal-5 rounded hover:bg-amber-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
+          <button id="compraBtn" class="g--background-color-principal-5 g--font-family-principal rounded hover:bg-emerald-400 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
         </div>
       </div>
 
