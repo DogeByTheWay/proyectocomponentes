@@ -2,15 +2,12 @@
     border:getBorderRadius(1) solid getColors("gris",1);
     border-radius:getBorderRadius(4);
     padding: getPadding(4);
-    &__body{
-
-    }
     &__footer{
-display: flex;
-flex-direction: row;
-justify-content:flex-end;
-align-items:baseline;
-column-gap: 20px;
-padding-top: getPadding(5);
+        display: flex;
+        flex-direction: row;
+        justify-content:flex-end;
+        align-items:baseline;
+        column-gap: 20px;
+        padding-top: getPadding(5);
     }
 }

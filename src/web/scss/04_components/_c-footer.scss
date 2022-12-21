@@ -12,9 +12,5 @@
         margin: getMargin(6);
         font-family: getFontFamily("alternativo");
         color: getColors("principal", 4);
-
-        &--blanco{
-            color: getColors("blanco", 1);
-        }
     }
 }
