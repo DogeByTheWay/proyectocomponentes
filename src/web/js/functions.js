@@ -35,7 +35,7 @@ window.onload = () => {
     } else {
       nav.style = "display:inline-block;";
       document.getElementsByTagName("body")[0].style = "overflow:hidden;";
-    }
+    }    
   };
 
   document.getElementById("cestaBtn").onclick = abrirCesta;
@@ -313,7 +313,7 @@ function cargacesta() {
             <span>Coste Total</span>
             <span>€600</span>
           </div>
-          <button id="compraBtn" class="g--background-color-principal-5 g--font-family-principal rounded hover:bg-emerald-400 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
+          <button id="compraBtn" tabindex="1" class="g--background-color-principal-5 g--font-family-principal rounded hover:bg-emerald-400 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
         </div>
       </div>
 
@@ -379,9 +379,9 @@ function cargaproducto() {
             </div>
           </div>
         </div>
-        <div class="flex pt-28">
-          <span class="title-font font-medium text-2xl text-gray-900 ">€58.00</span>
-          <button class=" flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-amber-600 rounded">Añadir al Carrito</button>
+        <div class="flex">
+          <span class="title-font font-medium text-2xl text-gray-900">€58.00</span>
+          <button class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-400 rounded">Añadir al Carrito</button>
         </div>
       </div>
       <div class="flex flex-col w-full">
