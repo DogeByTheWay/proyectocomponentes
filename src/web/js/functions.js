@@ -50,9 +50,7 @@ window.onload = () => {
       document.getElementById("login").close();
       document.getElementById("listaCesta").showModal();
     };
-}
-
-  document.getElementById("cestaBtn").onclick = abrirCesta;
+    document.getElementById("cestaBtn").onclick = abrirCesta;
   document.getElementById("loginBtn").onclick = abrirLogin;
   document.getElementById("compraBtn").onclick = abrirPago;
   document.getElementById("volverMenu").onclick = function () {
@@ -69,6 +67,8 @@ window.onload = () => {
     document.getElementById("login").close();
     document.getElementById("listaCesta").showModal();
   };
+}
+
 
 
 function mostrarOrdenadores() {
