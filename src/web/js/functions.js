@@ -216,7 +216,7 @@ function cargacesta() {
             <div class="flex flex-col justify-between ml-4 flex-grow">
               <span class="g--font-family-principal text-sm">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</span>
               <span class="g--font-family-principal g--color-principal-5 text-xs">Portatil</span>
-              <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
+              <a href="#" class="g--font-family-principal outline-0 hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
             </div>
           </div>
           <div class="flex justify-center w-1/5">
@@ -506,7 +506,7 @@ function cargarContenido() {
           </a>
           <div class="p-5">
               <a href="#">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Almacenamiento</h5>
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Discos duros</h5>
               </a>      
           </div>
       </div>
