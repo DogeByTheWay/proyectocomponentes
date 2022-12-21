@@ -1,61 +1,62 @@
 function abrirCesta() {
-    let cesta= document.getElementById("cesta");
-    (cesta.open) ? cesta.close() : cesta.showModal();
+  let cesta = document.getElementById("cesta");
+  cesta.open ? cesta.close() : cesta.showModal();
 }
 function abrirProducto() {
-    let producto= document.getElementById("producto");
-    (producto.open) ? producto.close() : producto.showModal();
+  let producto = document.getElementById("producto");
+  producto.open ? producto.close() : producto.showModal();
 }
 function abrirLogin() {
-  let login= document.getElementById("login");
-  (login.open) ? login.close() : login.showModal();
+  let login = document.getElementById("login");
+  login.open ? login.close() : login.showModal();
 }
 function abrirPago() {
-  let pago= document.getElementById("pago");
-  (pago.open) ? pago.close() : pago.showModal();
+  let pago = document.getElementById("pago");
+  pago.open ? pago.close() : pago.showModal();
 }
 
-function quitaMenu(){
+function quitaMenu() {
   let nav = document.getElementsByClassName("c-nav")[0];
-  nav.style='display:none;'
-  document.getElementsByTagName("body")[0].style="overflow:auto;";
+  nav.style = "display:none;";
+  document.getElementsByTagName("body")[0].style = "overflow:auto;";
 }
 
 window.onload = () => {
-  
-    cargacesta();
-    cargaproducto();
-    cargaLogin();
-    cargarContenido();
-    cargaPago();
-    document.getElementById("c-barra").onclick = function () {
-        let nav = document.getElementsByClassName("c-nav")[0];
-        if(nav.style.display=="inline-block"){
-            nav.style='display:none;'
-            document.getElementsByTagName("body")[0].style="overflow:auto;";
-        }else{
-            nav.style = 'display:inline-block;';
-            document.getElementsByTagName("body")[0].style="overflow:hidden;";
-        }
+  cargacesta();
+  cargaproducto();
+  cargaLogin();
+  cargarContenido();
+  cargaPago();
+  document.getElementById("c-barra").onclick = function () {
+    let nav = document.getElementsByClassName("c-nav")[0];
+    if (nav.style.display == "inline-block") {
+      nav.style = "display:none;";
+      document.getElementsByTagName("body")[0].style = "overflow:auto;";
+    } else {
+      nav.style = "display:inline-block;";
+      document.getElementsByTagName("body")[0].style = "overflow:hidden;";
     }
-    
-    document.getElementById('cestaBtn').onclick = abrirCesta;   
-    document.getElementById('loginBtn').onclick = abrirLogin;
-    document.getElementById('compraBtn').onclick = abrirPago;
-    document.getElementById('volverMenu').onclick =function(){
-      cargarContenido();
-    };
-    document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
-    document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()}; 
-    document.getElementById("btnIniciarSesion").onclick=function(){
-      document.getElementById("login").close();
-      document.getElementById("listaCesta").showModal();
-    };
-}
+  };
 
-function mostrarOrdenadores(){
-  document.getElementById("contenedorTodo").innerHTML="";
-  document.getElementById("contenedorTodo").innerHTML=`
+  document.getElementById("cestaBtn").onclick = abrirCesta;
+  document.getElementById("loginBtn").onclick = abrirLogin;
+  document.getElementById("compraBtn").onclick = abrirPago;
+  document.getElementById("volverMenu").onclick = function () {
+    cargarContenido();
+  };
+  document.getElementById("ordenadoresBtn").onclick = mostrarOrdenadores;
+  document.getElementById("cerrarCesta").onclick = () => {
+    document.getElementById("cesta").close();
+  };
+  document.getElementById("btnIniciarSesion").onclick = function () {
+    document.getElementById("login").close();
+    document.getElementById("listaCesta").showModal();
+  };
+};
+
+function mostrarOrdenadores() {
+  document.getElementById("contenedorTodo").innerHTML = "";
+  document.getElementById("contenedorTodo").innerHTML = `
   <section class="p-5 pl-40 pr-40">
   <b class="g--font-size-xl">Ordenadores</b>
 <div class="l-horizontal-space-between">
@@ -139,9 +140,18 @@ function mostrarOrdenadores(){
     
  </div>
 </div>
+<div id="paginacion" class="m-2">
+  <ul class="pagination flex flex-row justify-center gap-4">
+    <li class="rounded-sm cursor-pointer px-2 shadow-md">Pagina anterior</li>
+    <li class="rounded-sm cursor-pointer px-2 shadow-md">1</li>
+    <li class="rounded-sm cursor-pointer px-2	shadow-md">2</li>
+    <li class="rounded-sm cursor-pointer px-2	shadow-md">3</li>            
+    <li class="rounded-sm cursor-pointer px-2	shadow-md">Pagina siguiente</li>            
+  </ul>
+</div>
+
  
-</section>`
-  ;
+</section>`;
 }
 
 function cargaLogin() {
@@ -182,10 +192,12 @@ function cargaLogin() {
   </div>`;
 }
 
-function cargacesta(){
-    document.getElementById("cesta").innerHTML+=`<div class="container mx-auto mt-10">
-    <div class="flex shadow-md my-10 rounded-md">
-      <div class="w-3/4 bg-white px-10 py-10 rounded-l-md">
+function cargacesta() {
+  document.getElementById(
+    "cesta"
+  ).innerHTML += `<div class="container mx-auto mt-10">
+    <div class="flex shadow-md my-10">
+      <div class="w-3/4 bg-white px-10 py-10">
         <div class="flex justify-between border-b pb-8">
           <h1 class= g--color-principal-5 text-2xl">Cesta de la compra</h1>
           <h2 class= g--color-principal-5 text-2xl">3 Articulos</h2>
@@ -295,21 +307,24 @@ function cargacesta(){
           <label for="promo" class="inline-block mb-3 text-sm uppercase">Codigo Promocion</label>
           <input type="text" id="promo" placeholder="Introduce tu Codigo" class="p-2 text-sm w-full">
         </div>
-        <button class="bg-amber-500 hover:bg-amber-600 px-5 py-2 text-sm text-white uppercase rounded-md">Probar Codigo</button>
+        <button class="bg-amber-500 hover:bg-amber-600 px-5 rounded py-2 text-sm text-white uppercase">Probar Codigo</button>
         <div class="border-t mt-8">
           <div class="flex justify-between py-6 text-sm uppercase">
             <span>Coste Total</span>
             <span>€600</span>
           </div>
           <button id="compraBtn" class="g--background-color-principal-5 hover:bg-emerald-700 py-3 text-sm text-white uppercase w-full rounded-md">Ir a pago</button>
+          <button id="compraBtn" class="g--background-color-principal-5 rounded hover:bg-amber-600 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
         </div>
       </div>
 
     </div>
   </div>`;
 }
-function cargaproducto(){
-    document.getElementById("producto").innerHTML+=`<div class="container px-5 py-24 mx-auto">
+function cargaproducto() {
+  document.getElementById(
+    "producto"
+  ).innerHTML += `<div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="./assets/img/6.jpg">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -406,9 +421,8 @@ function cargaproducto(){
   </div>`;
 }
 
-function cargarContenido(){
-  document.getElementById("contenedorTodo").innerHTML=
-  `     <section>
+function cargarContenido() {
+  document.getElementById("contenedorTodo").innerHTML = `     <section>
   <article class="flex flex-row-reverse items-center p-5 pl-40 pr-40 ">
       <div class="text-right w-1/2">
           <h1 class="text-4xl">Compra la tecnologia que ayuda al medioambiante</h1>
@@ -416,7 +430,7 @@ function cargarContenido(){
               Nuestra tienda contiene los productos que siempre has querido pero ahora de forma
               sostenible y ofreciendo el mismo rendimiento.
           </p>
-          <a class="c-button">Saber más</a>
+          <a class="c-button cursor-pointer">Saber más</a>
       </div>
       <div class="w-1/2">
           <img class="w-full" src="assets/img/refurbished.png" alt="Imagen reciclaje venta">
@@ -518,11 +532,11 @@ function cargarContenido(){
           </div>
       </div>
   </div>
-</div>`
+</div>`;
 }
 
-function cargaPago(){
-  document.getElementById("pago").innerHTML=`<div class="c-paymentform">
+function cargaPago() {
+  document.getElementById("pago").innerHTML = `<div class="c-paymentform">
   <div class="c-paymentform__header">
     <h1 class="g--font-weight-3xl">Checkout</h1>
   </div>
