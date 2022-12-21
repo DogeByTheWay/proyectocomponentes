@@ -760,6 +760,9 @@ table {
 .c-nav__logo {
   width: 75px;
 }
+.c-nav--visible {
+  display: inline-block;
+}
 
 .c-icon {
   color: #E6FEFE;

@@ -29,8 +29,12 @@
         }
     }
 
+
     &__logo {
         width: 75px;
     }
 
+    &--visible{
+        display:inline-block;
+    }
 }

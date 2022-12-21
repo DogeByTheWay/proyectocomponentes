@@ -22,21 +22,35 @@ function quitaMenu() {
 }
 
 window.onload = () => {
-  cargacesta();
-  cargaproducto();
-  cargaLogin();
-  cargarContenido();
-  cargaPago();
-  document.getElementById("c-barra").onclick = function () {
-    let nav = document.getElementsByClassName("c-nav")[0];
-    if (nav.style.display == "inline-block") {
-      nav.style = "display:none;";
-      document.getElementsByTagName("body")[0].style = "overflow:auto;";
-    } else {
-      nav.style = "display:inline-block;";
-      document.getElementsByTagName("body")[0].style = "overflow:hidden;";
-    }    
-  };
+  
+    cargacesta();
+    cargaproducto();
+    cargaLogin();
+    cargarContenido();
+    cargaPago();
+    document.getElementById("burger").onmouseenter = function () {
+        let nav = document.getElementsByClassName("c-nav")[0];
+        nav.classList.toggle("c-nav--visible")
+        nav.onmouseleave=()=>{nav.classList.toggle("c-nav--visible")}
+    }
+    document.getElementById("burger").onmouseleave = function () {
+      let nav = document.getElementsByClassName("c-nav")[0];
+      nav.classList.toggle("c-nav--visible")
+    }
+    
+    document.getElementById('cestaBtn').onclick = abrirCesta;   
+    document.getElementById('loginBtn').onclick = abrirLogin;
+    document.getElementById('compraBtn').onclick = abrirPago;
+    document.getElementById('volverMenu').onclick =function(){
+      cargarContenido();
+    };
+    document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
+    document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()}; 
+    document.getElementById("btnIniciarSesion").onclick=function(){
+      document.getElementById("login").close();
+      document.getElementById("listaCesta").showModal();
+    };
+}
 
   document.getElementById("cestaBtn").onclick = abrirCesta;
   document.getElementById("loginBtn").onclick = abrirLogin;
@@ -52,7 +66,7 @@ window.onload = () => {
     document.getElementById("login").close();
     document.getElementById("listaCesta").showModal();
   };
-};
+
 
 function mostrarOrdenadores() {
   document.getElementById("contenedorTodo").innerHTML = "";
@@ -66,7 +80,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -76,7 +90,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -86,7 +100,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>  <div class="c-card">
@@ -95,7 +109,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -106,7 +120,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -116,7 +130,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -126,7 +140,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>  <div class="c-card">
@@ -135,7 +149,7 @@ function mostrarOrdenadores() {
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -168,13 +182,13 @@ function cargaLogin() {
             <i class="c-form__icon fas fa-lock"></i>
             <input type="password" class="c-form__text" placeholder="Password">
           </div>
-          <button class="c-button-login">
+          <a class="c-button-login" id="btnIniciarSesion">
             <span class="c-button-text">Iniciar Sesión</span>
             <i class="c-button-icon fas fa-chevron-right"></i>
-          </button>				
+          </a>				
         </form>
         <div class="c-social">
-          <h3 class="g--font-family-principal" id="btnIniciarSesion">log in via</h3>
+          <h3 class="g--font-family-principal" >log in via</h3>
           <div class="l-flex l-flex--align-items-center l-flex--justify-content-center">
             <a href="#" class="c-social__icon fab fa-instagram"></a>
             <a href="#" class="c-social__icon fab fa-facebook"></a>
@@ -208,7 +222,7 @@ function cargacesta() {
           <h3 class="g--font-family-principal text-center text-gray-600 text-xs uppercase w-1/5 text-center">Precio</h3>
           <h3 class="g--font-family-principal text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
         </div>
-        <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
+        <div class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
             <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/1.jpg" alt="">
@@ -233,7 +247,7 @@ function cargacesta() {
           <span class="text-center w-1/5 g--font-family-principal text-sm">€400.00</span>
         </div>
 
-        <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
+        <div class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
             <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/2.jpg" alt="">
@@ -258,7 +272,7 @@ function cargacesta() {
           <span class="text-center g--font-family-principal w-1/5 text-sm">€40.00</span>
         </div>
 
-        <div class="flex items-center hover:bg-emerald-100 -mx-8 px-6 py-5">
+        <div class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
           <div class="flex w-2/5"> 
             <div class="w-40 min-w-max">
               <img class="h-24" src="./assets/img/3.jpg" alt="">
@@ -313,7 +327,7 @@ function cargacesta() {
             <span>Coste Total</span>
             <span>€600</span>
           </div>
-          <button id="compraBtn" tabindex="1" class="g--background-color-principal-5 g--font-family-principal rounded hover:bg-emerald-400 py-3 text-sm text-white uppercase w-full">Ir a pago</button>
+          <button id="compraBtn" class="g--background-color-principal-5 hover:bg-teal-700 py-3 text-sm text-white uppercase w-full rounded-md">Ir a pago</button>
         </div>
       </div>
 
@@ -447,7 +461,7 @@ function cargarContenido() {
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -458,7 +472,7 @@ function cargarContenido() {
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -469,7 +483,7 @@ function cargarContenido() {
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>  <div class="c-card">
@@ -479,7 +493,7 @@ function cargarContenido() {
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
        <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Comprar</a>
+       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
      </div>
     
  </div>
@@ -490,7 +504,7 @@ function cargarContenido() {
 <div class="p-5 pl-40 pr-40">
   <p class="text-2xl g--margin-bottom-3">Categorias TOP</p>
   <div class="flex justify-between items-center space-x-4">
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
           <a href="#">
               <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
           </a>
@@ -500,7 +514,7 @@ function cargarContenido() {
               </a>               
           </div>
       </div>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
           <a href="#">
               <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
           </a>
@@ -510,7 +524,7 @@ function cargarContenido() {
               </a>      
           </div>
       </div>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
           <a href="#">
               <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
           </a>
@@ -520,7 +534,7 @@ function cargarContenido() {
               </a>            
           </div>
       </div>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-emerald-700 dark:border-emerald-300">
+      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
           <a href="#">
               <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
           </a>
