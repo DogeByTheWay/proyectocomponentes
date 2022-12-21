@@ -61,7 +61,7 @@ function mostrarOrdenadores(){
 <div class="l-horizontal-space-between">
  <div class="c-card">
     
-     <img src="assets/img/14.jpg" class="c-card__img" >
+     <img src="assets/img/14.jpg" class="c-card__img" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
@@ -71,7 +71,7 @@ function mostrarOrdenadores(){
  </div>
  <div class="c-card">
     
-     <img src="assets/img/12.jpg" class="c-card__img" >
+     <img src="assets/img/12.jpg" class="c-card__img" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
@@ -81,7 +81,7 @@ function mostrarOrdenadores(){
  </div>
  <div class="c-card">
     
-     <img src="assets/img/14.jpg" class="c-card__img" >
+     <img src="assets/img/14.jpg" class="c-card__img" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
@@ -90,7 +90,7 @@ function mostrarOrdenadores(){
     
  </div>  <div class="c-card">
     
-     <img src="assets/img/11.jpg" class="c-card__img" >
+     <img src="assets/img/11.jpg" class="c-card__img" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <b>429€ PVPR  <del>400€</del></b>
@@ -429,7 +429,7 @@ function cargarContenido(){
 <div class="l-horizontal-space-between">
  <div class="c-card g--background-color-gris-0">
     
-     <img src="assets/img/14.jpg" class="c-card__img" >
+     <img src="assets/img/14.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
@@ -440,7 +440,7 @@ function cargarContenido(){
  </div>
  <div class="c-card g--background-color-gris-0">
     
-     <img src="assets/img/12.jpg" class="c-card__img" >
+     <img src="assets/img/12.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
@@ -451,7 +451,7 @@ function cargarContenido(){
  </div>
  <div class="c-card">
     
-     <img src="assets/img/14.jpg" class="c-card__img" >
+     <img src="assets/img/14.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
@@ -461,7 +461,7 @@ function cargarContenido(){
     
  </div>  <div class="c-card">
     
-     <img src="assets/img/11.jpg" class="c-card__img" >
+     <img src="assets/img/11.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
      <div class="c-card__body">
        <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
        <p class="g--color-rojo-4">-10%</p>
