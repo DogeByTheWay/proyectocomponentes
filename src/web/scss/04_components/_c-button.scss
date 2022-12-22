@@ -27,11 +27,9 @@
     margin-bottom:getMargin(2);
   }
 
-  &--secundario{
 
-  }
 
-  &-login {
+  &--login {
     background: #fff;
     font-size: getFontSize('l');
     margin-top: getMargin(9);
@@ -49,13 +47,13 @@
     cursor: pointer;
     transition: .2s;
 }
-&-login:active,
-&-login:focus,
-&-login:hover {
+&--login:active,
+&--login:focus,
+&--login:hover {
   border-color: getColors('principal', 6);
   outline: none;
 }
-&-icon {
+&--icon {
     font-size: getFontSize('2xl');
     margin-left: auto;
     color: getColors('principal', 6);

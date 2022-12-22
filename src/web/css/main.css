@@ -696,7 +696,7 @@ table {
   padding-right: 24px;
   margin-bottom: 6px;
 }
-.c-button-login {
+.c-button--login {
   background: #fff;
   font-size: 18px;
   margin-top: 30px;
@@ -715,11 +715,11 @@ table {
   cursor: pointer;
   transition: 0.2s;
 }
-.c-button-login:active, .c-button-login:focus, .c-button-login:hover {
+.c-button--login:active, .c-button--login:focus, .c-button--login:hover {
   border-color: #18775F;
   outline: none;
 }
-.c-button-icon {
+.c-button--icon {
   font-size: 24px;
   margin-left: auto;
   color: #18775F;

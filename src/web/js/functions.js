@@ -185,9 +185,9 @@ function cargaLogin() {
             <i class="c-form__icon fas fa-lock"></i>
             <input type="password" class="c-form__text" placeholder="Password">
           </div>
-          <a class="c-button-login" id="btnIniciarSesion">
-            <span class="c-button-text">Iniciar Sesión</span>
-            <i class="c-button-icon fas fa-chevron-right"></i>
+          <a class="c-button--login" id="btnIniciarSesion">
+            <span class="c-button--text">Iniciar Sesión</span>
+            <i class="c-button--icon fas fa-chevron-right"></i>
           </a>				
         </form>
         <div class="c-social">
