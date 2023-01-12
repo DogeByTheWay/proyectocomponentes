@@ -1,7 +1,6 @@
 .c-paymentform {
     background-color: getColors("blanco",3);
-    border-radius:getBorderRadius(8);
-    height: 812px;
+    border-radius:getBorderRadius(8); 
     box-shadow: getShadow(0);
     width: 975px;
     padding: getPadding(9);
@@ -21,5 +20,10 @@
       background-color: getColors("principal",4);
       color:getColors("gris",0);
       padding: getPadding(6);
+    }
+    &__form{
+      background-color: getColors("blanco",6);
+      border-radius:getBorderRadius(8);
+      padding: getPadding(9);
     }
 }

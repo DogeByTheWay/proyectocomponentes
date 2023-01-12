@@ -20,3 +20,14 @@ input[type="radio"] {
     border-top: 1px solid getColors("gris",8)!important;
     font-weight: getFontWeight("2xl");
   }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+  input[type=text],
+  input[type=number]{
+    padding: getPadding(3);
+    border-radius: getBorderRadius(4);
+  }

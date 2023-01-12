@@ -21,6 +21,16 @@ function quitaMenu() {
   document.getElementsByTagName("body")[0].style = "overflow:auto;";
 }
 
+function activaFormulario(){
+  let bloque=document.getElementsByClassName("c-paymentform__form")[0];
+  bloque.style.display="block";
+}
+
+function desactivaFormulario(){
+  let bloque=document.getElementsByClassName("c-paymentform__form")[0];
+  bloque.style.display="none";
+}
+
 window.onload = () => {
   
     cargacesta();
@@ -28,6 +38,8 @@ window.onload = () => {
     cargaLogin();
     cargarContenido();
     cargaPago();
+    getCategorias();
+    
     document.getElementById("burger").onmouseenter = function () {
         let nav = document.getElementsByClassName("c-nav")[0];
         nav.classList.toggle("c-nav--visible")
@@ -37,6 +49,8 @@ window.onload = () => {
       let nav = document.getElementsByClassName("c-nav")[0];
       nav.classList.toggle("c-nav--visible")
     }
+    document.getElementById("visa").onclick=activaFormulario;
+    document.getElementById("paypal").onclick=desactivaFormulario;
     
     document.getElementById('cestaBtn').onclick = abrirCesta;   
     document.getElementById('loginBtn').onclick = abrirLogin;
@@ -56,10 +70,6 @@ window.onload = () => {
   document.getElementById("volverMenu").onclick = function () {
     cargarContenido();
   };
-  document.getElementById("ordenadoresBtn").onclick = mostrarOrdenadores;
-  document.getElementById("cerrarCesta").onclick = () => {
-    document.getElementById("cesta").close();
-  };  
   document.getElementById("cerrarProducto").onclick = () => {
     document.getElementById("producto").close();
   };
@@ -562,18 +572,41 @@ function cargaPago() {
     <h1 class="g--font-weight-3xl">Checkout</h1>
   </div>
   <div class="l-flex l-flex--direction-column g--gap-9">
-    <h2 class="c-paymentform__title">Address</h2>
+    <h2 class="c-paymentform__title">Dirección de envio</h2>
     <div class="c-paymentform__address">
       Adam Johnson<br />
       403 Oakland Ave Street, A city, Florida, 32104,<br />
       United States of America
     </div>
     <h2 class="c-paymentform__title">
-      Payment Method
+      Método de pago
     </h2>
     <div class="c-payment-item">
       <label for="visa"><img src="assets/img/visa.svg" width="30" />Tarjeta de credito</label>
       <input checked id="visa" name="payment-method" type="radio" />
+    </div>
+    <div class="c-paymentform__form">
+      <form>
+      <div class="l-flex l-flex--direction-column l-flex--horizontal-gap-5 l-flex--justify-items-center g--margin-left-10 g--margin-right-10">
+          <label>Titular de la tarjeta</label>
+          <input type="text"></input>
+        <div class="l-flex l-flex--vertical-gap-10">
+          <div>
+            <label>Numero de la tarjeta</label><br>
+            <input type="number" style="width: 300px;"></input><br>
+          </div>
+          <div>
+            <label>Fecha de caducidad</label><br>
+            <input type="number"></input><br>
+          </div>
+          <div>
+            <label>CVC</label><br>
+            <input type="number"></input>
+          </div>
+        </div>
+        </div>
+
+      </form>
     </div>
     <div class="c-payment-item">
       <label for="paypal"><img src="assets/img/paypal.svg" width="30" />PayPal</label>
