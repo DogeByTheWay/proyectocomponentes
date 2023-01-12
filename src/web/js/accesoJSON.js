@@ -51,6 +51,7 @@ function getAll(clave) {
     req.onload = function () {
       if (req.status == 200 || req.status == 201) {
         resolve(req.response);
+        console.log(req.getAllResponseHeaders())
       } else reject("Error:" + req.statusText);
     };
   });

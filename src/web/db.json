@@ -23,24 +23,25 @@
     { "id": 15, "nombre": "Altavoces", "categoria": 4 }
   ],
   "usuarios": [
-    { "id": 1, "nombre": "mario@gmail.com", "password": "root" },
-    { "id": 2, "nombre": "wendy@gmail.com", "password": "root" },
-    { "id": 3, "nombre": "esteban@gmail.com", "password": "root" },
-    { "id": 4, "nombre": "pablo@gmail.com", "password": "root" }
+    { "id": 1, "nombre": "mario@gmail.com", "password": "root" , "log": false},
+    { "id": 2, "nombre": "wendy@gmail.com", "password": "root" , "log": false},
+    { "id": 3, "nombre": "esteban@gmail.com", "password": "root" , "log": false},
+    { "id": 4, "nombre": "pablo@gmail.com", "password": "root" , "log": false}
   ],
   "idCarrito": [1],
   "carritos": [
     {
       "id":1,
-      "idUsuario":1,
-      "articulos": [
-        {
-          "id":4, 
-          "unidades":2
-        }
-       ],
-       "estado": "pagado",
-       "activo": true
+      "idUsuario": 1,   
+      "estado": "pagado",
+      "activo": true
+    }
+  ],
+  "productoEnCarrito": [
+    {
+      "idCarrito": 1,
+      "idArticulo": 44,
+      "unidades": 1
     }
   ],
   "articulos": [
@@ -163,6 +164,342 @@
       "precio": 39,
       "categoria": 2,
       "subcategoria": 4
+    },
+    {
+      "id": 16,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "categoria": 4,
+      "subcategoria": 10
+    },
+    {
+      "id": 17,
+      "nombre": "Xiaomi Mi Smart Compact Proyector 120' FullHD 500 Lúmenes ANSI",
+      "descripcion": "Proyector Compatibilidad de tamaño de pantalla: 1016 - 5080 mm (40 - 200'). Brillo de proyector: 500 lúmenes ANSI. Resolución original del proyector: 1080p (1920x1080). Enfoque: Auto. Cantidad de puertos USB 2.0: 1. Entrada de audio (L,R): 1. Número de puertos HDMI: 1. Wifi: Si. Bluetooth: Si. Versión de Bluetooth: 4.0 BLE",
+      "precio": 359,
+      "categoria": 4,
+      "subcategoria": 11
+    },
+    {
+      "id": 18,
+      "nombre": "Xiaomi TV P1E 43' LED UltraHD 4K HDR10",
+      "descripcion": "Diagonal de la pantalla: 109,2 cm (43'). Tipo HD: 4K Ultra HD. Tecnología de visualización: LED. Relación de aspecto nativa: 16:9. Formato de vídeo soportado: 1080p,1440p,2160p. Brillo de pantalla: 270 cd/m². Frecuencia nativa de refresco: 60 Hz",
+      "precio": 199,
+      "categoria": 4,
+      "subcategoria": 12
+    },
+    {
+      "id": 19,
+      "nombre": "Canon Selphy CP1300 Impresora Portátil Color WiFi Negra",
+      "descripcion": "Pantalla incorporada: Si. Pantalla: LCD. Sistema operativo Windows soportado: Si. Sistema operativo MAC soportado: Si. Otros sistemas operativos soportados: Android,iOS. Wifi: Si. Puerto USB: Si. Impresión directa: Si. Conector USB: Mini-USB B.",
+      "precio": 69,
+      "categoria": 4,
+      "subcategoria": 13
+    },
+    {
+      "id": 20,
+      "nombre": "HyperX Quadcast S Micrófono RGB Condensador USB Autónomo",
+      "descripcion": "Sensibilidad de micrófono: -36 dB. Micrófono, distorsión armónica total (THD): 0,05%. Micrófono, impedancia de salida: 32 Ohmios. Micrófono, relación señal/ruido: 90 dB. Tipo de dirección de micrófono: Omnidireccional. Conector USB: USB Tipo C",
+      "precio": 98,
+      "categoria": 4,
+      "subcategoria": 14
+    },
+    {
+      "id": 21,
+      "nombre": "Bose Companion 2 Series III Altavoces Multimedia Negro",
+      "descripcion": "Tipo de interfaz de altavoz: RCA. Auriculares: 3,5 mm. Corriente de salida de adaptador AC: 1,2 A. Corriente: 0,6 A. Voltaje de entrada DC: 12 V. Canales de salida de audio: 2.0 canales. Amplificador: Integrado.",
+      "precio": 88,
+      "categoria": 4,
+      "subcategoria": 15
+    },
+    {
+      "id": 22,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "categoria": 4,
+      "subcategoria": 10
+    },
+    {
+      "id": 23,
+      "nombre": "Xiaomi Mi Smart Compact Proyector 120' FullHD 500 Lúmenes ANSI",
+      "descripcion": "Proyector Compatibilidad de tamaño de pantalla: 1016 - 5080 mm (40 - 200'). Brillo de proyector: 500 lúmenes ANSI. Resolución original del proyector: 1080p (1920x1080). Enfoque: Auto. Cantidad de puertos USB 2.0: 1. Entrada de audio (L,R): 1. Número de puertos HDMI: 1. Wifi: Si. Bluetooth: Si. Versión de Bluetooth: 4.0 BLE",
+      "precio": 359,
+      "categoria": 4,
+      "subcategoria": 11
+    },
+    {
+      "id": 24,
+      "nombre": "Xiaomi TV P1E 43' LED UltraHD 4K HDR10",
+      "descripcion": "Diagonal de la pantalla: 109,2 cm (43'). Tipo HD: 4K Ultra HD. Tecnología de visualización: LED. Relación de aspecto nativa: 16:9. Formato de vídeo soportado: 1080p,1440p,2160p. Brillo de pantalla: 270 cd/m². Frecuencia nativa de refresco: 60 Hz",
+      "precio": 199,
+      "categoria": 4,
+      "subcategoria": 12
+    },
+    {
+      "id": 25,
+      "nombre": "Canon Selphy CP1300 Impresora Portátil Color WiFi Negra",
+      "descripcion": "Pantalla incorporada: Si. Pantalla: LCD. Sistema operativo Windows soportado: Si. Sistema operativo MAC soportado: Si. Otros sistemas operativos soportados: Android,iOS. Wifi: Si. Puerto USB: Si. Impresión directa: Si. Conector USB: Mini-USB B.",
+      "precio": 69,
+      "categoria": 4,
+      "subcategoria": 13
+    },
+    {
+      "id": 26,
+      "nombre": "HyperX Quadcast S Micrófono RGB Condensador USB Autónomo",
+      "descripcion": "Sensibilidad de micrófono: -36 dB. Micrófono, distorsión armónica total (THD): 0,05%. Micrófono, impedancia de salida: 32 Ohmios. Micrófono, relación señal/ruido: 90 dB. Tipo de dirección de micrófono: Omnidireccional. Conector USB: USB Tipo C",
+      "precio": 98,
+      "categoria": 4,
+      "subcategoria": 14
+    },
+    {
+      "id": 27,
+      "nombre": "Bose Companion 2 Series III Altavoces Multimedia Negro",
+      "descripcion": "Tipo de interfaz de altavoz: RCA. Auriculares: 3,5 mm. Corriente de salida de adaptador AC: 1,2 A. Corriente: 0,6 A. Voltaje de entrada DC: 12 V. Canales de salida de audio: 2.0 canales. Amplificador: Integrado.",
+      "precio": 88,
+      "categoria": 4,
+      "subcategoria": 15
+    },
+    {
+      "id": 28,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "categoria": 4,
+      "subcategoria": 10
+    },
+    {
+      "id": 29,
+      "nombre": "Xiaomi Mi Smart Compact Proyector 120' FullHD 500 Lúmenes ANSI",
+      "descripcion": "Proyector Compatibilidad de tamaño de pantalla: 1016 - 5080 mm (40 - 200'). Brillo de proyector: 500 lúmenes ANSI. Resolución original del proyector: 1080p (1920x1080). Enfoque: Auto. Cantidad de puertos USB 2.0: 1. Entrada de audio (L,R): 1. Número de puertos HDMI: 1. Wifi: Si. Bluetooth: Si. Versión de Bluetooth: 4.0 BLE",
+      "precio": 359,
+      "categoria": 4,
+      "subcategoria": 11
+    },
+    {
+      "id": 30,
+      "nombre": "Xiaomi TV P1E 43' LED UltraHD 4K HDR10",
+      "descripcion": "Diagonal de la pantalla: 109,2 cm (43'). Tipo HD: 4K Ultra HD. Tecnología de visualización: LED. Relación de aspecto nativa: 16:9. Formato de vídeo soportado: 1080p,1440p,2160p. Brillo de pantalla: 270 cd/m². Frecuencia nativa de refresco: 60 Hz",
+      "precio": 199,
+      "categoria": 4,
+      "subcategoria": 12
+    },
+    {
+      "id": 31,
+      "nombre": "Canon Selphy CP1300 Impresora Portátil Color WiFi Negra",
+      "descripcion": "Pantalla incorporada: Si. Pantalla: LCD. Sistema operativo Windows soportado: Si. Sistema operativo MAC soportado: Si. Otros sistemas operativos soportados: Android,iOS. Wifi: Si. Puerto USB: Si. Impresión directa: Si. Conector USB: Mini-USB B.",
+      "precio": 69,
+      "categoria": 4,
+      "subcategoria": 13
+    },
+    {
+      "id": 32,
+      "nombre": "HyperX Quadcast S Micrófono RGB Condensador USB Autónomo",
+      "descripcion": "Sensibilidad de micrófono: -36 dB. Micrófono, distorsión armónica total (THD): 0,05%. Micrófono, impedancia de salida: 32 Ohmios. Micrófono, relación señal/ruido: 90 dB. Tipo de dirección de micrófono: Omnidireccional. Conector USB: USB Tipo C",
+      "precio": 98,
+      "categoria": 4,
+      "subcategoria": 14
+    },
+    {
+      "id": 33,
+      "nombre": "Bose Companion 2 Series III Altavoces Multimedia Negro",
+      "descripcion": "Tipo de interfaz de altavoz: RCA. Auriculares: 3,5 mm. Corriente de salida de adaptador AC: 1,2 A. Corriente: 0,6 A. Voltaje de entrada DC: 12 V. Canales de salida de audio: 2.0 canales. Amplificador: Integrado.",
+      "precio": 88,
+      "categoria": 4,
+      "subcategoria": 15
+    },
+    {
+      "id": 34,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "categoria": 4,
+      "subcategoria": 10
+    },
+    {
+      "id": 35,
+      "nombre": "Xiaomi Mi Smart Compact Proyector 120' FullHD 500 Lúmenes ANSI",
+      "descripcion": "Proyector Compatibilidad de tamaño de pantalla: 1016 - 5080 mm (40 - 200'). Brillo de proyector: 500 lúmenes ANSI. Resolución original del proyector: 1080p (1920x1080). Enfoque: Auto. Cantidad de puertos USB 2.0: 1. Entrada de audio (L,R): 1. Número de puertos HDMI: 1. Wifi: Si. Bluetooth: Si. Versión de Bluetooth: 4.0 BLE",
+      "precio": 359,
+      "categoria": 4,
+      "subcategoria": 11
+    },
+    {
+      "id": 36,
+      "nombre": "Xiaomi TV P1E 43' LED UltraHD 4K HDR10",
+      "descripcion": "Diagonal de la pantalla: 109,2 cm (43'). Tipo HD: 4K Ultra HD. Tecnología de visualización: LED. Relación de aspecto nativa: 16:9. Formato de vídeo soportado: 1080p,1440p,2160p. Brillo de pantalla: 270 cd/m². Frecuencia nativa de refresco: 60 Hz",
+      "precio": 199,
+      "categoria": 4,
+      "subcategoria": 12
+    },
+    {
+      "id": 37,
+      "nombre": "Canon Selphy CP1300 Impresora Portátil Color WiFi Negra",
+      "descripcion": "Pantalla incorporada: Si. Pantalla: LCD. Sistema operativo Windows soportado: Si. Sistema operativo MAC soportado: Si. Otros sistemas operativos soportados: Android,iOS. Wifi: Si. Puerto USB: Si. Impresión directa: Si. Conector USB: Mini-USB B.",
+      "precio": 69,
+      "categoria": 4,
+      "subcategoria": 13
+    },
+    {
+      "id": 38,
+      "nombre": "HyperX Quadcast S Micrófono RGB Condensador USB Autónomo",
+      "descripcion": "Sensibilidad de micrófono: -36 dB. Micrófono, distorsión armónica total (THD): 0,05%. Micrófono, impedancia de salida: 32 Ohmios. Micrófono, relación señal/ruido: 90 dB. Tipo de dirección de micrófono: Omnidireccional. Conector USB: USB Tipo C",
+      "precio": 98,
+      "categoria": 4,
+      "subcategoria": 14
+    },
+    {
+      "id": 39,
+      "nombre": "Bose Companion 2 Series III Altavoces Multimedia Negro",
+      "descripcion": "Tipo de interfaz de altavoz: RCA. Auriculares: 3,5 mm. Corriente de salida de adaptador AC: 1,2 A. Corriente: 0,6 A. Voltaje de entrada DC: 12 V. Canales de salida de audio: 2.0 canales. Amplificador: Integrado.",
+      "precio": 88,
+      "categoria": 4,
+      "subcategoria": 15
+    },
+    {
+      "id": 40,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "categoria": 4,
+      "subcategoria": 10
+    },
+    {
+      "id": 41,
+      "nombre": "Xiaomi Mi Smart Compact Proyector 120' FullHD 500 Lúmenes ANSI",
+      "descripcion": "Proyector Compatibilidad de tamaño de pantalla: 1016 - 5080 mm (40 - 200'). Brillo de proyector: 500 lúmenes ANSI. Resolución original del proyector: 1080p (1920x1080). Enfoque: Auto. Cantidad de puertos USB 2.0: 1. Entrada de audio (L,R): 1. Número de puertos HDMI: 1. Wifi: Si. Bluetooth: Si. Versión de Bluetooth: 4.0 BLE",
+      "precio": 359,
+      "categoria": 4,
+      "subcategoria": 11
+    },
+    {
+      "id": 42,
+      "nombre": "Xiaomi TV P1E 43' LED UltraHD 4K HDR10",
+      "descripcion": "Diagonal de la pantalla: 109,2 cm (43'). Tipo HD: 4K Ultra HD. Tecnología de visualización: LED. Relación de aspecto nativa: 16:9. Formato de vídeo soportado: 1080p,1440p,2160p. Brillo de pantalla: 270 cd/m². Frecuencia nativa de refresco: 60 Hz",
+      "precio": 199,
+      "categoria": 4,
+      "subcategoria": 12
+    },
+    {
+      "id": 43,
+      "nombre": "Canon Selphy CP1300 Impresora Portátil Color WiFi Negra",
+      "descripcion": "Pantalla incorporada: Si. Pantalla: LCD. Sistema operativo Windows soportado: Si. Sistema operativo MAC soportado: Si. Otros sistemas operativos soportados: Android,iOS. Wifi: Si. Puerto USB: Si. Impresión directa: Si. Conector USB: Mini-USB B.",
+      "precio": 69,
+      "categoria": 4,
+      "subcategoria": 13
+    },
+    {
+      "id": 44,
+      "nombre": "HyperX Quadcast S Micrófono RGB Condensador USB Autónomo",
+      "descripcion": "Sensibilidad de micrófono: -36 dB. Micrófono, distorsión armónica total (THD): 0,05%. Micrófono, impedancia de salida: 32 Ohmios. Micrófono, relación señal/ruido: 90 dB. Tipo de dirección de micrófono: Omnidireccional. Conector USB: USB Tipo C",
+      "precio": 98,
+      "categoria": 4,
+      "subcategoria": 14
+    },
+    {
+      "id": 45,
+      "nombre": "Bose Companion 2 Series III Altavoces Multimedia Negro",
+      "descripcion": "Tipo de interfaz de altavoz: RCA. Auriculares: 3,5 mm. Corriente de salida de adaptador AC: 1,2 A. Corriente: 0,6 A. Voltaje de entrada DC: 12 V. Canales de salida de audio: 2.0 canales. Amplificador: Integrado.",
+      "precio": 88,
+      "categoria": 4,
+      "subcategoria": 15
+    },
+    {
+      "id": 46,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "categoria": 4,
+      "subcategoria": 10
+    },
+    {
+      "id": 47,
+      "nombre": "Xiaomi Mi Smart Compact Proyector 120' FullHD 500 Lúmenes ANSI",
+      "descripcion": "Proyector Compatibilidad de tamaño de pantalla: 1016 - 5080 mm (40 - 200'). Brillo de proyector: 500 lúmenes ANSI. Resolución original del proyector: 1080p (1920x1080). Enfoque: Auto. Cantidad de puertos USB 2.0: 1. Entrada de audio (L,R): 1. Número de puertos HDMI: 1. Wifi: Si. Bluetooth: Si. Versión de Bluetooth: 4.0 BLE",
+      "precio": 359,
+      "categoria": 4,
+      "subcategoria": 11
+    },
+    {
+      "id": 48,
+      "nombre": "Xiaomi TV P1E 43' LED UltraHD 4K HDR10",
+      "descripcion": "Diagonal de la pantalla: 109,2 cm (43'). Tipo HD: 4K Ultra HD. Tecnología de visualización: LED. Relación de aspecto nativa: 16:9. Formato de vídeo soportado: 1080p,1440p,2160p. Brillo de pantalla: 270 cd/m². Frecuencia nativa de refresco: 60 Hz",
+      "precio": 199,
+      "categoria": 4,
+      "subcategoria": 12
+    },
+    {
+      "id": 49,
+      "nombre": "Canon Selphy CP1300 Impresora Portátil Color WiFi Negra",
+      "descripcion": "Pantalla incorporada: Si. Pantalla: LCD. Sistema operativo Windows soportado: Si. Sistema operativo MAC soportado: Si. Otros sistemas operativos soportados: Android,iOS. Wifi: Si. Puerto USB: Si. Impresión directa: Si. Conector USB: Mini-USB B.",
+      "precio": 69,
+      "categoria": 4,
+      "subcategoria": 13
+    },
+    {
+      "id": 50,
+      "nombre": "HyperX Quadcast S Micrófono RGB Condensador USB Autónomo",
+      "descripcion": "Sensibilidad de micrófono: -36 dB. Micrófono, distorsión armónica total (THD): 0,05%. Micrófono, impedancia de salida: 32 Ohmios. Micrófono, relación señal/ruido: 90 dB. Tipo de dirección de micrófono: Omnidireccional. Conector USB: USB Tipo C",
+      "precio": 98,
+      "categoria": 4,
+      "subcategoria": 14
+    },
+    {
+      "id": 51,
+      "nombre": "Bose Companion 2 Series III Altavoces Multimedia Negro",
+      "descripcion": "Tipo de interfaz de altavoz: RCA. Auriculares: 3,5 mm. Corriente de salida de adaptador AC: 1,2 A. Corriente: 0,6 A. Voltaje de entrada DC: 12 V. Canales de salida de audio: 2.0 canales. Amplificador: Integrado.",
+      "precio": 88,
+      "categoria": 4,
+      "subcategoria": 15
+    },
+    {
+      "id": 52,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "categoria": 4,
+      "subcategoria": 10
+    },
+    {
+      "id": 53,
+      "nombre": "Xiaomi Mi Smart Compact Proyector 120' FullHD 500 Lúmenes ANSI",
+      "descripcion": "Proyector Compatibilidad de tamaño de pantalla: 1016 - 5080 mm (40 - 200'). Brillo de proyector: 500 lúmenes ANSI. Resolución original del proyector: 1080p (1920x1080). Enfoque: Auto. Cantidad de puertos USB 2.0: 1. Entrada de audio (L,R): 1. Número de puertos HDMI: 1. Wifi: Si. Bluetooth: Si. Versión de Bluetooth: 4.0 BLE",
+      "precio": 359,
+      "categoria": 4,
+      "subcategoria": 11
+    },
+    {
+      "id": 54,
+      "nombre": "Xiaomi TV P1E 43' LED UltraHD 4K HDR10",
+      "descripcion": "Diagonal de la pantalla: 109,2 cm (43'). Tipo HD: 4K Ultra HD. Tecnología de visualización: LED. Relación de aspecto nativa: 16:9. Formato de vídeo soportado: 1080p,1440p,2160p. Brillo de pantalla: 270 cd/m². Frecuencia nativa de refresco: 60 Hz",
+      "precio": 199,
+      "categoria": 4,
+      "subcategoria": 12
+    },
+    {
+      "id": 55,
+      "nombre": "Canon Selphy CP1300 Impresora Portátil Color WiFi Negra",
+      "descripcion": "Pantalla incorporada: Si. Pantalla: LCD. Sistema operativo Windows soportado: Si. Sistema operativo MAC soportado: Si. Otros sistemas operativos soportados: Android,iOS. Wifi: Si. Puerto USB: Si. Impresión directa: Si. Conector USB: Mini-USB B.",
+      "precio": 69,
+      "categoria": 4,
+      "subcategoria": 13
+    },
+    {
+      "id": 56,
+      "nombre": "HyperX Quadcast S Micrófono RGB Condensador USB Autónomo",
+      "descripcion": "Sensibilidad de micrófono: -36 dB. Micrófono, distorsión armónica total (THD): 0,05%. Micrófono, impedancia de salida: 32 Ohmios. Micrófono, relación señal/ruido: 90 dB. Tipo de dirección de micrófono: Omnidireccional. Conector USB: USB Tipo C",
+      "precio": 98,
+      "categoria": 4,
+      "subcategoria": 14
+    },
+    {
+      "id": 57,
+      "nombre": "Bose Companion 2 Series III Altavoces Multimedia Negro",
+      "descripcion": "Tipo de interfaz de altavoz: RCA. Auriculares: 3,5 mm. Corriente de salida de adaptador AC: 1,2 A. Corriente: 0,6 A. Voltaje de entrada DC: 12 V. Canales de salida de audio: 2.0 canales. Amplificador: Integrado.",
+      "precio": 88,
+      "categoria": 4,
+      "subcategoria": 15
     }
   ]
 }

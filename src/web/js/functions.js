@@ -32,39 +32,29 @@ function desactivaFormulario(){
 }
 
 window.onload = () => {
-  
-    cargacesta();
-    cargaproducto();
-    cargaLogin();
-    cargarContenido();
-    cargaPago();
-    getCategorias();
-    
-    document.getElementById("burger").onmouseenter = function () {
-        let nav = document.getElementsByClassName("c-nav")[0];
-        nav.classList.toggle("c-nav--visible")
-        nav.onmouseleave=()=>{nav.classList.toggle("c-nav--visible")}
-    }
-    document.getElementById("burger").onmouseleave = function () {
-      let nav = document.getElementsByClassName("c-nav")[0];
-      nav.classList.toggle("c-nav--visible")
-    }
-    document.getElementById("visa").onclick=activaFormulario;
-    document.getElementById("paypal").onclick=desactivaFormulario;
-    
-    document.getElementById('cestaBtn').onclick = abrirCesta;   
-    document.getElementById('loginBtn').onclick = abrirLogin;
-    document.getElementById('compraBtn').onclick = abrirPago;
-    document.getElementById('volverMenu').onclick =function(){
-      cargarContenido();
+  cargacesta();
+  cargarProducto();
+  cargaLogin();
+  cargarContenido();
+  cargaPago();
+  getAll("categorias")
+    .then((a) => pintarCategorias(a))
+    .catch(console.log("merde"));
+  document.getElementById("burger").onmouseenter = function () {
+    let nav = document.getElementsByClassName("c-nav")[0];
+    nav.classList.toggle("c-nav--visible");
+    nav.onmouseleave = () => {
+      nav.classList.toggle("c-nav--visible");
     };
-    document.getElementById('ordenadoresBtn').onclick = mostrarOrdenadores;
-    document.getElementById('cerrarCesta').onclick = () => {document.getElementById("cesta").close()}; 
-    document.getElementById("btnIniciarSesion").onclick=function(){
-      document.getElementById("login").close();
-      document.getElementById("listaCesta").showModal();
-    };
-    document.getElementById("cestaBtn").onclick = abrirCesta;
+  };
+  document.getElementById("burger").onmouseleave = function () {
+    let nav = document.getElementsByClassName("c-nav")[0];
+    nav.classList.toggle("c-nav--visible");
+  };
+  document.getElementById("cerrarCesta").onclick = () => {
+    document.getElementById("cesta").close();
+  };
+  document.getElementById("cestaBtn").onclick = abrirCesta;
   document.getElementById("loginBtn").onclick = abrirLogin;
   document.getElementById("compraBtn").onclick = abrirPago;
   document.getElementById("volverMenu").onclick = function () {
@@ -77,108 +67,75 @@ window.onload = () => {
     document.getElementById("login").close();
     document.getElementById("listaCesta").showModal();
   };
+};
+
+function pintarCategorias(a) {
+  let c_nav = document.querySelector(".c-nav");
+  c_nav.innerHTML = "";
+  let texto = "";
+  JSON.parse(a).forEach((cat) => {
+    texto += `<li class="c-nav__item" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a></li>`;
+  });
+  c_nav.innerHTML = texto;
+  let items = document.getElementsByClassName("c-nav__item");
+  Array.from(items).forEach((item) => {
+    item.onclick = () => {
+      obtenerArticulos(item.id, item.textContent);
+    };
+  });
+  document.getElementById("c4").classList.add("c-nav__item--bottom");
 }
 
-
+function obtenerArticulos(id, nombre) {
+  if (id.substring(0, 1) === "c") {
+    getAll(`articulos/categoria/${id.substring(1)}`).then((a) => {
+      pintarArticulos(JSON.parse(a), nombre);
+    });
+  } else {
+    getAll(`articulos/subcategoria/${id.substring(1)}`).then(a => {
+      pintarArticulos(JSON.parse(a), nombre);
+    }
+      )
+  }
+}
+function pintarArticulos(articulos, nombre) {
+  let main = document.getElementById("contenedorTodo");
+  main.innerHTML = "";
+  let texto = `
+    <section class="p-5 pl-40 pr-40">
+    <b class="g--font-size-xl">${nombre}</b>
+    <div class="l-horizontal-space-between">`;
+  articulos.forEach((item) => {
+    texto += `<div class="c-card">    
+                <img src="assets/img/${item.id}.jpg" class="c-card__img">
+                <div class="c-card__body">
+                  <h5 class="g--font-size-s">${item.nombre}</h5>
+                  <b>${item.precio}€ PVPR  <del>${item.precio}</del></b>
+                  <a id=${item.id} class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
+                </div>   
+              </div>`;
+  });
+  texto += "</section>";
+  main.innerHTML = texto;
+  Array.from(document.getElementsByClassName("c-card__img")).forEach((e) =>
+    e.addEventListener("click", cargarProducto(e.id))
+  );  
+  Array.from(main.getElementsByTagName("a")).forEach((e) =>
+    e.addEventListener("click", cargaLogin(e.id))
+  );
+}
 
 function mostrarOrdenadores() {
   document.getElementById("contenedorTodo").innerHTML = "";
-  document.getElementById("contenedorTodo").innerHTML = `
-  <section class="p-5 pl-40 pr-40">
-  <b class="g--font-size-xl">Ordenadores</b>
-<div class="l-horizontal-space-between">
- <div class="c-card">
-    
-     <img src="assets/img/15.jpg" class="c-card__img" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
- <div class="c-card">
-    
-     <img src="assets/img/1.jpg" class="c-card__img" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
- <div class="c-card">
-    
-     <img src="assets/img/5.jpg" class="c-card__img" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>  <div class="c-card">
-    
-     <img src="assets/img/11.jpg" class="c-card__img" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
-
- <div class="c-card">
-    
-     <img src="assets/img/14.jpg" class="c-card__img" >
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
- <div class="c-card">
-    
-     <img src="assets/img/15.jpg" class="c-card__img" >
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
- <div class="c-card">
-    
-     <img src="assets/img/1.jpg" class="c-card__img" >
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>  <div class="c-card">
-    
-     <img src="assets/img/5.jpg" class="c-card__img" >
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
-</div>
-<div id="paginacion" class="m-2">
-  <ul class="pagination flex flex-row justify-center gap-4">
-    <li class="rounded-sm cursor-pointer px-2 shadow-md">Pagina anterior</li>
-    <li class="rounded-sm cursor-pointer px-2 shadow-md">1</li>
-    <li class="rounded-sm cursor-pointer px-2	shadow-md">2</li>
-    <li class="rounded-sm cursor-pointer px-2	shadow-md">3</li>            
-    <li class="rounded-sm cursor-pointer px-2	shadow-md">Pagina siguiente</li>            
-  </ul>
-</div>
-
- 
-</section>`;
+  texto = `<div id="paginacion" class="m-2">
+    <ul class="pagination flex flex-row justify-center gap-4">
+      <li class="rounded-sm cursor-pointer px-2 shadow-md">Pagina anterior</li>
+      <li class="rounded-sm cursor-pointer px-2 shadow-md">1</li>
+      <li class="rounded-sm cursor-pointer px-2	shadow-md">2</li>
+      <li class="rounded-sm cursor-pointer px-2	shadow-md">3</li>
+      <li class="rounded-sm cursor-pointer px-2	shadow-md">Pagina siguiente</li>
+    </ul>
+  </div>;`
 }
 
 function cargaLogin() {
@@ -347,10 +304,8 @@ function cargacesta() {
     </div>
   </div>`;
 }
-function cargaproducto() {
-  document.getElementById(
-    "producto"
-  ).innerHTML += `  
+function cargarProducto() {
+  document.getElementById("producto").innerHTML += `  
   <button id="cerrarProducto" class="flex outline-0 g--color-principal-5 g--font-family-principal text-sm ml-40">      
     <svg class="fill-current mr-2 g--color-principal-5 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
     Volver a lista de productos
