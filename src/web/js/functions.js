@@ -10,9 +10,17 @@ function abrirLogin() {
   let login = document.getElementById("login");
   login.open ? login.close() : login.showModal();
 }
+function abrirLogout() {
+  let logout = document.getElementById("logout");
+  logout.open ? logout.close() : logout.showModal();
+}
 function abrirPago() {
   let pago = document.getElementById("pago");
   pago.open ? pago.close() : pago.showModal();
+}
+function abrirHistorial(){
+  let historial=document.getElementById("listaCesta");
+  historial.open ? historial.close() : historial.showModal();
 }
 
 function quitaMenu() {
@@ -32,9 +40,12 @@ function desactivaFormulario(){
 }
 
 window.onload = () => {
+  alreadyLoggedChecker();
+  cargaHistorial();
   cargacesta();
   cargarProducto();
   cargaLogin();
+  cargaLogout();
   cargarContenido();
   cargaPago();
   getAll("categorias")
@@ -47,6 +58,7 @@ window.onload = () => {
       nav.classList.toggle("c-nav--visible");
     };
   };
+  document.getElementById("btnIniciarSesion").onclick = recogeDatosLogin;
   document.getElementById("burger").onmouseleave = function () {
     let nav = document.getElementsByClassName("c-nav")[0];
     nav.classList.toggle("c-nav--visible");
@@ -57,17 +69,37 @@ window.onload = () => {
   document.getElementById("cestaBtn").onclick = abrirCesta;
   document.getElementById("loginBtn").onclick = abrirLogin;
   document.getElementById("compraBtn").onclick = abrirPago;
+  document.getElementById("historyFeat").onclick=abrirHistorial;
   document.getElementById("volverMenu").onclick = function () {
     cargarContenido();
   };
   document.getElementById("cerrarProducto").onclick = () => {
     document.getElementById("producto").close();
   };
-  document.getElementById("btnIniciarSesion").onclick = function () {
-    document.getElementById("login").close();
-    document.getElementById("listaCesta").showModal();
-  };
 };
+
+function alreadyLoggedChecker(){
+  getAll("usuarios").then(data => {let user=JSON.parse(data).find(u=>u.log==true); user!=null ? pintaDatosUsuario(user.nombre) : console.log("Nadie logeado")})
+}
+function pintaDatosUsuario(nombre){
+  document.getElementById("loginBtn").innerHTML=`<i class="fa-solid fa-user mr-3"></i>${nombre}`;
+  document.getElementById("historyFeat").style.display="block";
+  document.getElementById("loginBtn").onclick=abrirLogout;
+}
+function recogeDatosLogin(){
+  let user=document.getElementById("emailUser").value;
+  let passwd=document.getElementById("passwdUser").value;
+    getAll("usuarios").then(usuarios => compruebaDatosLogin(user,passwd,JSON.parse(usuarios)))
+    .catch(error => console.log(error));
+}
+function compruebaDatosLogin(user,passwd,usuarios){
+  let usuario=usuarios.find(u=> u.nombre ==user && u.password == passwd)
+  if(usuario!=null){
+    patch("usuarios",`${usuario.id}`,{'log':true}).then(document.location.reload());
+  }else{
+    alert("Error de credenciales")
+  }
+}
 
 function pintarCategorias(a) {
   let c_nav = document.querySelector(".c-nav");
@@ -222,6 +254,103 @@ function modificarProducto(producto) {
   console.log("DALE A OTRO BOTON QUE AUN NO MODIFICA");
 }
 
+function cargaHistorial(){
+  document.getElementById("listaCesta").innerHTML=`
+  <div>
+    <b class="g--font-size-2xl">Lista de Carritos</b>
+    <p><b class="g--font-size-xl">Pendientes</b></p>
+    <div class="l-vertical">
+    <div class="c-listaCarrito">
+        <table class="c-listaCarrito__body" border=1 >
+            <tr>
+             <td><img src="./assets/img/11.jpg" width="80px" height="130px" /></td>
+             <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+             <td class="g--font-size-m"> &nbsp;&nbsp;500€</td>
+            </tr>
+            <tr>
+                <td><img src="./assets/img/12.jpg" width="80px" height="130px"/></td>
+                <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+                <td class="g--font-size-m"> &nbsp;&nbsp;450€</td>
+               </tr>            
+        </table>
+        <div class="c-listaCarrito__footer">
+        <button class="c-button c-button--size-stretch">Seguir Comprando</button>
+        <button class="c-button c-button--size-stretch">Realizar Pago</button>
+        <b>Total:950€</b>
+        </div> 
+    </div>
+
+    <div class="c-listaCarrito">
+        <table class="c-listaCarrito__body" border=1 >
+            <tr>
+             <td><img src="./assets/img/13.jpg" width="80px" height="130px"/></td>
+             <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+             <td class="g--font-size-m"> &nbsp;&nbsp;400€</td>
+            </tr>
+            <tr>
+                <td><img src="./assets/img/11.jpg" width="80px" height="130px"/></td>
+                <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+                <td class="g--font-size-m"> &nbsp;&nbsp;450€</td>
+               </tr>            
+        </table>
+        <div class="c-listaCarrito__footer">
+        <button class="c-button c-button--size-stretch">Seguir Comprando</button>
+        <button class="c-button c-button--size-stretch">Realizar Pago</button>
+        <b>Total:850€</b>
+        </div>
+    </div>
+    </div>
+
+    <p><b class="g--font-size-xl">Realizados</b></p>
+    <div class="l-vertical">
+        <div class="c-listaCarrito">
+            <table class="c-listaCarrito__body" border=1 >
+                <tr>
+                 <td><img src="./assets/img/14.jpg" width="80px" height="130px"/></td>
+                 <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+                 <td class="g--font-size-m"> &nbsp;&nbsp;600€</td>
+                </tr>
+                <tr>
+                    <td><img src="./assets/img/15.jpg" width="80px" height="130px"/></td>
+                    <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+                    <td class="g--font-size-m"> &nbsp;&nbsp;650€</td>
+                   </tr>            
+            </table>
+            <div class="c-listaCarrito__footer">
+            <p>Realizado 24 Septiembre 2022</p>
+            <button class="c-button c-button--size-stretch">Volver a Comprar</button>
+            <b>Total:1250€</b>
+            </div>
+            
+        </div>
+        <div class="c-listaCarrito">
+            <table class="c-listaCarrito__body" border=1 >
+                <tr>
+                 <td><img src="./assets/img/11.jpg" width="80px" height="130px"/></td>
+                 <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+                 <td class="g--font-size-m"> &nbsp;&nbsp;500€</td>
+                </tr>
+                <tr>
+                    <td><img src="./assets/img/13.jpg" width="80px" height="130px"/></td>
+                    <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
+                    <td class="g--font-size-m"> &nbsp;&nbsp;450€</td>
+                   </tr>            
+            </table>
+            <div class="c-listaCarrito__footer">
+            <p>Realizado 20 Diciembre 2022</p>
+            <button class="c-button c-button--size-stretch">Volver a Comprar</button>
+            <b>Total:950€</b>
+            </div>
+            
+        </div>
+ 
+        </div>
+    </div>
+  `;
+}
+function cargaLogout() {
+  document.getElementById("logout").innerHTML = `CIERRA SESIÓN`;
+}
 function cargaLogin() {
   document.getElementById("login").innerHTML = `
   <div class="l-flex l-flex--align-items-center l-flex--justify-content-center">
@@ -230,11 +359,11 @@ function cargaLogin() {
         <form class="c-form">
           <div class="c-form__input">
             <i class="c-form__icon fas fa-user"></i>
-            <input type="text" class="c-form__text" placeholder="Email">
+            <input type="text" class="c-form__text" id="emailUser" placeholder="Email">
           </div>
           <div class="c-form__input">
             <i class="c-form__icon fas fa-lock"></i>
-            <input type="password" class="c-form__text" placeholder="Password">
+            <input type="password" class="c-form__text" id="passwdUser" placeholder="Password">
           </div>
           <a class="c-button--login" id="btnIniciarSesion">
             <span class="c-button--text">Iniciar Sesión</span>
