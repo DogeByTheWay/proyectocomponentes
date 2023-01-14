@@ -1,9 +1,0 @@
-{   
-    "/usuarios/nombre/:nombre": "/usuarios?nombre=:nombre",
-    "/usuarios/id/:id": "/usuarios?id=:id",
-    "/articulos/categoria/:id":"/articulos?categoria=:id",
-    "/articulos/subcategoria/:id": "/articulos?subcategoria=:id",
-    "/subcategorias/categoria/:id": "/subcategorias?categoria=:id",    
-    "/subcategorias/id/:id": "/subcategorias?categoria=:id",
-    "_comment": "json-server --watch db.json --routes routes.json"
-  }

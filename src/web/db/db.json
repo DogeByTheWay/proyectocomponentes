@@ -1,47 +1,139 @@
 {
   "categorias": [
-    { "id": 1, "nombre": "Ordenadores" },
-    { "id": 2, "nombre": "Discos Duros" },
-    { "id": 3, "nombre": "Componentes" },
-    { "id": 4, "nombre": "Audio, Video" }
+    {
+      "id": 1,
+      "nombre": "Ordenadores"
+    },
+    {
+      "id": 2,
+      "nombre": "Discos Duros"
+    },
+    {
+      "id": 3,
+      "nombre": "Componentes"
+    },
+    {
+      "id": 4,
+      "nombre": "Audio, Video"
+    }
   ],
   "subcategorias": [
-    { "id": 1, "nombre": "Portatiles", "categoria": 1 },
-    { "id": 2, "nombre": "PC", "categoria": 1 },
-    { "id": 3, "nombre": "Memorias USB", "categoria": 2 },
-    { "id": 4, "nombre": "Disco duro externo", "categoria": 2 },
-    { "id": 5, "nombre": "Placas base", "categoria": 3 },
-    { "id": 6, "nombre": "Procesador", "categoria": 3 },
-    { "id": 7, "nombre": "Discos duros", "categoria": 3 },
-    { "id": 8, "nombre": "Tarjetas gráficas", "categoria": 3 },
-    { "id": 9, "nombre": "RAM", "categoria": 3 },
-    { "id": 10, "nombre": "Monitores", "categoria": 4 },
-    { "id": 11, "nombre": "Proyectores", "categoria": 4 },
-    { "id": 12, "nombre": "TV", "categoria": 4 },
-    { "id": 13, "nombre": "Impresoras", "categoria": 4 },
-    { "id": 14, "nombre": "Micrófonos", "categoria": 4 },
-    { "id": 15, "nombre": "Altavoces", "categoria": 4 }
+    {
+      "id": 1,
+      "nombre": "Portatiles",
+      "categoria": 1
+    },
+    {
+      "id": 2,
+      "nombre": "PC",
+      "categoria": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Memorias USB",
+      "categoria": 2
+    },
+    {
+      "id": 4,
+      "nombre": "Disco duro externo",
+      "categoria": 2
+    },
+    {
+      "id": 5,
+      "nombre": "Placas base",
+      "categoria": 3
+    },
+    {
+      "id": 6,
+      "nombre": "Procesador",
+      "categoria": 3
+    },
+    {
+      "id": 7,
+      "nombre": "Discos duros",
+      "categoria": 3
+    },
+    {
+      "id": 8,
+      "nombre": "Tarjetas gráficas",
+      "categoria": 3
+    },
+    {
+      "id": 9,
+      "nombre": "RAM",
+      "categoria": 3
+    },
+    {
+      "id": 10,
+      "nombre": "Monitores",
+      "categoria": 4
+    },
+    {
+      "id": 11,
+      "nombre": "Proyectores",
+      "categoria": 4
+    },
+    {
+      "id": 12,
+      "nombre": "TV",
+      "categoria": 4
+    },
+    {
+      "id": 13,
+      "nombre": "Impresoras",
+      "categoria": 4
+    },
+    {
+      "id": 14,
+      "nombre": "Micrófonos",
+      "categoria": 4
+    },
+    {
+      "id": 15,
+      "nombre": "Altavoces",
+      "categoria": 4
+    }
   ],
   "usuarios": [
-    { "id": 1, "nombre": "mario@gmail.com", "password": "root" , "log": false},
-    { "id": 2, "nombre": "wendy@gmail.com", "password": "root" , "log": false},
-    { "id": 3, "nombre": "esteban@gmail.com", "password": "root" , "log": false},
-    { "id": 4, "nombre": "pablo@gmail.com", "password": "root" , "log": false}
+    {
+      "id": 1,
+      "nombre": "mario@gmail.com",
+      "password": "root",
+      "log": true
+    },
+    {
+      "id": 2,
+      "nombre": "wendy@gmail.com",
+      "password": "root",
+      "log": false
+    },
+    {
+      "id": 3,
+      "nombre": "esteban@gmail.com",
+      "password": "root",
+      "log": false
+    },
+    {
+      "id": 4,
+      "nombre": "pablo@gmail.com",
+      "password": "root",
+      "log": false
+    }
   ],
-  "idCarrito": [1],
   "carritos": [
     {
-      "id":1,
-      "idUsuario": 1,   
-      "estado": "pagado",
+      "id": 1,
+      "idUsuario": 1,
+      "estado": "pendiente",
       "activo": true
     }
   ],
-  "productoEnCarrito": [
+  "productos": [
     {
       "idCarrito": 1,
-      "idArticulo": 44,
-      "unidades": 1
+      "idArticulo": 10,
+      "unidades": 1,
+      "id": 1
     }
   ],
   "articulos": [

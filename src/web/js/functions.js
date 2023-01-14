@@ -39,7 +39,7 @@ window.onload = () => {
   cargaPago();
   getAll("categorias")
     .then((a) => pintarCategorias(a))
-    .catch(console.log("merde"));
+    .catch((a) => console.log(a));
   document.getElementById("burger").onmouseenter = function () {
     let nav = document.getElementsByClassName("c-nav")[0];
     nav.classList.toggle("c-nav--visible");
@@ -86,56 +86,140 @@ function pintarCategorias(a) {
   document.getElementById("c4").classList.add("c-nav__item--bottom");
 }
 
-function obtenerArticulos(id, nombre) {
+function obtenerArticulos(id, nombreCategoria) {
   if (id.substring(0, 1) === "c") {
-    getAll(`articulos/categoria/${id.substring(1)}`).then((a) => {
-      pintarArticulos(JSON.parse(a), nombre);
+    getOnePage(`articulos/categoriaPage`, id.substring(1)).then((articulos_headerArray) => {
+      pintarPaginacion(articulos_headerArray, nombreCategoria)
     });
   } else {
     getAll(`articulos/subcategoria/${id.substring(1)}`).then(a => {
-      pintarArticulos(JSON.parse(a), nombre);
+      pintarArticulos(JSON.parse(a), nombreCategoria);
     }
       )
   }
 }
-function pintarArticulos(articulos, nombre) {
+
+function obtenerArticulosDesdeUrlHeader(url, nombreCategoria) {
+  getOnePageWithUrl(url).then((articulos_headerArray) => {
+    pintarPaginacion(articulos_headerArray, nombreCategoria)
+  });
+}
+
+function pintarPaginacion(articulos_headerArray, nombreCategoria) {
+  let header = articulos_headerArray.pop();
+  let prev = false;
+  let next = false;
+  let urlFirst, urlPrev, urlNext, urlLast;
+  if(header.find(a => a.match(/.*prev.*/))) {
+    prev = true;
+  }
+  if(header.find(a => a.match(/.*next.*/))) {
+    next = true;
+  }
+  let textoPaginacion = `<div id="paginacion" class="m-2">
+                  <ul class="pagination flex flex-row justify-center gap-4">`
+  header.forEach( item => {
+    if(item.match('first')) {
+      let regex = /http.+=8/;
+      let urlPageFirst = item.match(regex);
+      textoPaginacion+=`<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlFirst">Primero</button></li> `;
+      urlFirst = urlPageFirst[0];
+      if(!prev) {
+        textoPaginacion+=`<li class="rounded-sm px-2 shadow-md g--background-color-principal-0 opacity-25">&lt&lt</li>`;             
+      }
+    }    
+    if(item.match('prev')) {
+      let regex = /http.+=8/;
+      let urlPagePrev = item.match(regex);
+      textoPaginacion+=`<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlPrev">&lt&lt</button></li>`;
+      urlPrev = urlPagePrev[0];
+    }     
+    if(item.match('next')) {
+      let regex = /http.+=8/;
+      let urlPageNext = item.match(regex);
+      textoPaginacion+=`<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlNext">&gt&gt</button></li>`;
+      urlNext = urlPageNext[0];
+    }       
+    if(item.match('last')) {
+      if(!next) {
+        textoPaginacion+=`<li class="rounded-sm px-2 shadow-md g--background-color-principal-0 opacity-25">&gt&gt</li>`;
+      }       
+      let regex = /http.+=8/;
+      let urlPageLast = item.match(regex);
+      textoPaginacion+=`<li class="rounded-sm cursor-pointer px-2 g--background-color-principal-0 shadow-md"><button id="urlLast">Último</button></li>`;
+      urlLast = urlPageLast[0];
+    }
+  })
+  textoPaginacion+=`</ul>
+      </div>`
+  pintarArticulos(articulos_headerArray, nombreCategoria, textoPaginacion, urlFirst, urlPrev, urlNext, urlLast);
+}
+
+function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, urlPrev, urlNext, urlLast) {
   let main = document.getElementById("contenedorTodo");
   main.innerHTML = "";
   let texto = `
     <section class="p-5 pl-40 pr-40">
-    <b class="g--font-size-xl">${nombre}</b>
+    <b class="g--font-size-xl">${nombreCategoria}</b>
     <div class="l-horizontal-space-between">`;
+    let itemPrecio2;
   articulos.forEach((item) => {
+    itemPrecio2 = item.precio * 1.2;
     texto += `<div class="c-card">    
                 <img src="assets/img/${item.id}.jpg" class="c-card__img">
                 <div class="c-card__body">
                   <h5 class="g--font-size-s">${item.nombre}</h5>
-                  <b>${item.precio}€ PVPR  <del>${item.precio}</del></b>
+                  <b>${item.precio}€ PVPR  <del>${itemPrecio2.toFixed(0)}</del></b>
                   <a id=${item.id} class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
                 </div>   
               </div>`;
   });
   texto += "</section>";
-  main.innerHTML = texto;
+  main.innerHTML = texto + textoPaginacion;  
+  if(typeof urlFirst !== 'undefined') { 
+  document.getElementById('urlFirst').addEventListener('click', ()=> {obtenerArticulosDesdeUrlHeader(urlFirst, nombreCategoria)});
+  }
+  if(typeof urlPrev !== 'undefined') {
+    document.getElementById('urlPrev').addEventListener('click', ()=> obtenerArticulosDesdeUrlHeader(urlPrev, nombreCategoria));
+  }
+  if(typeof urlNext !== 'undefined') {
+    document.getElementById('urlNext').addEventListener('click', ()=> obtenerArticulosDesdeUrlHeader(urlNext, nombreCategoria));
+  }
+  if(typeof urlLast !== 'undefined') {
+  document.getElementById('urlLast').addEventListener('click', ()=> obtenerArticulosDesdeUrlHeader(urlLast, nombreCategoria));
+  }
   Array.from(document.getElementsByClassName("c-card__img")).forEach((e) =>
     e.addEventListener("click", cargarProducto(e.id))
   );  
   Array.from(main.getElementsByTagName("a")).forEach((e) =>
-    e.addEventListener("click", cargaLogin(e.id))
+    e.addEventListener("click", () => isLogedCardToCarrito(e.id))
   );
 }
 
-function mostrarOrdenadores() {
-  document.getElementById("contenedorTodo").innerHTML = "";
-  texto = `<div id="paginacion" class="m-2">
-    <ul class="pagination flex flex-row justify-center gap-4">
-      <li class="rounded-sm cursor-pointer px-2 shadow-md">Pagina anterior</li>
-      <li class="rounded-sm cursor-pointer px-2 shadow-md">1</li>
-      <li class="rounded-sm cursor-pointer px-2	shadow-md">2</li>
-      <li class="rounded-sm cursor-pointer px-2	shadow-md">3</li>
-      <li class="rounded-sm cursor-pointer px-2	shadow-md">Pagina siguiente</li>
-    </ul>
-  </div>;`
+function isLogedCardToCarrito(articuloId) {
+  getOne("usuarios/log", "true").then(usuario => usuario ? buscarCarritoAModificar(articuloId, usuario[0].id) : alert("               Usuario no ha iniciado sesion."))
+                              
+}
+function buscarCarritoAModificar(idArticulo, idUsuario) {
+  getOneRow("carritos/activo/usuario", true, idUsuario)
+  .then( carrito => buscarArticuloEnProductos(carrito[0].id, idArticulo))
+  .catch(e => console.log(e)) 
+}
+
+function buscarArticuloEnProductos(idCarrito, idArticulo) {   
+  getOneRow("productos/idCarrito/idArticulo", idCarrito, idArticulo)
+    .then( producto => producto[0] ? modificarProducto(producto[0]) : anyadirProducto(idCarrito, idArticulo))
+  
+}    
+      
+function anyadirProducto(idCarrito,idArticulo) {
+  let body = { "idCarrito": idCarrito, "idArticulo": parseInt(idArticulo), "unidades": 1 };  
+  post("productos", body).then(a => alert("Añadido al carrito")).catch(a => console.log(a))
+}
+
+
+function modificarProducto(producto) {
+  console.log("DALE A OTRO BOTON QUE AUN NO MODIFICA");
 }
 
 function cargaLogin() {
