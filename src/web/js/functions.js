@@ -50,6 +50,7 @@ window.onload = () => {
   cargaPago();
   getAll("categorias")
     .then((a) => pintarCategorias(a))
+    
     .catch((a) => console.log(a));
   getAll("ofertas")
     .then((of)=>pintarOfertas(of))
@@ -75,6 +76,13 @@ window.onload = () => {
   document.getElementById("historyFeat").onclick=abrirHistorial;
   document.getElementById("volverMenu").onclick = function () {
     cargarContenido();
+    getAll("categorias")
+    .then((a) => pintarCategorias(a))
+    
+    .catch((a) => console.log(a));
+  getAll("ofertas")
+    .then((of)=>pintarOfertas(of))
+    .catch((of)=>console.log(of))
   };
   document.getElementById("cerrarProducto").onclick = () => {
     document.getElementById("producto").close();
@@ -106,20 +114,44 @@ function compruebaDatosLogin(user,passwd,usuarios){
 
 function pintarCategorias(a) {
   let c_nav = document.querySelector(".c-nav");
+  let categoriasTop=document.getElementById("categoriasTop");
   c_nav.innerHTML = "";
   let texto = "";
+  let res="";
   JSON.parse(a).forEach((cat) => {
     texto += `<li class="c-nav__item" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a></li>`;
+    res+=`<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
+  <a id="${"c" + cat.id}"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
+  <div class="p-5">
+      <a id="${"c" + cat.id}"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">${cat.nombre}</h5></a>               
+  </div>
+</div>`;
   });
   c_nav.innerHTML = texto;
+  categoriasTop.innerHTML=res;
   let items = document.getElementsByClassName("c-nav__item");
   Array.from(items).forEach((item) => {
     item.onclick = () => {
+      console.log("saber item id"+item.id);
+      console.log("saber text content "+item.textContent)
+
       obtenerArticulos(item.id, item.textContent);
     };
   });
+  let botones=document.getElementsByTagName("a");
+  Array.from(botones).forEach((bot) => {
+    bot.onclick = () => {
+      console.log("saber item id"+bot.id);
+      console.log("saber text content "+bot.textContent);
+      
+
+      obtenerArticulos(bot.id, bot.textContent);
+    };
+  }
+  );
   document.getElementById("c4").classList.add("c-nav__item--bottom");
 }
+
 
 function pintarOfertas(of){
   let ofertasFlash=document.getElementById("ofertasFlash");
@@ -690,47 +722,8 @@ function cargarContenido() {
 
 <div class="p-5 pl-40 pr-40">
   <p class="text-2xl g--margin-bottom-3">Categorias TOP</p>
-  <div class="flex justify-between items-center space-x-4">
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
-          <a href="#">
-              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
-          </a>
-          <div class="p-5">
-              <a href="#">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Ordenadores</h5>
-              </a>               
-          </div>
-      </div>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
-          <a href="#">
-              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
-          </a>
-          <div class="p-5">
-              <a href="#">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Discos duros</h5>
-              </a>      
-          </div>
-      </div>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
-          <a href="#">
-              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
-          </a>
-          <div class="p-5">
-              <a href="#">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Componentes</h5>
-              </a>            
-          </div>
-      </div>
-      <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
-          <a href="#">
-              <img class="rounded-t-lg" src="assets/img/ordenadores.jpg" alt="" />
-          </a>
-          <div class="p-5">
-              <a href="#">
-                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Audio, Video</h5>
-              </a>                
-          </div>
-      </div>
+  <div class="flex justify-between items-center space-x-4" id="categoriasTop">
+  
   </div>
 </div>`;
 }

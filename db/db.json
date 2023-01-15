@@ -182,6 +182,12 @@
       "idArticulo": 13,
       "unidades": 1,
       "id": 9
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 4,
+      "unidades": 1,
+      "id": 10
     }
   ],
   "ofertas": [
