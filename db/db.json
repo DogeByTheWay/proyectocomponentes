@@ -134,6 +134,92 @@
       "idArticulo": 10,
       "unidades": 1,
       "id": 1
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 1,
+      "unidades": 1,
+      "id": 2
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 15,
+      "unidades": 1,
+      "id": 3
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 2,
+      "unidades": 1,
+      "id": 4
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 9,
+      "unidades": 1,
+      "id": 5
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 11,
+      "unidades": 1,
+      "id": 6
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 8,
+      "unidades": 1,
+      "id": 7
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 3,
+      "unidades": 1,
+      "id": 8
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 13,
+      "unidades": 1,
+      "id": 9
+    }
+  ],
+  "ofertas": [
+    {
+      "id": 1,
+      "nombre": "Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6",
+      "descripcion": "Procesador Intel Core i5-1135G7 (4C / 8T, 2.4 / 4.2GHz, 8MB). Memoria RAM 8GB Soldered DDR4-3200. Almacenamiento 256GB SSD M.2 2242 PCIe 3.0x4 NVMe. Unidad óptica No dispone. Display 15.6 FHD (1920x1080) TN 250nits Anti-glare, 45% NTSC. Controlador gráfico Integrada Intel Iris Xe",
+      "precio": 429,
+      "descuento": 10,
+      "categoria": 1,
+      "subcategoria": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Placa base Asus TUF GAMING B450-PLUS II",
+      "descripcion": "CPU AMD AM4 Socket for 3rd/2nd/1st Gen AMD Ryzen™/2nd and 1st Gen AMD Ryzen™ Vega Graphics Processors. Chipset AMD B450. 4 x DIMM, Max. 128GB, DDR4. Dual Channel Memory Architecture ECC Memory support varies by CPU.",
+      "precio": 119,
+      "descuento": 20,
+      "categoria": 3,
+      "subcategoria": 5
+    },
+    {
+      "id": 5,
+      "nombre": "Samsung 870 EVO SSD 2.5 500GB SATA3 Negro",
+      "descripcion": "Unidad de estado sólido. Factor de forma de disco SSD: 2.5. Interfaz: Serial ATA III. SDD, capacidad: 500 GB. Velocidad de lectura: 560 MB/s. Velocidad de escritura: 530 MB/s.",
+      "precio": 43,
+      "descuento": 15,
+      "categoria": 3,
+      "subcategoria": 7
+    },
+    {
+      "id": 8,
+      "nombre": "Philips 27M1N3200VS/00 27 LED FullHD 165Hz",
+      "descripcion": "Diagonal de la pantalla: 68,6 cm (27). Brillo de la pantalla (típico): 250 cd / m². Resolución de la pantalla: 1920 x 1080 Pixeles. Tiempo de respuesta: 4 ms. Superficie de la pantalla: Mate. Relación de aspecto: 16:9. Razón de contraste (típica): 3000:1. Máxima velocidad de actualización: 165 Hz. Cobertura sRGB (típica): 121,9%. Cobertura NTSC (típica): 101,5%. Cobertura Adobe RGB: 89,9%",
+      "precio": 117,
+      "descuento": 25,
+      "categoria": 4,
+      "subcategoria": 10
     }
   ],
   "articulos": [

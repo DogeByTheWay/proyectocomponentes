@@ -51,6 +51,9 @@ window.onload = () => {
   getAll("categorias")
     .then((a) => pintarCategorias(a))
     .catch((a) => console.log(a));
+  getAll("ofertas")
+    .then((of)=>pintarOfertas(of))
+    .catch((of)=>console.log(of))
   document.getElementById("burger").onmouseenter = function () {
     let nav = document.getElementsByClassName("c-nav")[0];
     nav.classList.toggle("c-nav--visible");
@@ -118,6 +121,46 @@ function pintarCategorias(a) {
   document.getElementById("c4").classList.add("c-nav__item--bottom");
 }
 
+function pintarOfertas(of){
+  let ofertasFlash=document.getElementById("ofertasFlash");
+  let resultado="";
+ JSON.parse(of).forEach((ofertas)=>{
+resultado+=`
+<div class="c-card">
+  
+   <img src="assets/img/${ofertas.id}.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
+   <div class="c-card__body">
+     <h5 class="g--font-size-s">${ofertas.nombre}</h5>
+     <p class="g--color-rojo-4">-${ofertas.descuento}%</p>
+     <b>${ofertas.precio-(ofertas.precio*(ofertas.descuento/100))}€ PVPR  <del>${ofertas.precio}€</del></b>
+     <a href="#" class="c-button c-button--size-stretch g--margin-top-1" id="${ofertas.id}">Añadir al carrito</a>
+   </div>
+  
+</div>
+`;
+ })
+ ofertasFlash.innerHTML=resultado;
+
+ Array.from(document.getElementsByClassName("c-card__img")).forEach((e) =>
+ e.addEventListener("click", cargarProducto(e.id))
+);  
+botones=document.getElementsByClassName("c-button");
+		//console.log(botones);
+				/*hay que hacer antes un ARRAY.FROM.BOTONES.FOREACH (bot=> bot.addEventListener('click',()=>{
+				console.log("has pulsado");
+			})) */
+		
+		Array.from(botones).forEach (bot=>bot.addEventListener('click',()=>{//console.log("has pulsado"+ bot.id)
+      console.log("has pulsado "+bot.id)
+      //hay que recorrer listaArticulos para acceder a esos datos
+    JSON.parse(of).find(ofertas=>{
+		if(ofertas.codigo==bot.id){
+      
+    }
+  })
+}));
+			//console.log(art);
+}
 function obtenerArticulos(id, nombreCategoria) {
   if (id.substring(0, 1) === "c") {
     getOnePage(`articulos/categoriaPage`, id.substring(1)).then((articulos_headerArray) => {
@@ -621,7 +664,7 @@ function cargarProducto() {
 }
 
 function cargarContenido() {
-  document.getElementById("contenedorTodo").innerHTML = `     <section>
+  document.getElementById("contenedorTodo").innerHTML = `<section>
   <article class="flex flex-row-reverse items-center p-5 pl-40 pr-40 ">
       <div class="text-right w-1/2">
           <h1 class="text-4xl">Compra la tecnologia que ayuda al medioambiante</h1>
@@ -639,50 +682,8 @@ function cargarContenido() {
 <hr>
 <section class="p-5 pl-40 pr-40">
 <p class="g--font-size-2xl g--margin-bottom-3">Ofertas</p>
-<div class="l-horizontal-space-between">
- <div class="c-card g--background-color-gris-0">
-    
-     <img src="assets/img/14.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <p class="g--color-rojo-4">-10%</p>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
- <div class="c-card g--background-color-gris-0">
-    
-     <img src="assets/img/12.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <p class="g--color-rojo-4">-10%</p>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
- <div class="c-card">
-    
-     <img src="assets/img/14.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <p class="g--color-rojo-4">-10%</p>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>  <div class="c-card">
-    
-     <img src="assets/img/11.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
-     <div class="c-card__body">
-       <h5 class="g--font-size-s">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</h5>
-       <p class="g--color-rojo-4">-10%</p>
-       <b>429€ PVPR  <del>400€</del></b>
-       <a href="#" class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
-     </div>
-    
- </div>
+<div class="l-horizontal-space-between" id="ofertasFlash">
+ 
 </div>   
  
 </section>
