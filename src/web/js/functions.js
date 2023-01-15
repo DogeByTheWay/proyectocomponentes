@@ -18,8 +18,8 @@ function abrirPago() {
   let pago = document.getElementById("pago");
   pago.open ? pago.close() : pago.showModal();
 }
-function abrirHistorial(){
-  let historial=document.getElementById("listaCesta");
+function abrirHistorial() {
+  let historial = document.getElementById("listaCesta");
   historial.open ? historial.close() : historial.showModal();
 }
 
@@ -29,21 +29,20 @@ function quitaMenu() {
   document.getElementsByTagName("body")[0].style = "overflow:auto;";
 }
 
-function activaFormulario(){
-  let bloque=document.getElementsByClassName("c-paymentform__form")[0];
-  bloque.style.display="block";
+function activaFormulario() {
+  let bloque = document.getElementsByClassName("c-paymentform__form")[0];
+  bloque.style.display = "block";
 }
 
-function desactivaFormulario(){
-  let bloque=document.getElementsByClassName("c-paymentform__form")[0];
-  bloque.style.display="none";
+function desactivaFormulario() {
+  let bloque = document.getElementsByClassName("c-paymentform__form")[0];
+  bloque.style.display = "none";
 }
 
 window.onload = () => {
   alreadyLoggedChecker();
   cargaHistorial();
   cargacesta();
-  cargarProducto();
   cargaLogin();
   cargaLogout();
   cargarContenido();
@@ -73,7 +72,7 @@ window.onload = () => {
   document.getElementById("cestaBtn").onclick = abrirCesta;
   document.getElementById("loginBtn").onclick = abrirLogin;
   document.getElementById("compraBtn").onclick = abrirPago;
-  document.getElementById("historyFeat").onclick=abrirHistorial;
+  document.getElementById("historyFeat").onclick = abrirHistorial;
   document.getElementById("volverMenu").onclick = function () {
     cargarContenido();
     getAll("categorias")
@@ -84,31 +83,36 @@ window.onload = () => {
     .then((of)=>pintarOfertas(of))
     .catch((of)=>console.log(of))
   };
-  document.getElementById("cerrarProducto").onclick = () => {
-    document.getElementById("producto").close();
-  };
 };
 
-function alreadyLoggedChecker(){
-  getAll("usuarios").then(data => {let user=JSON.parse(data).find(u=>u.log==true); user!=null ? pintaDatosUsuario(user.nombre) : console.log("Nadie logeado")})
+function alreadyLoggedChecker() {
+  getAll("usuarios").then((data) => {
+    let user = JSON.parse(data).find((u) => u.log == true);
+    user != null
+      ? pintaDatosUsuario(user.nombre)
+      : console.log("Nadie logeado");
+  });
 }
-function pintaDatosUsuario(nombre){
-  document.getElementById("loginBtn").innerHTML=`<i class="fa-solid fa-user mr-3"></i>${nombre}`;
-  document.getElementById("historyFeat").style.display="block";
-  document.getElementById("loginBtn").onclick=abrirLogout;
+function pintaDatosUsuario(nombre) {
+  document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${nombre}`;
+  document.getElementById("historyFeat").style.display = "block";
+  document.getElementById("loginBtn").onclick = abrirLogout;
 }
-function recogeDatosLogin(){
-  let user=document.getElementById("emailUser").value;
-  let passwd=document.getElementById("passwdUser").value;
-    getAll("usuarios").then(usuarios => compruebaDatosLogin(user,passwd,JSON.parse(usuarios)))
-    .catch(error => console.log(error));
+function recogeDatosLogin() {
+  let user = document.getElementById("emailUser").value;
+  let passwd = document.getElementById("passwdUser").value;
+  getAll("usuarios")
+    .then((usuarios) => compruebaDatosLogin(user, passwd, JSON.parse(usuarios)))
+    .catch((error) => console.log(error));
 }
-function compruebaDatosLogin(user,passwd,usuarios){
-  let usuario=usuarios.find(u=> u.nombre ==user && u.password == passwd)
-  if(usuario!=null){
-    patch("usuarios",`${usuario.id}`,{'log':true}).then(document.location.reload());
-  }else{
-    alert("Error de credenciales")
+function compruebaDatosLogin(user, passwd, usuarios) {
+  let usuario = usuarios.find((u) => u.nombre == user && u.password == passwd);
+  if (usuario != null) {
+    patch("usuarios", `${usuario.id}`, { log: true }).then(
+      document.location.reload()
+    );
+  } else {
+    alert("Error de credenciales");
   }
 }
 
@@ -195,20 +199,21 @@ botones=document.getElementsByClassName("c-button");
 }
 function obtenerArticulos(id, nombreCategoria) {
   if (id.substring(0, 1) === "c") {
-    getOnePage(`articulos/categoriaPage`, id.substring(1)).then((articulos_headerArray) => {
-      pintarPaginacion(articulos_headerArray, nombreCategoria)
-    });
+    getOnePage(`articulos/categoriaPage`, id.substring(1)).then(
+      (articulos_headerArray) => {
+        pintarPaginacion(articulos_headerArray, nombreCategoria);
+      }
+    );
   } else {
-    getAll(`articulos/subcategoria/${id.substring(1)}`).then(a => {
+    getAll(`articulos/subcategoria/${id.substring(1)}`).then((a) => {
       pintarArticulos(JSON.parse(a), nombreCategoria);
-    }
-      )
+    });
   }
 }
 
 function obtenerArticulosDesdeUrlHeader(url, nombreCategoria) {
   getOnePageWithUrl(url).then((articulos_headerArray) => {
-    pintarPaginacion(articulos_headerArray, nombreCategoria)
+    pintarPaginacion(articulos_headerArray, nombreCategoria);
   });
 }
 
@@ -217,48 +222,48 @@ function pintarPaginacion(articulos_headerArray, nombreCategoria) {
   let prev = false;
   let next = false;
   let urlFirst, urlPrev, urlNext, urlLast;
-  if(header.find(a => a.match(/.*prev.*/))) {
+  if (header.find((a) => a.match(/.*prev.*/))) {
     prev = true;
   }
-  if(header.find(a => a.match(/.*next.*/))) {
+  if (header.find((a) => a.match(/.*next.*/))) {
     next = true;
   }
   let textoPaginacion = `<div id="paginacion" class="m-2">
-                  <ul class="pagination flex flex-row justify-center gap-4">`
-  header.forEach( item => {
-    if(item.match('first')) {
+                  <ul class="pagination flex flex-row justify-center gap-4">`;
+  header.forEach((item) => {
+    if (item.match("first")) {
       let regex = /http.+=8/;
       let urlPageFirst = item.match(regex);
-      textoPaginacion+=`<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlFirst">Primero</button></li> `;
+      textoPaginacion += `<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlFirst">Primero</button></li> `;
       urlFirst = urlPageFirst[0];
-      if(!prev) {
-        textoPaginacion+=`<li class="rounded-sm px-2 shadow-md g--background-color-principal-0 opacity-25">&lt&lt</li>`;             
+      if (!prev) {
+        textoPaginacion += `<li class="rounded-sm px-2 shadow-md g--background-color-principal-0 opacity-25">&lt&lt</li>`;
       }
-    }    
-    if(item.match('prev')) {
+    }
+    if (item.match("prev")) {
       let regex = /http.+=8/;
       let urlPagePrev = item.match(regex);
-      textoPaginacion+=`<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlPrev">&lt&lt</button></li>`;
+      textoPaginacion += `<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlPrev">&lt&lt</button></li>`;
       urlPrev = urlPagePrev[0];
-    }     
-    if(item.match('next')) {
+    }
+    if (item.match("next")) {
       let regex = /http.+=8/;
       let urlPageNext = item.match(regex);
-      textoPaginacion+=`<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlNext">&gt&gt</button></li>`;
+      textoPaginacion += `<li  class="rounded-sm cursor-pointer g--background-color-principal-0 px-2 shadow-md"><button id="urlNext">&gt&gt</button></li>`;
       urlNext = urlPageNext[0];
-    }       
-    if(item.match('last')) {
-      if(!next) {
-        textoPaginacion+=`<li class="rounded-sm px-2 shadow-md g--background-color-principal-0 opacity-25">&gt&gt</li>`;
-      }       
+    }
+    if (item.match("last")) {
+      if (!next) {
+        textoPaginacion += `<li class="rounded-sm px-2 shadow-md g--background-color-principal-0 opacity-25">&gt&gt</li>`;
+      }
       let regex = /http.+=8/;
       let urlPageLast = item.match(regex);
-      textoPaginacion+=`<li class="rounded-sm cursor-pointer px-2 g--background-color-principal-0 shadow-md"><button id="urlLast">Último</button></li>`;
+      textoPaginacion += `<li class="rounded-sm cursor-pointer px-2 g--background-color-principal-0 shadow-md"><button id="urlLast">Último</button></li>`;
       urlLast = urlPageLast[0];
     }
-  })
-  textoPaginacion+=`</ul>
-      </div>`
+  });
+  textoPaginacion += `</ul>
+      </div>`;
   pintarArticulos(articulos_headerArray, nombreCategoria, textoPaginacion, urlFirst, urlPrev, urlNext, urlLast);
 }
 
@@ -269,68 +274,93 @@ function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, 
     <section class="p-5 pl-40 pr-40">
     <b class="g--font-size-xl">${nombreCategoria}</b>
     <div class="l-horizontal-space-between">`;
-    let itemPrecio2;
+  let itemPrecio2;
   articulos.forEach((item) => {
     itemPrecio2 = item.precio * 1.2;
     texto += `<div class="c-card">    
-                <img src="assets/img/${item.id}.jpg" class="c-card__img">
+                <img id="${item.id} " src="assets/img/${item.id}.jpg" class="cursor:pointer c-card__img">
                 <div class="c-card__body">
                   <h5 class="g--font-size-s">${item.nombre}</h5>
                   <b>${item.precio}€ PVPR  <del>${itemPrecio2.toFixed(0)}</del></b>
-                  <a id=${item.id} class="c-button c-button--size-stretch g--margin-top-1">Añadir al carrito</a>
+                  <a id=${item.id} class="c-button c-button--size-stretch cursor:pointer g--margin-top-1">Añadir al carrito</a>
                 </div>   
               </div>`;
   });
   texto += "</section>";
-  main.innerHTML = texto + textoPaginacion;  
-  if(typeof urlFirst !== 'undefined') { 
-  document.getElementById('urlFirst').addEventListener('click', ()=> {obtenerArticulosDesdeUrlHeader(urlFirst, nombreCategoria)});
+  main.innerHTML = texto + textoPaginacion;
+  if (typeof urlFirst !== "undefined") {
+    document.getElementById("urlFirst").addEventListener("click", () => {
+      obtenerArticulosDesdeUrlHeader(urlFirst, nombreCategoria);
+    });
   }
-  if(typeof urlPrev !== 'undefined') {
-    document.getElementById('urlPrev').addEventListener('click', ()=> obtenerArticulosDesdeUrlHeader(urlPrev, nombreCategoria));
+  if (typeof urlPrev !== "undefined") {
+    document
+      .getElementById("urlPrev")
+      .addEventListener("click", () =>
+        obtenerArticulosDesdeUrlHeader(urlPrev, nombreCategoria)
+      );
   }
-  if(typeof urlNext !== 'undefined') {
-    document.getElementById('urlNext').addEventListener('click', ()=> obtenerArticulosDesdeUrlHeader(urlNext, nombreCategoria));
+  if (typeof urlNext !== "undefined") {
+    document
+      .getElementById("urlNext")
+      .addEventListener("click", () =>
+        obtenerArticulosDesdeUrlHeader(urlNext, nombreCategoria)
+      );
   }
-  if(typeof urlLast !== 'undefined') {
-  document.getElementById('urlLast').addEventListener('click', ()=> obtenerArticulosDesdeUrlHeader(urlLast, nombreCategoria));
+  if (typeof urlLast !== "undefined") {
+    document
+      .getElementById("urlLast")
+      .addEventListener("click", () =>
+        obtenerArticulosDesdeUrlHeader(urlLast, nombreCategoria)
+      );
   }
-  Array.from(document.getElementsByClassName("c-card__img")).forEach((e) =>
-    e.addEventListener("click", cargarProducto(e.id))
-  );  
+  Array.from(main.getElementsByClassName("c-card__img")).forEach((e) =>
+    e.addEventListener("click", () => buscarArticuloPorId(e.id))
+  );
   Array.from(main.getElementsByTagName("a")).forEach((e) =>
     e.addEventListener("click", () => isLogedCardToCarrito(e.id))
   );
 }
 
 function isLogedCardToCarrito(articuloId) {
-  getOne("usuarios/log", "true").then(usuario => usuario ? buscarCarritoAModificar(articuloId, usuario[0].id) : alert("               Usuario no ha iniciado sesion."))
-                              
+  getOne("usuarios/log", "true").then((usuario) =>
+    usuario
+      ? buscarCarritoAModificar(articuloId, usuario[0].id)
+      : alert("               Usuario no ha iniciado sesion.")
+  );
 }
 function buscarCarritoAModificar(idArticulo, idUsuario) {
   getOneRow("carritos/activo/usuario", true, idUsuario)
-  .then( carrito => buscarArticuloEnProductos(carrito[0].id, idArticulo))
-  .catch(e => console.log(e)) 
+    .then((carrito) => buscarArticuloEnProductos(carrito[0].id, idArticulo))
+    .catch((e) => console.log(e));
 }
 
-function buscarArticuloEnProductos(idCarrito, idArticulo) {   
-  getOneRow("productos/idCarrito/idArticulo", idCarrito, idArticulo)
-    .then( producto => producto[0] ? modificarProducto(producto[0]) : anyadirProducto(idCarrito, idArticulo))
-  
-}    
-      
-function anyadirProducto(idCarrito,idArticulo) {
-  let body = { "idCarrito": idCarrito, "idArticulo": parseInt(idArticulo), "unidades": 1 };  
-  post("productos", body).then(a => alert("Añadido al carrito")).catch(a => console.log(a))
+function buscarArticuloEnProductos(idCarrito, idArticulo) {
+  getOneRow("productos/idCarrito/idArticulo", idCarrito, idArticulo).then(
+    (producto) =>
+      producto[0]
+        ? modificarProducto(producto[0])
+        : anyadirProducto(idCarrito, idArticulo)
+  );
 }
 
+function anyadirProducto(idCarrito, idArticulo) {
+  let body = {
+    idCarrito: idCarrito,
+    idArticulo: parseInt(idArticulo),
+    unidades: 1,
+  };
+  post("productos", body)
+    .then((a) => alert("Añadido al carrito"))
+    .catch((a) => console.log(a));
+}
 
 function modificarProducto(producto) {
   console.log("DALE A OTRO BOTON QUE AUN NO MODIFICA");
 }
 
-function cargaHistorial(){
-  document.getElementById("listaCesta").innerHTML=`
+function cargaHistorial() {
+  document.getElementById("listaCesta").innerHTML = `
   <div>
     <b class="g--font-size-2xl">Lista de Carritos</b>
     <p><b class="g--font-size-xl">Pendientes</b></p>
@@ -592,18 +622,28 @@ function cargacesta() {
     </div>
   </div>`;
 }
-function cargarProducto() {
-  document.getElementById("producto").innerHTML += `  
-  <button id="cerrarProducto" class="flex outline-0 g--color-principal-5 g--font-family-principal text-sm ml-40">      
+function buscarArticuloPorId(idArticulo) {
+  getOne("articulos/id", idArticulo)
+    .then((a) => buscarSubcategoriaNombre(a[0]))
+    .catch((e) => console.log(e));
+}
+function buscarSubcategoriaNombre(articulo) {
+  getOne("subcategorias", articulo.subcategoria)
+    .then((a) => cargarProducto(articulo, a[0].nombre))
+    .catch((e) => console.log(e));
+}
+function cargarProducto(articulo, subcategoriaNombre) {
+  let texto = "";
+  texto += `<button id="cerrarProducto" class="flex outline-0 g--color-principal-5 g--font-family-principal text-sm ml-40">      
     <svg class="fill-current mr-2 g--color-principal-5 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
     Volver a lista de productos
   </button>  
   <div class="container px-5 py-24 mx-auto">
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="./assets/img/6.jpg">
+      <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="./assets/img/${articulo.id}.jpg">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-        <h2 class="text-sm g--color-principal-5 tracking-widest">Tarjeta Grafica</h2>
-        <h1 class="text-gray-900 text-3xl title-font mb-1">ASUS GeForce RTX 2060 Dual OC EVO Edition 6GB GDDR6</h1>
+        <h2 class="text-sm g--color-principal-5 tracking-widest">${subcategoriaNombre}</h2>
+        <h1 class="text-gray-900 text-3xl title-font mb-1">${articulo.nombre}</h1>
         <div class="flex mb-4">
           <span class="flex items-center">
             <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-amber-500" viewBox="0 0 24 24">
@@ -656,8 +696,10 @@ function cargarProducto() {
         </div>
         <div class="flex">
           <span class="title-font font-medium text-2xl text-gray-900">€58.00</span>
-          <button class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-400 rounded">Añadir al Carrito</button>
-        </div>
+
+          <button id="${articulo.id}"class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-400 rounded">Añadir al Carrito</button>
+        
+          </div>
       </div>
       <div class="flex flex-col w-full">
         <div>
@@ -666,33 +708,20 @@ function cargarProducto() {
         </div>
         <div class="mt-5">
           <ul>
-            <li>Familia de procesadores de gráficos: NVIDIA</li>
-            <li>Procesador gráfico: GeForce RTX 2060</li>
-            <li>Máxima resolución: 7680 x 4320 Pixeles</li>
-            <li>CUDA: Si</li>
-            <li>Frecuencia del procesador: 1365 MHz</li>
-            <li>Soporte para proceso paralelo: No compatible</li>
-            <li>FireStream: No</li>
-            <li>Núcleos CUDA: 1920</li>
-            <li>Aumento de la velocidad de reloj del procesador: 1755 MHz</li>
-            <li>Frecuencia del procesador (modo OC): 1365 MHz</li>
-            <li>Velocidad de aceleración del reloj del procesador (modo OC): 1785 MHz</li>
-            <li>Capacidad memoria de adaptador gráfico: 6 GB</li>
-            <li>Tipo de memoria de adaptador gráfico: GDDR6</li>
-            <li>Ancho de datos: 192 bit</li>
-            <li>Velocidad de memoria del reloj: 14000 MHz</li>
-            <li> Puertos e Interfaces</li>
-            <li> Tipo de interfaz: PCI Express x16 3.0</li>
-            <li> Número de puertos HDMI: 2</li>
-            <li> Cantidad de puertos DVI-D: 1</li>
-            <li> Cantidad de DisplayPorts: 1</li>
-            <li> Versión HDMI: 2.0b</li>
-            <li>Versión de DisplayPort: 1.4</li>
+          <li>${articulo.descripcion}</li>            
           </ul>
         </div>
       </div>
     </div>
   </div>`;
+  let detalleProducto = document.getElementById("producto");
+  detalleProducto.innerHTML = texto;
+  Array.from(detalleProducto.getElementsByTagName("button"))[1].onclick = () =>
+    isLogedCardToCarrito(articulo.id);
+  document.getElementById("cerrarProducto").onclick = () => {
+    document.getElementById("producto").close();
+  };
+  abrirProducto();
 }
 
 function cargarContenido() {

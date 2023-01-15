@@ -4,10 +4,8 @@
     gap: 100px;
     justify-content:space-between;
     justify-items: center;
-
-    background-color: getColors("negro",0);
- 
-
+    background-color: getColors("negro",0);    
+    margin-top: auto;
     &__item{
         margin: getMargin(6);
         font-family: getFontFamily("alternativo");

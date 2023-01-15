@@ -919,6 +919,7 @@ table {
   justify-content: space-between;
   justify-items: center;
   background-color: #242927;
+  margin-top: auto;
 }
 .c-footer__item {
   margin: 16px;
