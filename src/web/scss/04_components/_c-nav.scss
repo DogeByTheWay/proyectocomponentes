@@ -11,7 +11,18 @@
     box-shadow: 
         -2px 4px 4px getColors('gris',3),
         2px 4px 4px getColors('gris',3);
-
+        & li ul{
+            display:none;
+            position:absolute;
+            color:getColors("negro", 6);
+            min-width: 160px;
+            left:154px;
+            top:0px;
+            background-color: getColors("gris", 0);
+        }
+        & li:hover >ul {
+            display:block
+        }
     &__item {
         padding: getPadding(7);
         

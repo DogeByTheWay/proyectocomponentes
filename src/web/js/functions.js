@@ -123,7 +123,11 @@ function pintarCategorias(a) {
   let texto = "";
   let res="";
   JSON.parse(a).forEach((cat) => {
-    texto += `<li class="c-nav__item" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a></li>`;
+    texto += `<li class="c-nav__item" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a>
+    <ul id="${"s"+cat.id}">
+    ${pintaSubcategorias(cat.id)}
+    </ul>
+    </li>`;
     res+=`<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
   <a id="${"c" + cat.id}"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
   <div class="p-5">
@@ -155,6 +159,31 @@ function pintarCategorias(a) {
   );
   document.getElementById("c4").classList.add("c-nav__item--bottom");
 }
+
+function pintaSubcategorias(categoria){
+ 
+  getAll("subcategorias")
+  .then( (ArraySubcategoria)=>comprobarSubcategoria(ArraySubcategoria,categoria) //console.log("muestrasubcategoria "+ deUnaenUna.nombre+ "id de catgoria:"+deUnaenUna.categoria))
+  )
+  .catch(console.log("merde"));
+
+ }
+ function comprobarSubcategoria(Array2,idCategoria){
+
+let encontrado=JSON.parse(Array2).filter((sub=>sub.categoria==idCategoria));
+
+subcategoria=document.getElementById("s"+idCategoria);
+  let resultado="";
+
+  Array.from(encontrado).forEach((sub)=>{
+    resultado+=`
+    <li class="c-nav__item">${sub.nombre}
+    </li>
+   `;
+   })
+   subcategoria.innerHTML=resultado ; 
+  
+ }
 
 
 function pintarOfertas(of){

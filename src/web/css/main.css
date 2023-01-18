@@ -755,6 +755,18 @@ table {
   border-bottom-left-radius: 6px;
   box-shadow: -2px 4px 4px #CCD1D0, 2px 4px 4px #CCD1D0;
 }
+.c-nav li ul {
+  display: none;
+  position: absolute;
+  color: #131615;
+  min-width: 160px;
+  left: 154px;
+  top: 0px;
+  background-color: #FFFFFF;
+}
+.c-nav li:hover > ul {
+  display: block;
+}
 .c-nav__item {
   padding: 20px;
 }
