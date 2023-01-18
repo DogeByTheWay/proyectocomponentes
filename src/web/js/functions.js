@@ -1,6 +1,6 @@
 function abrirCesta() {
   let cesta = document.getElementById("cesta");
-  cesta.open ? cesta.close() : cesta.showModal();
+  cesta.open ? cesta.close() : cesta.showModal(),cargaPrecioCantidad();
 }
 function abrirProducto() {
   let producto = document.getElementById("producto");
@@ -97,6 +97,20 @@ function pintaDatosUsuario(nombre) {
   document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${nombre}`;
   document.getElementById("historyFeat").style.display = "block";
   document.getElementById("loginBtn").onclick = abrirLogout;
+  cargaCarritoActivo(nombre);
+}
+function cargaPrecioCantidad(){
+  let articulos=0;
+  let total=0;
+  let divsProductos=document.querySelectorAll(".valores")
+  let precios=document.querySelectorAll(".precio")
+  precios.forEach(precio =>total+=parseInt(precio.textContent.slice(0,-1)))
+  console.log(total)
+  divsProductos.forEach(input => articulos+=parseInt(input.value));
+  document.getElementById("cantidadArticulos").innerHTML=articulos + " articulos";
+  document.getElementById("resumenArticulos").innerHTML=articulos + " articulos";
+  document.getElementById("precioTotal").innerHTML=total + "€";
+  document.getElementById("precioTotalResumen").innerHTML=total + "€";
 }
 function recogeDatosLogin() {
   let user = document.getElementById("emailUser").value;
@@ -108,9 +122,8 @@ function recogeDatosLogin() {
 function compruebaDatosLogin(user, passwd, usuarios) {
   let usuario = usuarios.find((u) => u.nombre == user && u.password == passwd);
   if (usuario != null) {
-    patch("usuarios", `${usuario.id}`, { log: true }).then(
-      document.location.reload()
-    );
+    patch("usuarios", `${usuario.id}`, { 'log': true }).then(document.location.reload());
+    
   } else {
     alert("Error de credenciales");
   }
@@ -146,17 +159,6 @@ function pintarCategorias(a) {
       obtenerArticulos(item.id, item.textContent);
     };
   });
-  let botones=document.getElementsByTagName("a");
-  Array.from(botones).forEach((bot) => {
-    bot.onclick = () => {
-      console.log("saber item id"+bot.id);
-      console.log("saber text content "+bot.textContent);
-      
-
-      obtenerArticulos(bot.id, bot.textContent);
-    };
-  }
-  );
   document.getElementById("c4").classList.add("c-nav__item--bottom");
 }
 
@@ -343,7 +345,7 @@ function isLogedCardToCarrito(articuloId) {
   getOne("usuarios/log", "true").then((usuario) =>
     usuario
       ? buscarCarritoAModificar(articuloId, usuario[0].id)
-      : alert("               Usuario no ha iniciado sesion.")
+      : alert("Usuario no ha iniciado sesion.")
   );
 }
 function buscarCarritoAModificar(idArticulo, idUsuario) {
@@ -356,7 +358,7 @@ function buscarArticuloEnProductos(idCarrito, idArticulo) {
   getOneRow("productos/idCarrito/idArticulo", idCarrito, idArticulo).then(
     (producto) =>
       producto[0]
-        ? modificarProducto(producto[0])
+        ? modificarProducto(idCarrito,idArticulo)
         : anyadirProducto(idCarrito, idArticulo)
   );
 }
@@ -368,110 +370,83 @@ function anyadirProducto(idCarrito, idArticulo) {
     unidades: 1,
   };
   post("productos", body)
-    .then((a) => alert("Añadido al carrito"))
+    .then(anyadirAcarrito(body))
     .catch((a) => console.log(a));
 }
 
-function modificarProducto(producto) {
-  console.log("DALE A OTRO BOTON QUE AUN NO MODIFICA");
+function anyadirAcarrito(item){
+  getOne("articulos",item.idArticulo)
+  .then(a=>{
+    document.getElementById("resumenProductos").innerHTML+=`
+<div id="p${a.id}" class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
+<div class="flex w-2/5"> 
+            <div class="w-40 min-w-max">
+              <img class="h-24" src="./assets/img/${a.id}.jpg" alt="">
+            </div>
+            <div class="flex flex-col justify-between ml-4 flex-grow">
+              <span class="g--font-family-principal text-sm">${a.nombre}</span>
+              <span class="g--font-family-principal g--color-principal-5 text-xs">Portatil</span>
+              <a onclick="eliminaDelCarrito(${a.id})" class="g--font-family-principal outline-0 hover:text-red-500 text-gray-500 text-xs cursor-pointer">Eliminar</a>
+            </div>
+          </div>
+          <div class="flex justify-center w-1/5">
+            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+            </svg>
+
+            <input id="unidadesProducto${a.id}" class="mx-2 border g--font-family-principal g--color-principal-5 text-center w-8 valores" type="text" value="${item.unidades}">
+
+            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+            </svg>
+          </div>
+          <span id="multiplicadorPrecioUD${a.id}" class="text-center w-1/5 g--font-family-principal text-sm">${a.precio}€</span>
+          <span id="multiplicadorPrecio${a.id}" class="text-center w-1/5 g--font-family-principal text-sm precio">${a.precio * item.unidades}€</span>
+</div>
+</div>`;
+  cargaPrecioCantidad()});
+}
+
+function eliminaDelCarrito(item){
+  getOne("productos/idArticulo",item)
+  .then( a=>{del("productos",a[0].id)
+  .then(document.getElementById(`p${a[0].idArticulo}`).remove());cargaPrecioCantidad()} )
+}
+function modificarProducto(producto,articulo) {
+  getOne("productos/idCarrito/idArticulo",producto +"/"+articulo).then(a=>patch("productos",a[0].id,{'unidades':a[0].unidades+ 1})
+  .then(b=>{let input=document.getElementById(`unidadesProducto${articulo}`);
+            input.value=parseInt(a[0].unidades)+1;
+            let precios=document.getElementById(`multiplicadorPrecio${articulo}`);
+            let precioUD=document.getElementById(`multiplicadorPrecioUD${articulo}`);
+            precios.innerHTML=parseInt(precioUD.textContent.slice(0,-1)* input.value)  +"€";
+}
+))
 }
 
 function cargaHistorial() {
-  document.getElementById("listaCesta").innerHTML = `
-  <div>
-    <b class="g--font-size-2xl">Lista de Carritos</b>
-    <p><b class="g--font-size-xl">Pendientes</b></p>
-    <div class="l-vertical">
-    <div class="c-listaCarrito">
-        <table class="c-listaCarrito__body" border=1 >
-            <tr>
-             <td><img src="./assets/img/11.jpg" width="80px" height="130px" /></td>
-             <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-             <td class="g--font-size-m"> &nbsp;&nbsp;500€</td>
-            </tr>
-            <tr>
-                <td><img src="./assets/img/12.jpg" width="80px" height="130px"/></td>
-                <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-                <td class="g--font-size-m"> &nbsp;&nbsp;450€</td>
-               </tr>            
-        </table>
-        <div class="c-listaCarrito__footer">
-        <button class="c-button c-button--size-stretch">Seguir Comprando</button>
-        <button class="c-button c-button--size-stretch">Realizar Pago</button>
-        <b>Total:950€</b>
-        </div> 
-    </div>
-
-    <div class="c-listaCarrito">
-        <table class="c-listaCarrito__body" border=1 >
-            <tr>
-             <td><img src="./assets/img/13.jpg" width="80px" height="130px"/></td>
-             <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-             <td class="g--font-size-m"> &nbsp;&nbsp;400€</td>
-            </tr>
-            <tr>
-                <td><img src="./assets/img/11.jpg" width="80px" height="130px"/></td>
-                <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-                <td class="g--font-size-m"> &nbsp;&nbsp;450€</td>
-               </tr>            
-        </table>
-        <div class="c-listaCarrito__footer">
-        <button class="c-button c-button--size-stretch">Seguir Comprando</button>
-        <button class="c-button c-button--size-stretch">Realizar Pago</button>
-        <b>Total:850€</b>
-        </div>
-    </div>
-    </div>
-
-    <p><b class="g--font-size-xl">Realizados</b></p>
-    <div class="l-vertical">
-        <div class="c-listaCarrito">
-            <table class="c-listaCarrito__body" border=1 >
-                <tr>
-                 <td><img src="./assets/img/14.jpg" width="80px" height="130px"/></td>
-                 <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-                 <td class="g--font-size-m"> &nbsp;&nbsp;600€</td>
-                </tr>
-                <tr>
-                    <td><img src="./assets/img/15.jpg" width="80px" height="130px"/></td>
-                    <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-                    <td class="g--font-size-m"> &nbsp;&nbsp;650€</td>
-                   </tr>            
-            </table>
-            <div class="c-listaCarrito__footer">
-            <p>Realizado 24 Septiembre 2022</p>
-            <button class="c-button c-button--size-stretch">Volver a Comprar</button>
-            <b>Total:1250€</b>
-            </div>
-            
-        </div>
-        <div class="c-listaCarrito">
-            <table class="c-listaCarrito__body" border=1 >
-                <tr>
-                 <td><img src="./assets/img/11.jpg" width="80px" height="130px"/></td>
-                 <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-                 <td class="g--font-size-m"> &nbsp;&nbsp;500€</td>
-                </tr>
-                <tr>
-                    <td><img src="./assets/img/13.jpg" width="80px" height="130px"/></td>
-                    <td class="g--font-size-m">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</td>
-                    <td class="g--font-size-m"> &nbsp;&nbsp;450€</td>
-                   </tr>            
-            </table>
-            <div class="c-listaCarrito__footer">
-            <p>Realizado 20 Diciembre 2022</p>
-            <button class="c-button c-button--size-stretch">Volver a Comprar</button>
-            <b>Total:950€</b>
-            </div>
-            
-        </div>
- 
-        </div>
-    </div>
-  `;
+  getAll("carritos/idUsuario/1").then(a=>cargaCarritosUsuario(a));
 }
+function cargaCarritosUsuario(a){
+  JSON.parse(a).forEach(carrito =>{
+    document.getElementById("listaCesta").innerHTML += `
+    <div class="cursor-pointer">${carrito.id}----------------${carrito.idUsuario}----------------${carrito.estado}<button class="c-button c-button--size-stretch" onclick="recuperaDatosCarrito(${carrito.id});">Recuperar carrito</button>
+    <button class="c-button c-button--size-stretch" onclick="eliminaCarrito(${carrito.id});">Eliminar carrito</button></div>
+  `;
+  })
+}
+function recuperaDatosCarrito(id){
+  getAll(`productos/idCarrito/${id}`).then(a=>JSON.parse(a).forEach(producto=>anyadirAcarrito(producto)));
+}
+
+function pintaCarritoActivo(a){
+  JSON.parse(a).forEach(articulo=>{buscarArticuloEnProductos(articulo.idCarrito,articulo.idArticulo)});
+}
+
+function eliminaCarrito(id){
+  
+}
+
 function cargaLogout() {
-  document.getElementById("logout").innerHTML = `CIERRA SESIÓN`;
+  document.getElementById("logout").innerHTML = `<div>CIERRA SESIÓN</div>`;
 }
 function cargaLogin() {
   document.getElementById("login").innerHTML = `
@@ -511,6 +486,18 @@ function cargaLogin() {
   </div>`;
 }
 
+function cargaCarritoActivo(nombre){
+  console.log(nombre)
+  getOne("usuarios/nombre",nombre)
+  .then(a=> getOne("carritos/activo/usuario/true",a[0].id)
+  .then(activo=>{
+    if(activo){
+      recuperaDatosCarrito(activo[0].id);
+    }
+  })
+  )
+}
+
 function cargacesta() {
   document.getElementById(
     "cesta"
@@ -519,7 +506,7 @@ function cargacesta() {
       <div class="w-3/4 bg-white px-10 py-10">
         <div class="flex justify-between border-b pb-8">
           <h1 class="g--font-family-principal g--color-principal-5 text-2xl">Cesta de la compra</h1>
-          <h2 class="g--font-family-principal g--color-principal-5 text-2xl">3 Articulos</h2>
+          <h2 id="cantidadArticulos" class="g--font-family-principal g--color-principal-5 text-2xl">0 Articulos</h2>
         </div>
         <div class="flex mt-10 mb-5">
           <h3 class="g--font-family-principal text-gray-600 text-xs uppercase w-2/5">Detalle Producto</h3>
@@ -527,82 +514,8 @@ function cargacesta() {
           <h3 class="g--font-family-principal text-center text-gray-600 text-xs uppercase w-1/5 text-center">Precio</h3>
           <h3 class="g--font-family-principal text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
         </div>
-        <div class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
-          <div class="flex w-2/5"> 
-            <div class="w-40 min-w-max">
-              <img class="h-24" src="./assets/img/1.jpg" alt="">
-            </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
-              <span class="g--font-family-principal text-sm">Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6</span>
-              <span class="g--font-family-principal g--color-principal-5 text-xs">Portatil</span>
-              <a href="#" class="g--font-family-principal outline-0 hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
-            </div>
-          </div>
-          <div class="flex justify-center w-1/5">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-
-            <input class="mx-2 border g--font-family-principal g--color-principal-5 text-center w-8" type="text" value="1">
-
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-          </div>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">€400.00</span>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">€400.00</span>
-        </div>
-
-        <div class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
-          <div class="flex w-2/5"> 
-            <div class="w-40 min-w-max">
-              <img class="h-24" src="./assets/img/2.jpg" alt="">
-            </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
-              <span class="g--font-family-principal text-sm">PC Racing Ordenador Gaming AMD Ryzen 7 5700G/16GB/1TB SSD</span>
-              <span class="g--color-principal-5 text-xs">PC</span>
-              <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
-            </div>
-          </div>
-          <div class="flex justify-center w-1/5">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-
-            <input class="mx-2 border text-center w-8 g--color-principal-5" type="text" value="1">
-
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-          </div>
-          <span class="text-center g--font-family-principal w-1/5 text-sm">€40.00</span>
-          <span class="text-center g--font-family-principal w-1/5 text-sm">€40.00</span>
-        </div>
-
-        <div class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
-          <div class="flex w-2/5"> 
-            <div class="w-40 min-w-max">
-              <img class="h-24" src="./assets/img/3.jpg" alt="">
-            </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
-              <span class="g--font-family-principal text-sm">Placa base Asus TUF GAMING B450-PLUS II</span>
-              <span class="g--font-family-principal g--color-principal-5 text-xs">Placa Base</span>
-              <a href="#" class="g--font-family-principal hover:text-red-500 text-gray-500 text-xs">Eliminar</a>
-            </div>
-          </div>
-          <div class="flex justify-center w-1/5">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-            <input class="mx-2 border text-center w-8 g--color-principal-5" type="text" value="1">
-
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-          </div>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">€150.00</span>
-          <span class="text-center w-1/5 g--font-family-principal text-sm">€150.00</span>
-        </div>
-
+        <div id="resumenProductos"></div>
         <button id="cerrarCesta" class="flex g--color-principal-5 g--font-family-principal text-sm mt-10">
-      
           <svg class="fill-current mr-2 g--color-principal-5 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
           Continua llenando la Cesta
         </button>
@@ -612,8 +525,8 @@ function cargacesta() {
         <h1 class="g--font-family-principal g--color-principal-5 text-2xl border-b pb-8">Resumen del pedido
       </h1>
         <div class="flex justify-between mt-10 mb-5">
-          <span class="g--font-family-principal text-sm uppercase">3 Articulos</span>
-          <span class="g--font-family-principal text-sm">590€</span>
+          <span id="resumenArticulos" class="g--font-family-principal text-sm uppercase">0 Articulos</span>
+          <span class="g--font-family-principal text-sm" id="precioTotal">0€</span>
         </div>
         <div>
           <label class="g--font-family-principal inline-block mb-3 text-sm uppercase">Metodo de envio</label>
@@ -630,7 +543,7 @@ function cargacesta() {
         <div class="border-t mt-8">
           <div class="flex justify-between g--font-family-principal py-6 text-sm uppercase">
             <span>Coste Total</span>
-            <span>€600</span>
+            <span id="precioTotalResumen">€0</span>
           </div>
           <button id="compraBtn" class="g--background-color-principal-5 hover:bg-teal-700 py-3 text-sm text-white uppercase w-full rounded-md">Ir a pago</button>
         </div>
