@@ -129,11 +129,11 @@ function pintarCategorias(a) {
     </ul>
     </li>`;
     res+=`<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
-  <a id="${"c" + cat.id}"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
-  <div class="p-5">
-      <a id="${"c" + cat.id}"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">${cat.nombre}</h5></a>               
-  </div>
-</div>`;
+            <a id="${"c" + cat.id}"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
+            <div class="p-5">
+            <a id="${"c" + cat.id}"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">${cat.nombre}</h5></a>               
+            </div>
+        </div>`;
   });
   c_nav.innerHTML = texto;
   categoriasTop.innerHTML=res;
@@ -193,7 +193,7 @@ function pintarOfertas(of){
 resultado+=`
 <div class="c-card">
   
-   <img src="assets/img/${ofertas.id}.jpg" class="c-card__img cursor-pointer" onclick="abrirProducto()">
+   <img id="${ofertas.id}"  src="assets/img/${ofertas.id}.jpg" class="c-card__img cursor-pointer">
    <div class="c-card__body">
      <h5 class="g--font-size-s">${ofertas.nombre}</h5>
      <p class="g--color-rojo-4">-${ofertas.descuento}%</p>
@@ -206,24 +206,12 @@ resultado+=`
  })
  ofertasFlash.innerHTML=resultado;
 
- Array.from(document.getElementsByClassName("c-card__img")).forEach((e) =>
- e.addEventListener("click", cargarProducto(e.id))
-);  
-botones=document.getElementsByClassName("c-button");
-		//console.log(botones);
-				/*hay que hacer antes un ARRAY.FROM.BOTONES.FOREACH (bot=> bot.addEventListener('click',()=>{
-				console.log("has pulsado");
-			})) */
-		
-		Array.from(botones).forEach (bot=>bot.addEventListener('click',()=>{//console.log("has pulsado"+ bot.id)
-      console.log("has pulsado "+bot.id)
-      //hay que recorrer listaArticulos para acceder a esos datos
-    JSON.parse(of).find(ofertas=>{
-		if(ofertas.codigo==bot.id){
-      
-    }
-  })
-}));
+ Array.from(ofertasFlash.getElementsByClassName("c-card__img")).forEach((e) =>
+    e.addEventListener("click", () => buscarArticuloPorId(e.id))
+  );
+  Array.from(ofertasFlash.getElementsByTagName("a")).forEach((e) =>
+    e.addEventListener("click", () => isLogedCardToCarrito(e.id))
+  );
 			//console.log(art);
 }
 function obtenerArticulos(id, nombreCategoria) {
@@ -310,7 +298,7 @@ function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, 
                 <img id="${item.id} " src="assets/img/${item.id}.jpg" class="cursor:pointer c-card__img">
                 <div class="c-card__body">
                   <h5 class="g--font-size-s">${item.nombre}</h5>
-                  <b>${item.precio}€ PVPR  <del>${itemPrecio2.toFixed(0)}</del></b>
+                  <b>${item.precio}€ PVPR</b>
                   <a id=${item.id} class="c-button c-button--size-stretch cursor:pointer g--margin-top-1">Añadir al carrito</a>
                 </div>   
               </div>`;
@@ -724,7 +712,7 @@ function cargarProducto(articulo, subcategoriaNombre) {
           </div>
         </div>
         <div class="flex">
-          <span class="title-font font-medium text-2xl text-gray-900">€58.00</span>
+          <span class="title-font font-medium text-2xl text-gray-900">${articulo.precio}€</span>
 
           <button id="${articulo.id}"class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-400 rounded">Añadir al Carrito</button>
         
