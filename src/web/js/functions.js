@@ -1,6 +1,8 @@
+var idUserActive = 0;
+var carritoActivoId = 0;
 function abrirCesta() {
   let cesta = document.getElementById("cesta");
-  cesta.open ? cesta.close() : cesta.showModal(),cargaPrecioCantidad();
+  cesta.open ? cesta.close() : cesta.showModal(), cargaPrecioCantidad();
 }
 function abrirProducto() {
   let producto = document.getElementById("producto");
@@ -41,7 +43,6 @@ function desactivaFormulario() {
 
 window.onload = () => {
   alreadyLoggedChecker();
-  cargaHistorial();
   cargacesta();
   cargaLogin();
   cargaLogout();
@@ -49,11 +50,11 @@ window.onload = () => {
   cargaPago();
   getAll("categorias")
     .then((a) => pintarCategorias(a))
-    
+
     .catch((a) => console.log(a));
   getAll("ofertas")
-    .then((of)=>pintarOfertas(of))
-    .catch((of)=>console.log(of))
+    .then((of) => pintarOfertas(of))
+    .catch((of) => console.log(of))
   document.getElementById("burger").onmouseenter = function () {
     let nav = document.getElementsByClassName("c-nav")[0];
     nav.classList.toggle("c-nav--visible");
@@ -72,16 +73,16 @@ window.onload = () => {
   document.getElementById("cestaBtn").onclick = abrirCesta;
   document.getElementById("loginBtn").onclick = abrirLogin;
   document.getElementById("compraBtn").onclick = abrirPago;
-  document.getElementById("historyFeat").onclick = abrirHistorial;
+  document.getElementById("historyFeat").onclick = () => { cargaHistorial(); abrirHistorial() };
   document.getElementById("volverMenu").onclick = function () {
     cargarContenido();
     getAll("categorias")
-    .then((a) => pintarCategorias(a))
-    
-    .catch((a) => console.log(a));
-  getAll("ofertas")
-    .then((of)=>pintarOfertas(of))
-    .catch((of)=>console.log(of))
+      .then((a) => pintarCategorias(a))
+
+      .catch((a) => console.log(a));
+    getAll("ofertas")
+      .then((of) => pintarOfertas(of))
+      .catch((of) => console.log(of))
   };
 };
 
@@ -89,28 +90,29 @@ function alreadyLoggedChecker() {
   getAll("usuarios").then((data) => {
     let user = JSON.parse(data).find((u) => u.log == true);
     user != null
-      ? pintaDatosUsuario(user.nombre)
+      ? pintaDatosUsuario(user)
       : console.log("Nadie logeado");
   });
 }
-function pintaDatosUsuario(nombre) {
-  document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${nombre}`;
+function pintaDatosUsuario(user) {
+  idUserActive = user.id;
+  document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${user.nombre}`;
   document.getElementById("historyFeat").style.display = "block";
   document.getElementById("loginBtn").onclick = abrirLogout;
-  cargaCarritoActivo(nombre);
+  cargaCarritoActivo(user.nombre);
 }
-function cargaPrecioCantidad(){
-  let articulos=0;
-  let total=0;
-  let divsProductos=document.querySelectorAll(".valores")
-  let precios=document.querySelectorAll(".precio")
-  precios.forEach(precio =>total+=parseInt(precio.textContent.slice(0,-1)))
+function cargaPrecioCantidad() {
+  let articulos = 0;
+  let total = 0;
+  let divsProductos = document.querySelectorAll(".valores")
+  let precios = document.querySelectorAll(".precio")
+  precios.forEach(precio => total += parseInt(precio.textContent.slice(0, -1)))
   console.log(total)
-  divsProductos.forEach(input => articulos+=parseInt(input.value));
-  document.getElementById("cantidadArticulos").innerHTML=articulos + " articulos";
-  document.getElementById("resumenArticulos").innerHTML=articulos + " articulos";
-  document.getElementById("precioTotal").innerHTML=total + "€";
-  document.getElementById("precioTotalResumen").innerHTML=total + "€";
+  divsProductos.forEach(input => articulos += parseInt(input.value));
+  document.getElementById("cantidadArticulos").innerHTML = articulos + " articulos";
+  document.getElementById("resumenArticulos").innerHTML = articulos + " articulos";
+  document.getElementById("precioTotal").innerHTML = total + "€";
+  document.getElementById("precioTotalResumen").innerHTML = total + "€";
 }
 function recogeDatosLogin() {
   let user = document.getElementById("emailUser").value;
@@ -123,7 +125,7 @@ function compruebaDatosLogin(user, passwd, usuarios) {
   let usuario = usuarios.find((u) => u.nombre == user && u.password == passwd);
   if (usuario != null) {
     patch("usuarios", `${usuario.id}`, { 'log': true }).then(document.location.reload());
-    
+
   } else {
     alert("Error de credenciales");
   }
@@ -131,17 +133,17 @@ function compruebaDatosLogin(user, passwd, usuarios) {
 
 function pintarCategorias(a) {
   let c_nav = document.querySelector(".c-nav");
-  let categoriasTop=document.getElementById("categoriasTop");
+  let categoriasTop = document.getElementById("categoriasTop");
   c_nav.innerHTML = "";
   let texto = "";
-  let res="";
+  let res = "";
   JSON.parse(a).forEach((cat) => {
     texto += `<li class="c-nav__item" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a>
-    <ul id="${"s"+cat.id}">
+    <ul id="${"s" + cat.id}">
     ${pintaSubcategorias(cat.id)}
     </ul>
     </li>`;
-    res+=`<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
+    res += `<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
             <a id="${"c" + cat.id}"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
             <div class="p-5">
             <a id="${"c" + cat.id}"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">${cat.nombre}</h5></a>               
@@ -149,12 +151,12 @@ function pintarCategorias(a) {
         </div>`;
   });
   c_nav.innerHTML = texto;
-  categoriasTop.innerHTML=res;
+  categoriasTop.innerHTML = res;
   let items = document.getElementsByClassName("c-nav__item");
   Array.from(items).forEach((item) => {
     item.onclick = () => {
-      console.log("saber item id"+item.id);
-      console.log("saber text content "+item.textContent)
+      console.log("saber item id" + item.id);
+      console.log("saber text content " + item.textContent)
 
       obtenerArticulos(item.id, item.textContent);
     };
@@ -162,59 +164,59 @@ function pintarCategorias(a) {
   document.getElementById("c4").classList.add("c-nav__item--bottom");
 }
 
-function pintaSubcategorias(categoria){
- 
+function pintaSubcategorias(categoria) {
+
   getAll("subcategorias")
-  .then( (ArraySubcategoria)=>comprobarSubcategoria(ArraySubcategoria,categoria) //console.log("muestrasubcategoria "+ deUnaenUna.nombre+ "id de catgoria:"+deUnaenUna.categoria))
-  )
-  .catch(console.log("merde"));
+    .then((ArraySubcategoria) => comprobarSubcategoria(ArraySubcategoria, categoria) //console.log("muestrasubcategoria "+ deUnaenUna.nombre+ "id de catgoria:"+deUnaenUna.categoria))
+    )
+    .catch(console.log("merde"));
 
- }
- function comprobarSubcategoria(Array2,idCategoria){
+}
+function comprobarSubcategoria(Array2, idCategoria) {
 
-let encontrado=JSON.parse(Array2).filter((sub=>sub.categoria==idCategoria));
+  let encontrado = JSON.parse(Array2).filter((sub => sub.categoria == idCategoria));
 
-subcategoria=document.getElementById("s"+idCategoria);
-  let resultado="";
+  subcategoria = document.getElementById("s" + idCategoria);
+  let resultado = "";
 
-  Array.from(encontrado).forEach((sub)=>{
-    resultado+=`
+  Array.from(encontrado).forEach((sub) => {
+    resultado += `
     <li class="c-nav__item">${sub.nombre}
     </li>
    `;
-   })
-   subcategoria.innerHTML=resultado ; 
-  
- }
+  })
+  subcategoria.innerHTML = resultado;
+
+}
 
 
-function pintarOfertas(of){
-  let ofertasFlash=document.getElementById("ofertasFlash");
-  let resultado="";
- JSON.parse(of).forEach((ofertas)=>{
-resultado+=`
+function pintarOfertas(of) {
+  let ofertasFlash = document.getElementById("ofertasFlash");
+  let resultado = "";
+  JSON.parse(of).forEach((ofertas) => {
+    resultado += `
 <div class="c-card">
   
    <img id="${ofertas.id}"  src="assets/img/${ofertas.id}.jpg" class="c-card__img cursor-pointer">
    <div class="c-card__body">
      <h5 class="g--font-size-s">${ofertas.nombre}</h5>
      <p class="g--color-rojo-4">-${ofertas.descuento}%</p>
-     <b>${ofertas.precio-(ofertas.precio*(ofertas.descuento/100))}€ PVPR  <del>${ofertas.precio}€</del></b>
+     <b>${ofertas.precio - (ofertas.precio * (ofertas.descuento / 100))}€ PVPR  <del>${ofertas.precio}€</del></b>
      <a href="#" class="c-button c-button--size-stretch g--margin-top-1" id="${ofertas.id}">Añadir al carrito</a>
    </div>
   
 </div>
 `;
- })
- ofertasFlash.innerHTML=resultado;
+  })
+  ofertasFlash.innerHTML = resultado;
 
- Array.from(ofertasFlash.getElementsByClassName("c-card__img")).forEach((e) =>
+  Array.from(ofertasFlash.getElementsByClassName("c-card__img")).forEach((e) =>
     e.addEventListener("click", () => buscarArticuloPorId(e.id))
   );
   Array.from(ofertasFlash.getElementsByTagName("a")).forEach((e) =>
     e.addEventListener("click", () => isLogedCardToCarrito(e.id))
   );
-			//console.log(art);
+  //console.log(art);
 }
 function obtenerArticulos(id, nombreCategoria) {
   if (id.substring(0, 1) === "c") {
@@ -350,15 +352,23 @@ function isLogedCardToCarrito(articuloId) {
 }
 function buscarCarritoAModificar(idArticulo, idUsuario) {
   getOneRow("carritos/activo/usuario", true, idUsuario)
-    .then((carrito) => buscarArticuloEnProductos(carrito[0].id, idArticulo))
-    .catch((e) => console.log(e));
+    .then((carrito) => buscarArticuloEnProductos(carrito[0].id, idArticulo));
+}
+
+function crearCarrito(id) {
+  let carro = {
+    idUsuario: id,
+    estado: "pendiente",
+    activo: true,
+  };
+  post("carritos", carro)
 }
 
 function buscarArticuloEnProductos(idCarrito, idArticulo) {
   getOneRow("productos/idCarrito/idArticulo", idCarrito, idArticulo).then(
     (producto) =>
       producto[0]
-        ? modificarProducto(idCarrito,idArticulo)
+        ? modificarProducto(idCarrito, idArticulo)
         : anyadirProducto(idCarrito, idArticulo)
   );
 }
@@ -374,10 +384,10 @@ function anyadirProducto(idCarrito, idArticulo) {
     .catch((a) => console.log(a));
 }
 
-function anyadirAcarrito(item){
-  getOne("articulos",item.idArticulo)
-  .then(a=>{
-    document.getElementById("resumenProductos").innerHTML+=`
+function anyadirAcarrito(item) {
+  getOne("articulos", item.idArticulo)
+    .then(a => {
+      document.getElementById("resumenProductos").innerHTML += `
 <div id="p${a.id}" class="flex items-center hover:bg-teal-100 -mx-8 px-6 py-5">
 <div class="flex w-2/5"> 
             <div class="w-40 min-w-max">
@@ -389,60 +399,96 @@ function anyadirAcarrito(item){
               <a onclick="eliminaDelCarrito(${a.id})" class="g--font-family-principal outline-0 hover:text-red-500 text-gray-500 text-xs cursor-pointer">Eliminar</a>
             </div>
           </div>
-          <div class="flex justify-center w-1/5">
+          <div class="flex justify-center items-center w-1/5">
+          <a class="cursor-pointer" onclick="restaUnidad(${a.id})">
             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
-
-            <input id="unidadesProducto${a.id}" class="mx-2 border g--font-family-principal g--color-principal-5 text-center w-8 valores" type="text" value="${item.unidades}">
-
+          </a>
+            <input id="unidadesProducto${a.id}" class="mx-2 border g--font-family-principal g--color-principal-5 text-center w-8 valores" type="text" value="${item.unidades}" readonly="readonly" >
+          <a class="cursor-pointer" onclick="sumaUnidad(${a.id})">
             <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
+          </a>
           </div>
           <span id="multiplicadorPrecioUD${a.id}" class="text-center w-1/5 g--font-family-principal text-sm">${a.precio}€</span>
           <span id="multiplicadorPrecio${a.id}" class="text-center w-1/5 g--font-family-principal text-sm precio">${a.precio * item.unidades}€</span>
 </div>
 </div>`;
-  cargaPrecioCantidad()});
+      cargaPrecioCantidad()
+    });
 }
-
-function eliminaDelCarrito(item){
-  getOne("productos/idArticulo",item)
-  .then( a=>{del("productos",a[0].id)
-  .then(document.getElementById(`p${a[0].idArticulo}`).remove());cargaPrecioCantidad()} )
+function sumaUnidad(id){
+  let input=document.getElementById("unidadesProducto"+id);
+  console.log(input)
+  input.value=parseInt(input.value) + 1;
+  tiemporeal(carritoActivoId,id,input.value);
 }
-function modificarProducto(producto,articulo) {
-  getOne("productos/idCarrito/idArticulo",producto +"/"+articulo).then(a=>patch("productos",a[0].id,{'unidades':a[0].unidades+ 1})
-  .then(b=>{let input=document.getElementById(`unidadesProducto${articulo}`);
-            input.value=parseInt(a[0].unidades)+1;
-            let precios=document.getElementById(`multiplicadorPrecio${articulo}`);
-            let precioUD=document.getElementById(`multiplicadorPrecioUD${articulo}`);
-            precios.innerHTML=parseInt(precioUD.textContent.slice(0,-1)* input.value)  +"€";
+function restaUnidad(id){
+  let input=document.getElementById("unidadesProducto"+id);
+  input.value=parseInt(input.value) - 1;
+  tiemporeal(carritoActivoId,id,input.value);
 }
-))
+function tiemporeal(producto, articulo,unidades) {
+  getOne("productos/idCarrito/idArticulo", producto + "/" + articulo).then(a => patch("productos", a[0].id, { 'unidades': parseInt(unidades) })
+    .then(b => {
+      let precios = document.getElementById(`multiplicadorPrecio${articulo}`);
+      let precioUD = document.getElementById(`multiplicadorPrecioUD${articulo}`);
+      precios.innerHTML = parseInt(precioUD.textContent.slice(0, -1) * unidades) + "€";
+    cargaPrecioCantidad()}
+    ))
+}
+function eliminaDelCarrito(item) {
+  getOne("productos/idArticulo", item)
+    .then(a => {
+      del("productos", a[0].id)
+      .then(document.getElementById(`p${a[0].idArticulo}`).remove()); cargaPrecioCantidad()
+    })
+}
+function modificarProducto(producto, articulo) {
+  getOne("productos/idCarrito/idArticulo", producto + "/" + articulo).then(a => patch("productos", a[0].id, { 'unidades': a[0].unidades + 1 })
+    .then(b => {
+      let input = document.getElementById(`unidadesProducto${articulo}`);
+      input.value = parseInt(a[0].unidades) + 1;
+      let precios = document.getElementById(`multiplicadorPrecio${articulo}`);
+      let precioUD = document.getElementById(`multiplicadorPrecioUD${articulo}`);
+      precios.innerHTML = parseInt(precioUD.textContent.slice(0, -1) * input.value) + "€";
+    }
+    ))
 }
 
 function cargaHistorial() {
-  getAll("carritos/idUsuario/1").then(a=>cargaCarritosUsuario(a));
+  getAll(`carritos/idUsuario/${idUserActive}`).then(a => cargaCarritosUsuario(a));
 }
-function cargaCarritosUsuario(a){
-  JSON.parse(a).forEach(carrito =>{
+function cargaCarritosUsuario(a) {
+  document.getElementById("listaCesta").innerHTML = "";
+  JSON.parse(a).forEach(carrito => {
     document.getElementById("listaCesta").innerHTML += `
-    <div class="cursor-pointer">${carrito.id}----------------${carrito.idUsuario}----------------${carrito.estado}<button class="c-button c-button--size-stretch" onclick="recuperaDatosCarrito(${carrito.id});">Recuperar carrito</button>
+    <div class="cursor-pointer">${carrito.id}----------------${carrito.idUsuario}----------------${carrito.estado}<button class="c-button c-button--size-stretch" onclick="recuperaCarritoBoton(${carrito.id});">Recuperar carrito</button>
     <button class="c-button c-button--size-stretch" onclick="eliminaCarrito(${carrito.id});">Eliminar carrito</button></div>
   `;
   })
 }
-function recuperaDatosCarrito(id){
-  getAll(`productos/idCarrito/${id}`).then(a=>JSON.parse(a).forEach(producto=>anyadirAcarrito(producto)));
+function recuperaDatosCarrito(id) {
+  getAll(`productos/idCarrito/${id}`).then(a => {
+    document.getElementById("resumenProductos").innerHTML = "";
+    JSON.parse(a).forEach(producto => anyadirAcarrito(producto))
+  })
 }
 
-function pintaCarritoActivo(a){
-  JSON.parse(a).forEach(articulo=>{buscarArticuloEnProductos(articulo.idCarrito,articulo.idArticulo)});
+function recuperaCarritoBoton(id) {
+  console.log(carritoActivoId)
+  patch(`carritos`, id, { activo: true })
+    .then(patch(`carritos`, carritoActivoId, { activo: false })
+      .then(getAll(`productos/idCarrito/${id}`).then(a => {
+        document.getElementById("resumenProductos").innerHTML = "";
+        JSON.parse(a).forEach(producto => anyadirAcarrito(producto));
+        carritoActivoId=id;
+      })))
 }
 
-function eliminaCarrito(id){
-  
+function pintaCarritoActivo(a) {
+  JSON.parse(a).forEach(articulo => { buscarArticuloEnProductos(articulo.idCarrito, articulo.idArticulo) });
 }
 
 function cargaLogout() {
@@ -486,16 +532,20 @@ function cargaLogin() {
   </div>`;
 }
 
-function cargaCarritoActivo(nombre){
+function cargaCarritoActivo(nombre) {
   console.log(nombre)
-  getOne("usuarios/nombre",nombre)
-  .then(a=> getOne("carritos/activo/usuario/true",a[0].id)
-  .then(activo=>{
-    if(activo){
-      recuperaDatosCarrito(activo[0].id);
-    }
-  })
-  )
+  getOne("usuarios/nombre", nombre)
+    .then(a => getOne("carritos/activo/usuario/true", a[0].id)
+      .then(activo => {
+        if (activo.length != 0) {
+          carritoActivoId = activo[0].id;
+          recuperaDatosCarrito(activo[0].id);
+        } else {
+          carritoActivoId = a[0].id;
+          crearCarrito(a[0].id);
+        }
+      })
+    )
 }
 
 function cargacesta() {

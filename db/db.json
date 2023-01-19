@@ -122,47 +122,47 @@
   ],
   "carritos": [
     {
-      "id": 1,
       "idUsuario": 1,
       "estado": "pendiente",
-      "activo": true
+      "activo": true,
+      "id": 1
     },
     {
-      "id": 2,
       "idUsuario": 1,
       "estado": "pendiente",
-      "activo": false
-    },
-    {
-      "id": 3,
-      "idUsuario": 1,
-      "estado": "pagado",
-      "activo": false
+      "activo": false,
+      "id": 2
     }
   ],
   "productos": [
     {
-      "idCarrito": 1,
+      "idCarrito": 2,
       "idArticulo": 8,
-      "unidades": 5,
+      "unidades": 1,
       "id": 1
     },
     {
-      "idCarrito": 1,
-      "idArticulo": 10,
-      "unidades": 4,
-      "id": 3
+      "idCarrito": 2,
+      "idArticulo": 9,
+      "unidades": 1,
+      "id": 2
     },
     {
       "idCarrito": 1,
       "idArticulo": 9,
       "unidades": 4,
+      "id": 3
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 10,
+      "unidades": 3,
       "id": 4
     },
     {
       "idCarrito": 1,
       "idArticulo": 11,
-      "unidades": 3,
+      "unidades": 12,
       "id": 5
     }
   ],
