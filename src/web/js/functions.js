@@ -52,7 +52,7 @@ window.onload = () => {
     .then((a) => pintarCategorias(a))
 
     .catch((a) => console.log(a));
-  getAll("ofertas")
+  getAll("articulos")
     .then((of) => pintarOfertas(of))
     .catch((of) => console.log(of))
   document.getElementById("burger").onmouseenter = function () {
@@ -82,7 +82,7 @@ window.onload = () => {
       .then((a) => pintarCategorias(a))
 
       .catch((a) => console.log(a));
-    getAll("ofertas")
+    getAll("articulos")
       .then((of) => pintarOfertas(of))
       .catch((of) => console.log(of))
   };
@@ -162,7 +162,6 @@ function pintarCategorias(a) {
     item.onclick = () => {
       console.log("saber item id"+item.id);
       let categoria=item.textContent.split(" ")[0];
-      alert(categoria);
       console.log("saber text content "+item.textContent)
 
       obtenerArticulos(item.id, categoria);
@@ -183,24 +182,38 @@ function comprobarSubcategoria(Array2, idCategoria) {
 
   let encontrado = JSON.parse(Array2).filter((sub => sub.categoria == idCategoria));
 
-  subcategoria = document.getElementById("s" + idCategoria);
+  let subcategoria = document.getElementById("s" + idCategoria);
   let resultado = "";
 
   Array.from(encontrado).forEach((sub) => {
     resultado += `
-    <li class="c-nav__item">${sub.nombre}
+    <li class="c-nav__item subcategoria" id="sub${sub.id}">${sub.nombre}
     </li>
    `;
   })
   subcategoria.innerHTML = resultado;
+  let subCategorias = document.getElementsByClassName("subcategoria");
+  Array.from(subCategorias).forEach((sub) => {
+    sub.onclick = () => {
+      console.log("saber subcategoria id: "+sub.id);
+     
+      console.log("saber subcategoria "+sub.textContent)
+
+      obtenerArticulos(sub.id,sub.textContent);
+    };
+  });
 
 }
 
 
 function pintarOfertas(of) {
+
+  let encontrado=  JSON.parse(of).filter((ofertas)=>ofertas.oferta==true);
+  console.log(encontrado);
   let ofertasFlash = document.getElementById("ofertasFlash");
+
   let resultado = "";
-  JSON.parse(of).forEach((ofertas) => {
+  encontrado.forEach((ofertas) => {
     resultado += `
 <div class="c-card">
   
@@ -227,12 +240,23 @@ function pintarOfertas(of) {
 }
 function obtenerArticulos(id, nombreCategoria) {
   if (id.substring(0, 1) === "c") {
+    console.log("entra aqui1");
     getOnePage(`articulos/categoriaPage`, id.substring(1)).then(
       (articulos_headerArray) => {
         pintarPaginacion(articulos_headerArray, nombreCategoria);
       }
     );
-  } else {
+
+  }   else if(id.substring(0, 3) === "sub"){
+    console.log("entra aqui2");
+    getAll(`articulos/subcategoria/${id.substring(3)}`).then(
+      (a) => {
+        pintarArticulos(JSON.parse(a), nombreCategoria);
+      }
+    );
+  } 
+  else {
+    console.log("entra aqui3")
     getAll(`articulos/subcategoria/${id.substring(1)}`).then((a) => {
       pintarArticulos(JSON.parse(a), nombreCategoria);
     });
@@ -302,14 +326,13 @@ function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, 
     <section class="p-5 pl-40 pr-40">
     <b class="g--font-size-xl">${nombreCategoria}</b>
     <div class="l-horizontal-space-between">`;
-  let itemPrecio2;
   articulos.forEach((item) => {
-    itemPrecio2 = item.precio * 1.2;
     texto += `<div class="c-card">    
                 <img id="${item.id} " src="assets/img/${item.id}.jpg" class="cursor:pointer c-card__img">
                 <div class="c-card__body">
                   <h5 class="g--font-size-s">${item.nombre}</h5>
-                  <b>${item.precio}€ PVPR</b>
+                  ${item.oferta==true ? `<p class="g--color-rojo-4">`+item.descuento+" %</p>" : ""}
+                  <b>${item.oferta==true ?      item.precio - (item.precio * (item.descuento / 100)) + `€ PVPR <del>${item.precio}€</del>`: item.precio+ "€ PVPR"}</b>
                   <a id=${item.id} class="c-button c-button--size-stretch cursor:pointer g--margin-top-1">Añadir al carrito</a>
                 </div>   
               </div>`;
@@ -418,8 +441,8 @@ function anyadirAcarrito(item) {
             </svg>
           </a>
           </div>
-          <span id="multiplicadorPrecioUD${a.id}" class="text-center w-1/5 g--font-family-principal text-sm">${a.precio}€</span>
-          <span id="multiplicadorPrecio${a.id}" class="text-center w-1/5 g--font-family-principal text-sm precio">${a.precio * item.unidades}€</span>
+          <span id="multiplicadorPrecioUD${a.id}" class="text-center w-1/5 g--font-family-principal text-sm">${a.oferta==true ? a.precio - (a.precio * (a.descuento / 100)):a.precio}€</span>
+          <span id="multiplicadorPrecio${a.id}" class="text-center w-1/5 g--font-family-principal text-sm precio">${a.oferta==true ? (a.precio - (a.precio * (a.descuento / 100)))*item.unidades : a.precio*item.unidades}€</span>
 </div>
 </div>`;
       cargaPrecioCantidad()
@@ -720,7 +743,7 @@ function cargarProducto(articulo, subcategoriaNombre) {
           </div>
         </div>
         <div class="flex">
-          <span class="title-font font-medium text-2xl text-gray-900">${articulo.precio}€</span>
+          <span class="title-font font-medium text-2xl text-gray-900">${articulo.oferta==true ?      articulo.precio - (articulo.precio * (articulo.descuento / 100)):articulo.precio}€</span>
 
           <button id="${articulo.id}"class="flex ml-auto text-white g--background-color-principal-5 border-0 py-2 px-6 focus:outline-none hover:bg-emerald-400 rounded">Añadir al Carrito</button>
         
