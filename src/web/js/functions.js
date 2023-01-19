@@ -45,7 +45,6 @@ window.onload = () => {
   alreadyLoggedChecker();
   cargacesta();
   cargaLogin();
-  cargaLogout();
   cargarContenido();
   cargaPago();
   getAll("categorias")
@@ -71,26 +70,38 @@ window.onload = () => {
     document.getElementById("cesta").close();
   };
 
-  document.getElementById("cestaBtn").onclick = abrirCesta;
+  document.getElementById("cestaBtn").onclick = isLogedToCarrito;
   document.getElementById("loginBtn").onclick = abrirLogin;
-  document.getElementById("compraBtn").onclick = abrirPago;
+  document.getElementById("compraBtn").onclick = tieneArticulos;
+  document.getElementById("btn_pagar").onclick = actualizaCarroPagado;
   document.getElementById("historyFeat").onclick = () => { cargaHistorial(); abrirHistorial() };
   document.getElementById("volverMenu").onclick = function () {
-  
+
     cargarContenido();
     getAll("categorias")
       .then((a) => pintarCategorias(a))
-
       .catch((a) => console.log(a));
     getAll("articulos")
       .then((of) => pintarOfertas(of))
       .catch((of) => console.log(of))
   };
 };
+function tieneArticulos() {
+  let divsProductos = document.querySelectorAll(".valores")
+  if (divsProductos.length != 0) {
+    abrirPago();
+  } else {
+    alert("No hay articulos en el carrito.")
+  }
+}
+function actualizaCarroPagado() {
+  getOne("carritos/activo/usuario/true", idUserActive).then(a => { patch("carritos", a[0].id, { estado: "pagado", activo: false }); location.reload(true) })
+}
 
-function cerrarHistorial(){
+function cerrarHistorial() {
   document.getElementById("listaCesta").close();
 }
+
 function alreadyLoggedChecker() {
   getAll("usuarios").then((data) => {
     let user = JSON.parse(data).find((u) => u.log == true);
@@ -99,13 +110,16 @@ function alreadyLoggedChecker() {
       : console.log("Nadie logeado");
   });
 }
+
 function pintaDatosUsuario(user) {
   idUserActive = user.id;
+  cargaLogout();
   document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${user.nombre}`;
   document.getElementById("historyFeat").style.display = "block";
   document.getElementById("loginBtn").onclick = abrirLogout;
   cargaCarritoActivo(user.nombre);
 }
+
 function cargaPrecioCantidad() {
   let articulos = 0;
   let total = 0;
@@ -118,7 +132,11 @@ function cargaPrecioCantidad() {
   document.getElementById("resumenArticulos").innerHTML = articulos + " articulos";
   document.getElementById("precioTotal").innerHTML = total + "€";
   document.getElementById("precioTotalResumen").innerHTML = total + "€";
+  let iva = total * 0.21;
+  document.getElementById("tarifa").innerHTML = iva + "€";
+  document.getElementById("total").innerHTML = total + iva + "€";
 }
+
 function recogeDatosLogin() {
   let user = document.getElementById("emailUser").value;
   let passwd = document.getElementById("passwdUser").value;
@@ -126,10 +144,11 @@ function recogeDatosLogin() {
     .then((usuarios) => compruebaDatosLogin(user, passwd, JSON.parse(usuarios)))
     .catch((error) => console.log(error));
 }
+
 function compruebaDatosLogin(user, passwd, usuarios) {
   let usuario = usuarios.find((u) => u.nombre == user && u.password == passwd);
   if (usuario != null) {
-    patch("usuarios", `${usuario.id}`, { 'log': true }).then(document.location.reload());
+    patch("usuarios", `${usuario.id}`, { 'log': true }).then(location.reload(true));
 
   } else {
     alert("Error de credenciales");
@@ -144,11 +163,11 @@ function pintarCategorias(a) {
   let res = "";
   JSON.parse(a).forEach((cat) => {
     texto += `<li class="c-nav__item categoria" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a>
-    <ul id="${"s"+cat.id}">
+    <ul id="${"s" + cat.id}">
     ${pintaSubcategorias(cat.id)}
     </ul>
     </li>`;
-    res+=`<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
+    res += `<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
             <a id="${"c" + cat.id}" class="categoria"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
             <div class="p-5">
             <a id="${"c" + cat.id}" class="categoria"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">${cat.nombre}</h5></a>               
@@ -156,13 +175,13 @@ function pintarCategorias(a) {
         </div>`;
   });
   c_nav.innerHTML = texto;
-  categoriasTop.innerHTML=res;
+  categoriasTop.innerHTML = res;
   let items = document.getElementsByClassName("categoria");
   Array.from(items).forEach((item) => {
     item.onclick = () => {
-      console.log("saber item id"+item.id);
-      let categoria=item.textContent.split(" ")[0];
-      console.log("saber text content "+item.textContent)
+      console.log("saber item id" + item.id);
+      let categoria = item.textContent.split(" ")[0];
+      console.log("saber text content " + item.textContent)
 
       obtenerArticulos(item.id, categoria);
     };
@@ -175,9 +194,10 @@ function pintaSubcategorias(categoria) {
   getAll("subcategorias")
     .then((ArraySubcategoria) => comprobarSubcategoria(ArraySubcategoria, categoria) //console.log("muestrasubcategoria "+ deUnaenUna.nombre+ "id de catgoria:"+deUnaenUna.categoria))
     )
-    .catch(console.log("merde"));
+    .catch();
 
 }
+
 function comprobarSubcategoria(Array2, idCategoria) {
 
   let encontrado = JSON.parse(Array2).filter((sub => sub.categoria == idCategoria));
@@ -205,7 +225,6 @@ function comprobarSubcategoria(Array2, idCategoria) {
 
 }
 
-
 function pintarOfertas(of) {
 
   let encontrado=  JSON.parse(of).filter((ofertas)=>ofertas.oferta==true);
@@ -222,7 +241,7 @@ function pintarOfertas(of) {
      <h5 class="g--font-size-s">${ofertas.nombre}</h5>
      <p class="g--color-rojo-4">-${ofertas.descuento}%</p>
      <b>${ofertas.precio - (ofertas.precio * (ofertas.descuento / 100))}€ PVPR  <del>${ofertas.precio}€</del></b>
-     <a href="#" class="c-button c-button--size-stretch g--margin-top-1" id="${ofertas.id}">Añadir al carrito</a>
+     <a class="c-button c-button--size-stretch g--margin-top-1" id="${ofertas.id}">Añadir al carrito</a>
    </div>
   
 </div>
@@ -375,9 +394,16 @@ function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, 
 
 function isLogedCardToCarrito(articuloId) {
   getOne("usuarios/log", "true").then((usuario) =>
-    usuario
+    usuario.length != 0
       ? buscarCarritoAModificar(articuloId, usuario[0].id)
       : alert("Usuario no ha iniciado sesion.")
+  );
+}
+function isLogedToCarrito() {
+  getOne("usuarios/log", "true").then((usuario) =>
+    usuario.length == 0
+      ? alert("No puedes acceder al carrito si no estas logeado")
+      : abrirCesta()
   );
 }
 function buscarCarritoAModificar(idArticulo, idUsuario) {
@@ -391,7 +417,8 @@ function crearCarrito(id) {
     estado: "pendiente",
     activo: true,
   };
-  post("carritos", carro)
+  post("carritos", carro).then(
+    getOne("carritos/activo/usuario/true", idUserActive).then(a => carritoActivoId = a[0].id))
 }
 
 function buscarArticuloEnProductos(idCarrito, idArticulo) {
@@ -448,31 +475,37 @@ function anyadirAcarrito(item) {
       cargaPrecioCantidad()
     });
 }
-function sumaUnidad(id){
-  let input=document.getElementById("unidadesProducto"+id);
+function sumaUnidad(id) {
+  let input = document.getElementById("unidadesProducto" + id);
   console.log(input)
-  input.value=parseInt(input.value) + 1;
-  tiemporeal(carritoActivoId,id,input.value);
+  input.value = parseInt(input.value) + 1;
+  tiemporeal(carritoActivoId, id, input.value);
 }
-function restaUnidad(id){
-  let input=document.getElementById("unidadesProducto"+id);
-  input.value=parseInt(input.value) - 1;
-  tiemporeal(carritoActivoId,id,input.value);
+function restaUnidad(id) {
+  let input = document.getElementById("unidadesProducto" + id);
+  if (input.value == 1) {
+    eliminaDelCarrito(id);
+  }
+  else {
+    input.value = parseInt(input.value) - 1;
+    tiemporeal(carritoActivoId, id, input.value);
+  }
 }
-function tiemporeal(producto, articulo,unidades) {
+function tiemporeal(producto, articulo, unidades) {
   getOne("productos/idCarrito/idArticulo", producto + "/" + articulo).then(a => patch("productos", a[0].id, { 'unidades': parseInt(unidades) })
     .then(b => {
       let precios = document.getElementById(`multiplicadorPrecio${articulo}`);
       let precioUD = document.getElementById(`multiplicadorPrecioUD${articulo}`);
       precios.innerHTML = parseInt(precioUD.textContent.slice(0, -1) * unidades) + "€";
-    cargaPrecioCantidad()}
+      cargaPrecioCantidad()
+    }
     ))
 }
 function eliminaDelCarrito(item) {
   getOne("productos/idArticulo", item)
     .then(a => {
       del("productos", a[0].id)
-      .then(document.getElementById(`p${a[0].idArticulo}`).remove()); cargaPrecioCantidad()
+        .then(document.getElementById(`p${a[0].idArticulo}`).remove()); cargaPrecioCantidad()
     })
 }
 function modificarProducto(producto, articulo) {
@@ -487,10 +520,14 @@ function modificarProducto(producto, articulo) {
     ))
 }
 
-
+function eliminaCarrito(id) {
+  getAll(`productos/idCarrito/${id}`)
+    .then(a =>JSON.parse(a).forEach(producto=>del(`productos`, producto.id)))
+    .then(del("carritos", id).then(cargaHistorial())) 
+    }
 function cargaHistorial() {
-  getAll("carritos/idUsuario/1").then(a=>cargaCarritosUsuario(a));
-  document.getElementById("listaCesta").innerHTML = `
+        getAll(`carritos/idUsuario/${idUserActive}`).then(a => cargaCarritosUsuario(a));
+        document.getElementById("listaCesta").innerHTML = `
    <div>
      <b class="g--font-size-2xl">Lista de Carritos </b>
      <p><b class="g--font-size-xl">Pendientes</b></p>
@@ -511,59 +548,88 @@ function cargaHistorial() {
      </div>
    `;
 
- }
- function cargaCarritosUsuario(a){
- 
- let pendiente=JSON.parse(a).filter(encontrado=>encontrado.estado=="pendiente");
- let pagado=JSON.parse(a).filter(encontrado=>encontrado.estado=="pagado");
- 
-   pendiente.forEach(carrito =>{
-     document.getElementById("pendienteHistorial").innerHTML += `
+      }
+function cargaCarritosUsuario(a) {
+
+        let pendiente = JSON.parse(a).filter(encontrado => encontrado.estado == "pendiente");
+        let pagado = JSON.parse(a).filter(encontrado => encontrado.estado == "pagado");
+
+        pendiente.forEach(carrito => {
+          document.getElementById("pendienteHistorial").innerHTML += `
      <tr class="c-listaCarrito__item">
      <td>Nº Cesta: ${carrito.id}</td>
      <td><button class="c-button c-button--size-stretch" onclick="recuperaDatosCarrito(${carrito.id})">Recuperar carrito</button></td>
      <td><button class="c-button c-button--size-stretch" onclick="eliminaCarrito(${carrito.id});">Eliminar carrito</button></td>
      </tr> 
    `;
-   });
- 
- 
- pagado.forEach(carrito =>{
-   document.getElementById("pagadoHistorial").innerHTML+=`
+        });
+
+
+        pagado.forEach(carrito => {
+          document.getElementById("pagadoHistorial").innerHTML += `
    <tr class="c-listaCarrito__item">
    <td>Nº Cesta: ${carrito.id}</td>
-   <td><button class="c-button c-button--size-stretch" onclick="recuperaDatosCarrito(${carrito.id})">Volver a comprar</button></td>
+   <td><button class="c-button c-button--size-stretch" onclick="recompra(${carrito.id})">Volver a comprar</button></td>
  </tr>    `;
- });
- 
- }
+        });
+
+      }
 function recuperaDatosCarrito(id) {
-  getAll(`productos/idCarrito/${id}`).then(a => {
-    document.getElementById("resumenProductos").innerHTML = "";
-    JSON.parse(a).forEach(producto => anyadirAcarrito(producto))
-  })
-}
+        getAll(`productos/idCarrito/${id}`).then(a => {
+          document.getElementById("resumenProductos").innerHTML = "";
+          JSON.parse(a).forEach(producto => anyadirAcarrito(producto))
+        })
+      }
+function recompra(id) {
+        crearCarrito(idUserActive);
+        patch("carritos", carritoActivoId, { activo: false })
+          .then(getOne("carritos/activo/usuario/true", idUserActive).then(carro => {
+            getAll(`productos/idCarrito/${id}`).then(a => {
+              document.getElementById("resumenProductos").innerHTML = "";
+              JSON.parse(a).forEach(producto => { anyadirProducto(carro[0].id, producto.id); anyadirAcarrito(producto); })
+            })
+          }))
+          cargaHistorial()
+      }
 
 function recuperaCarritoBoton(id) {
-  console.log(carritoActivoId)
-  patch(`carritos`, id, { activo: true })
-    .then(patch(`carritos`, carritoActivoId, { activo: false })
-      .then(getAll(`productos/idCarrito/${id}`).then(a => {
-        document.getElementById("resumenProductos").innerHTML = "";
-        JSON.parse(a).forEach(producto => anyadirAcarrito(producto));
-        carritoActivoId=id;
-      })))
-}
+        console.log(carritoActivoId)
+        patch(`carritos`, id, { activo: true })
+          .then(patch(`carritos`, carritoActivoId, { activo: false })
+            .then(getAll(`productos/idCarrito/${id}`).then(a => {
+              document.getElementById("resumenProductos").innerHTML = "";
+              JSON.parse(a).forEach(producto => anyadirAcarrito(producto));
+              carritoActivoId = id;
+            })))
+      }
 
 function pintaCarritoActivo(a) {
-  JSON.parse(a).forEach(articulo => { buscarArticuloEnProductos(articulo.idCarrito, articulo.idArticulo) });
-}
+        JSON.parse(a).forEach(articulo => { buscarArticuloEnProductos(articulo.idCarrito, articulo.idArticulo) });
+      }
 
 function cargaLogout() {
-  document.getElementById("logout").innerHTML = `<div>CIERRA SESIÓN</div>`;
-}
+        getOne("usuarios", idUserActive).then(usuario =>
+          document.getElementById("logout").innerHTML = `<div>
+  <b class="g--font-size-2xl text-emerald-900">DATOS USUARIO <br><br>
+  <p><b class="g--font-size-xl text-emerald-900">Nombre</b></p>
+  <div class="l-vertical">
+   <div class="c-listaCarrito text-emerald-600">
+      ${usuario.nombre.split("@")[0].toUpperCase()}
+    </div>
+  </div>
+  <br>
+  <p><b class="g--font-size-xl text-emerald-900">Correo</b></p>
+  <div class="l-vertical">
+   <div class="c-listaCarrito text-emerald-600">
+      ${usuario.nombre}
+    </div>
+  </div><br>
+    <a class="c-button" onclick="cierraSesion()">Cierra sesion</a>
+  </div>`
+        )
+      }
 function cargaLogin() {
-  document.getElementById("login").innerHTML = `
+        document.getElementById("login").innerHTML = `
   <div class="l-flex l-flex--align-items-center l-flex--justify-content-center">
     <div class="c-login">
       <div class="l-login-tarjeta">
@@ -598,28 +664,30 @@ function cargaLogin() {
       </div>		
     </div>
   </div>`;
-}
+      }
 
+function cierraSesion() {
+        patch("usuarios", idUserActive, { log: false }).then(location.reload())
+      }
 function cargaCarritoActivo(nombre) {
-  console.log(nombre)
-  getOne("usuarios/nombre", nombre)
-    .then(a => getOne("carritos/activo/usuario/true", a[0].id)
-      .then(activo => {
-        if (activo.length != 0) {
-          carritoActivoId = activo[0].id;
-          recuperaDatosCarrito(activo[0].id);
-        } else {
-          carritoActivoId = a[0].id;
-          crearCarrito(a[0].id);
-        }
-      })
-    )
-}
+        getOne("usuarios/nombre", nombre)
+          .then(a => getOne("carritos/activo/usuario/true", a[0].id)
+            .then(activo => {
+              console.log(a)
+              if (activo.length != 0) {
+                carritoActivoId = activo[0].id;
+                recuperaDatosCarrito(activo[0].id);
+              } else {
+                crearCarrito(a[0].id);
+              }
+            })
+          )
+      }
 
 function cargacesta() {
-  document.getElementById(
-    "cesta"
-  ).innerHTML += `<div class="container mx-auto mt-10">
+        document.getElementById(
+          "cesta"
+        ).innerHTML += `<div class="container mx-auto mt-10">
     <div class="flex shadow-md my-10">
       <div class="w-3/4 bg-white px-10 py-10">
         <div class="flex justify-between border-b pb-8">
@@ -669,20 +737,20 @@ function cargacesta() {
 
     </div>
   </div>`;
-}
+      }
 function buscarArticuloPorId(idArticulo) {
-  getOne("articulos/id", idArticulo)
-    .then((a) => buscarSubcategoriaNombre(a[0]))
-    .catch((e) => console.log(e));
-}
+        getOne("articulos/id", idArticulo)
+          .then((a) => buscarSubcategoriaNombre(a[0]))
+          .catch((e) => console.log(e));
+      }
 function buscarSubcategoriaNombre(articulo) {
-  getOne("subcategorias", articulo.subcategoria)
-    .then((a) => cargarProducto(articulo, a[0].nombre))
-    .catch((e) => console.log(e));
-}
+        getOne("subcategorias", articulo.subcategoria)
+          .then((a) => cargarProducto(articulo, a[0].nombre))
+          .catch((e) => console.log(e));
+      }
 function cargarProducto(articulo, subcategoriaNombre) {
-  let texto = "";
-  texto += `<button id="cerrarProducto" class="flex outline-0 g--color-principal-5 g--font-family-principal text-sm ml-40">      
+        let texto = "";
+        texto += `<button id="cerrarProducto" class="flex outline-0 g--color-principal-5 g--font-family-principal text-sm ml-40">      
     <svg class="fill-current mr-2 g--color-principal-5 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
     Volver a lista de productos
   </button>  
@@ -762,18 +830,18 @@ function cargarProducto(articulo, subcategoriaNombre) {
       </div>
     </div>
   </div>`;
-  let detalleProducto = document.getElementById("producto");
-  detalleProducto.innerHTML = texto;
-  Array.from(detalleProducto.getElementsByTagName("button"))[1].onclick = () =>
-    isLogedCardToCarrito(articulo.id);
-  document.getElementById("cerrarProducto").onclick = () => {
-    document.getElementById("producto").close();
-  };
-  abrirProducto();
-}
+        let detalleProducto = document.getElementById("producto");
+        detalleProducto.innerHTML = texto;
+        Array.from(detalleProducto.getElementsByTagName("button"))[1].onclick = () =>
+          isLogedCardToCarrito(articulo.id);
+        document.getElementById("cerrarProducto").onclick = () => {
+          document.getElementById("producto").close();
+        };
+        abrirProducto();
+      }
 
 function cargarContenido() {
-  document.getElementById("contenedorTodo").innerHTML = `<section>
+        document.getElementById("contenedorTodo").innerHTML = `<section>
   <article class="flex flex-row-reverse items-center p-5 pl-40 pr-40 ">
       <div class="text-right w-1/2">
           <h1 class="text-4xl">Compra la tecnologia que ayuda al medioambiante</h1>
@@ -803,10 +871,10 @@ function cargarContenido() {
   
   </div>
 </div>`;
-}
+      }
 
 function cargaPago() {
-  document.getElementById("pago").innerHTML = `<div class="c-paymentform">
+        document.getElementById("pago").innerHTML = `<div class="c-paymentform">
   <div class="c-paymentform__header">
     <h1 class="g--font-weight-3xl">Checkout</h1>
   </div>
@@ -855,28 +923,24 @@ function cargaPago() {
     <table>
       <tbody>
         <tr>
-          <td>Shipping fee</td>
-          <td align="right">5.43€</td>
+          <td>IVA</td>
+          <td align="right" id="tarifa">5.43€</td>
         </tr>
         <tr>
-          <td>Discount 10%</td>
-          <td align="right">-1.89€</td>
-        </tr>
-        <tr>
-          <td>Price Total</td>
-          <td align="right">84.82€</td>
+          <td>Descuento</td>
+          <td align="right" id="descuento">0€</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td>Total</td>
-          <td align="right">88.36€</td>
+          <td align="right" id="total">0€</td>
         </tr>
       </tfoot>
     </table>
-    <div class="c-button c-button--size-stretch g--margin-top-1">
+    <div id="btn_pagar" class="c-button c-button--size-stretch g--margin-top-1">
       <a type="submit">Pagar</a>
     </div>
   </div>
 </div>`;
-}
+      }

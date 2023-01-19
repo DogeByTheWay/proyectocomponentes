@@ -99,7 +99,7 @@
       "id": 1,
       "nombre": "mario@gmail.com",
       "password": "root",
-      "log": true
+      "log": false
     },
     {
       "id": 2,
@@ -111,7 +111,7 @@
       "id": 3,
       "nombre": "esteban@gmail.com",
       "password": "root",
-      "log": false
+      "log": true
     },
     {
       "id": 4,
@@ -123,41 +123,94 @@
   "carritos": [
     {
       "idUsuario": 1,
-      "estado": "pendiente",
-      "activo": true,
+      "estado": "pagado",
+      "activo": false,
       "id": 1
+    },
+    {
+      "idUsuario": 1,
+      "estado": "pagado",
+      "activo": false,
+      "id": 2
     },
     {
       "idUsuario": 1,
       "estado": "pendiente",
       "activo": false,
-      "id": 2
+      "id": 3
     },
     {
-      "id": 4,
       "idUsuario": 1,
-      "estado": "pagado",
-      "activo": false
+      "estado": "pendiente",
+      "activo": false,
+      "id": 4
+    },
+    {
+      "idUsuario": 1,
+      "estado": "pendiente",
+      "activo": true,
+      "id": 5
+    },
+    {
+      "idUsuario": 3,
+      "estado": "pendiente",
+      "activo": true,
+      "id": 6
     }
   ],
   "productos": [
     {
       "idCarrito": 1,
       "idArticulo": 9,
-      "unidades": 4,
+      "unidades": 1,
+      "id": 1
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 10,
+      "unidades": 1,
+      "id": 2
+    },
+    {
+      "idCarrito": 1,
+      "idArticulo": 11,
+      "unidades": 1,
       "id": 3
     },
     {
-      "idCarrito": 1,
-      "idArticulo": 8,
+      "idCarrito": 2,
+      "idArticulo": 1,
       "unidades": 1,
-      "id": 10
+      "id": 4
     },
     {
-      "idCarrito": 1,
-      "idArticulo": 1,
-      "unidades": 4,
-      "id": 11
+      "idCarrito": 2,
+      "idArticulo": 2,
+      "unidades": 1,
+      "id": 5
+    },
+    {
+      "idCarrito": 2,
+      "idArticulo": 3,
+      "unidades": 1,
+      "id": 6
+    },
+    {
+      "idCarrito": 2,
+      "idArticulo": 3,
+      "unidades": 1,
+      "id": 7
+    }
+  ],
+  "ofertas": [
+    {
+      "id": 1,
+      "nombre": "Lenovo V15 Intel Core i5-1135G7/8GB/256GB SSD/15.6",
+      "descripcion": "Procesador Intel Core i5-1135G7 (4C / 8T, 2.4 / 4.2GHz, 8MB). Memoria RAM 8GB Soldered DDR4-3200. Almacenamiento 256GB SSD M.2 2242 PCIe 3.0x4 NVMe. Unidad óptica No dispone. Display 15.6 FHD (1920x1080) TN 250nits Anti-glare, 45% NTSC. Controlador gráfico Integrada Intel Iris Xe",
+      "precio": 429,
+      "descuento": 10,
+      "categoria": 1,
+      "subcategoria": 1
     },
     {
       "idCarrito": 1,
