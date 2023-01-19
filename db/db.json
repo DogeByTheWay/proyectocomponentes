@@ -6,7 +6,7 @@
     },
     {
       "id": 2,
-      "nombre": "Discos Duros"
+      "nombre": "DiscosDuros"
     },
     {
       "id": 3,
@@ -50,7 +50,7 @@
     },
     {
       "id": 7,
-      "nombre": "Discos duros",
+      "nombre": "Discos Duros",
       "categoria": 3
     },
     {
@@ -132,6 +132,12 @@
       "estado": "pendiente",
       "activo": false,
       "id": 2
+    },
+    {
+      "id": 4,
+      "idUsuario": 1,
+      "estado": "pagado",
+      "activo": false
     }
   ],
   "productos": [

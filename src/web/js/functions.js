@@ -70,11 +70,13 @@ window.onload = () => {
   document.getElementById("cerrarCesta").onclick = () => {
     document.getElementById("cesta").close();
   };
+
   document.getElementById("cestaBtn").onclick = abrirCesta;
   document.getElementById("loginBtn").onclick = abrirLogin;
   document.getElementById("compraBtn").onclick = abrirPago;
   document.getElementById("historyFeat").onclick = () => { cargaHistorial(); abrirHistorial() };
   document.getElementById("volverMenu").onclick = function () {
+  
     cargarContenido();
     getAll("categorias")
       .then((a) => pintarCategorias(a))
@@ -86,6 +88,9 @@ window.onload = () => {
   };
 };
 
+function cerrarHistorial(){
+  document.getElementById("listaCesta").close();
+}
 function alreadyLoggedChecker() {
   getAll("usuarios").then((data) => {
     let user = JSON.parse(data).find((u) => u.log == true);
@@ -138,27 +143,29 @@ function pintarCategorias(a) {
   let texto = "";
   let res = "";
   JSON.parse(a).forEach((cat) => {
-    texto += `<li class="c-nav__item" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a>
-    <ul id="${"s" + cat.id}">
+    texto += `<li class="c-nav__item categoria" id="${"c" + cat.id}"><a class="cursor-pointer">${cat.nombre}</a>
+    <ul id="${"s"+cat.id}">
     ${pintaSubcategorias(cat.id)}
     </ul>
     </li>`;
-    res += `<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
-            <a id="${"c" + cat.id}"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
+    res+=`<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-teal-700 dark:border-teal-300">
+            <a id="${"c" + cat.id}" class="categoria"><img class="rounded-t-lg" src="assets/img/${cat.id}.jpg" alt="" /></a>
             <div class="p-5">
-            <a id="${"c" + cat.id}"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">${cat.nombre}</h5></a>               
+            <a id="${"c" + cat.id}" class="categoria"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">${cat.nombre}</h5></a>               
             </div>
         </div>`;
   });
   c_nav.innerHTML = texto;
-  categoriasTop.innerHTML = res;
-  let items = document.getElementsByClassName("c-nav__item");
+  categoriasTop.innerHTML=res;
+  let items = document.getElementsByClassName("categoria");
   Array.from(items).forEach((item) => {
     item.onclick = () => {
-      console.log("saber item id" + item.id);
-      console.log("saber text content " + item.textContent)
+      console.log("saber item id"+item.id);
+      let categoria=item.textContent.split(" ")[0];
+      alert(categoria);
+      console.log("saber text content "+item.textContent)
 
-      obtenerArticulos(item.id, item.textContent);
+      obtenerArticulos(item.id, categoria);
     };
   });
   document.getElementById("c4").classList.add("c-nav__item--bottom");
@@ -457,18 +464,56 @@ function modificarProducto(producto, articulo) {
     ))
 }
 
+
 function cargaHistorial() {
-  getAll(`carritos/idUsuario/${idUserActive}`).then(a => cargaCarritosUsuario(a));
-}
-function cargaCarritosUsuario(a) {
-  document.getElementById("listaCesta").innerHTML = "";
-  JSON.parse(a).forEach(carrito => {
-    document.getElementById("listaCesta").innerHTML += `
-    <div class="cursor-pointer">${carrito.id}----------------${carrito.idUsuario}----------------${carrito.estado}<button class="c-button c-button--size-stretch" onclick="recuperaCarritoBoton(${carrito.id});">Recuperar carrito</button>
-    <button class="c-button c-button--size-stretch" onclick="eliminaCarrito(${carrito.id});">Eliminar carrito</button></div>
-  `;
-  })
-}
+  getAll("carritos/idUsuario/1").then(a=>cargaCarritosUsuario(a));
+  document.getElementById("listaCesta").innerHTML = `
+   <div>
+     <b class="g--font-size-2xl">Lista de Carritos </b>
+     <p><b class="g--font-size-xl">Pendientes</b></p>
+     <div class="l-vertical">
+      <div class="c-listaCarrito">
+         <table class="c-listaCarrito__body" border=1 id="pendienteHistorial">            
+         </table>
+       </div>
+     </div>
+     <p><b class="g--font-size-xl">Realizados</b></p>
+     <div class="l-vertical">
+         <div class="c-listaCarrito">
+             <table class="c-listaCarrito__body" border=1 id="pagadoHistorial">                     
+             </table>
+         </div>
+       </div>
+       <button onclick="cerrarHistorial()">Volver al Inicio</button>
+     </div>
+   `;
+
+ }
+ function cargaCarritosUsuario(a){
+ 
+ let pendiente=JSON.parse(a).filter(encontrado=>encontrado.estado=="pendiente");
+ let pagado=JSON.parse(a).filter(encontrado=>encontrado.estado=="pagado");
+ 
+   pendiente.forEach(carrito =>{
+     document.getElementById("pendienteHistorial").innerHTML += `
+     <tr class="c-listaCarrito__item">
+     <td>Nº Cesta: ${carrito.id}</td>
+     <td><button class="c-button c-button--size-stretch" onclick="recuperaDatosCarrito(${carrito.id})">Recuperar carrito</button></td>
+     <td><button class="c-button c-button--size-stretch" onclick="eliminaCarrito(${carrito.id});">Eliminar carrito</button></td>
+     </tr> 
+   `;
+   });
+ 
+ 
+ pagado.forEach(carrito =>{
+   document.getElementById("pagadoHistorial").innerHTML+=`
+   <tr class="c-listaCarrito__item">
+   <td>Nº Cesta: ${carrito.id}</td>
+   <td><button class="c-button c-button--size-stretch" onclick="recuperaDatosCarrito(${carrito.id})">Volver a comprar</button></td>
+ </tr>    `;
+ });
+ 
+ }
 function recuperaDatosCarrito(id) {
   getAll(`productos/idCarrito/${id}`).then(a => {
     document.getElementById("resumenProductos").innerHTML = "";
