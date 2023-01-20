@@ -121,86 +121,9 @@
     }
   ],
   "carritos": [
-    {
-      "idUsuario": 1,
-      "estado": "pagado",
-      "activo": false,
-      "id": 1
-    },
-    {
-      "idUsuario": 1,
-      "estado": "pagado",
-      "activo": false,
-      "id": 2
-    },
-    {
-      "idUsuario": 1,
-      "estado": "pendiente",
-      "activo": false,
-      "id": 3
-    },
-    {
-      "idUsuario": 1,
-      "estado": "pendiente",
-      "activo": false,
-      "id": 4
-    },
-    {
-      "idUsuario": 1,
-      "estado": "pendiente",
-      "activo": true,
-      "id": 5
-    },
-    {
-      "idUsuario": 3,
-      "estado": "pendiente",
-      "activo": true,
-      "id": 6
-    }
   ],
   "productos": [
-    {
-      "idCarrito": 1,
-      "idArticulo": 9,
-      "unidades": 1,
-      "id": 1
-    },
-    {
-      "idCarrito": 1,
-      "idArticulo": 10,
-      "unidades": 1,
-      "id": 2
-    },
-    {
-      "idCarrito": 1,
-      "idArticulo": 11,
-      "unidades": 1,
-      "id": 3
-    },
-    {
-      "idCarrito": 2,
-      "idArticulo": 1,
-      "unidades": 1,
-      "id": 4
-    },
-    {
-      "idCarrito": 2,
-      "idArticulo": 2,
-      "unidades": 1,
-      "id": 5
-    },
-    {
-      "idCarrito": 2,
-      "idArticulo": 3,
-      "unidades": 1,
-      "id": 6
-    },
-    {
-      "idCarrito": 2,
-      "idArticulo": 3,
-      "unidades": 1,
-      "id": 7
-    }
+   
   ],
   "ofertas": [
     {

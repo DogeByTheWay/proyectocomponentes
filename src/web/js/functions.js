@@ -558,7 +558,7 @@ function cargaCarritosUsuario(a) {
           document.getElementById("pendienteHistorial").innerHTML += `
      <tr class="c-listaCarrito__item">
      <td>Nº Cesta: ${carrito.id}</td>
-     <td><button class="c-button c-button--size-stretch" onclick="recuperaDatosCarrito(${carrito.id})">Recuperar carrito</button></td>
+     <td><button class="c-button c-button--size-stretch" onclick="recuperaCarritoBoton(${carrito.id})">Recuperar carrito</button></td>
      <td><button class="c-button c-button--size-stretch" onclick="eliminaCarrito(${carrito.id});">Eliminar carrito</button></td>
      </tr> 
    `;
@@ -593,7 +593,6 @@ function recompra(id) {
       }
 
 function recuperaCarritoBoton(id) {
-        console.log(carritoActivoId)
         patch(`carritos`, id, { activo: true })
           .then(patch(`carritos`, carritoActivoId, { activo: false })
             .then(getAll(`productos/idCarrito/${id}`).then(a => {
