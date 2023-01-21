@@ -17,8 +17,7 @@ class MysqlPDO implements IPDOConnection {
                 $sql = $_ENV['TIPODB'];
                 $url = $_ENV['URL'];
 
-                $pdo = new PDO("$sql:host=$url;dbname=$db", $user, $password);    
-                //$pdo = new PDO("mysql:host=localhost;dbname=movies", 'root', 'root');
+                $pdo = new PDO("$sql:host=$url;dbname=$db", $user, $password);    ;
                 $pdo->exec("set names utf8");
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {

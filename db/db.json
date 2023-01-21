@@ -98,32 +98,55 @@
     {
       "id": 1,
       "nombre": "mario@gmail.com",
-      "password": "root",
-      "log": false
+      "password": "root"
     },
     {
       "id": 2,
       "nombre": "wendy@gmail.com",
-      "password": "root",
-      "log": false
+      "password": "root"
     },
     {
       "id": 3,
       "nombre": "esteban@gmail.com",
-      "password": "root",
-      "log": true
+      "password": "root"
     },
     {
       "id": 4,
       "nombre": "pablo@gmail.com",
-      "password": "root",
-      "log": false
+      "password": "root"
+    }
+  ],
+  "token": [
+    {
+      "idUsuario": 1,
+      "token": "asdf",
+      "expiraEn": 121212122
+    }
+  ],
+  "tokenRefresco": [
+    {
+      "id": 1,
+      "idUsuario": 1,
+      "token": "asdfñlkjñlkjñlkjñlkjñlkj",
+      "expiraEn": 121212122,
+      "activo": true
     }
   ],
   "carritos": [
+    {
+      "id": 1,
+      "idUsuario":1,
+      "estado": "pagado",
+      "activo":true
+    }
   ],
   "productos": [
-   
+    {
+      "id":1,
+      "idCarrito" :1,
+      "idArticulo":2,
+      "unidades":2
+    }
   ],
   "ofertas": [
     {
