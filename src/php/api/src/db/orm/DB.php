@@ -47,8 +47,7 @@ class DB {
     public static function update(string $sql, array $params): int {
         return self::executeNoResult($sql, $params);
     }
-    
-         
+             
     private static function executeNoResult(string $sql, array $params):int {
         $pdo = DBFactory::getConnection()::connect();
         try {

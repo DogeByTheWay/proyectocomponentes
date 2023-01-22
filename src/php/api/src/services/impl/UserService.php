@@ -8,11 +8,11 @@ use App\services\IUserService;
 
 class UserService implements IUserService {
 
-    public static function findByUsuario(UserDTO $user): bool {
-        return UserFactory::getDAO()::findByUsuario($user);
+    public static function findByNombre(UserDTO $user): UserDTO {
+        return UserFactory::getDAO()::findByNombre($user);
     }
 
-    public static function findById(int $id): bool {
+    public static function findById(int $id): \stdClass {
       return UserFactory::getDAO()::findById($id);
     }
 

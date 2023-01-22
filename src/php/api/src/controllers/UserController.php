@@ -20,28 +20,26 @@ class UserController {
     }
     
     public function sanitizarDatos($data) {
-        $data->usuario = strip_tags($data->usuario);
+        $data->nombre = strip_tags($data->nombre);
         $data->password = strip_tags($data->password);
         return $data;
     }
 
     public function passwordHash($datosSanitizados) {
         $datosSanitizados->password = password_hash($datosSanitizados->password, PASSWORD_DEFAULT, ['cost' => 10]);
+       
         return $datosSanitizados;
     }   
 
-    public function crearDTO(bool $registro) {
+    public function crearDTO() {
         $data = $this->getData();
         try {
-            if(!isset($data->usuario) || !isset($data->password)) {
+            if(!isset($data->nombre) || !isset($data->password)) {
                 throw new \Throwable();
             }
             $datosSanitizados = $this->sanitizarDatos($data);
-            if($registro) {
-                $datosSanitizados = $this->passwordHash($datosSanitizados);   
-            }                 
-            if(filter_var($datosSanitizados->usuario, FILTER_VALIDATE_EMAIL)) {
-                $user =  new UserDTO(null, $datosSanitizados->usuario, $datosSanitizados->password);                
+            if(filter_var($datosSanitizados->nombre, FILTER_VALIDATE_EMAIL)) {
+                $user =  new UserDTO(null, $datosSanitizados->nombre, $datosSanitizados->password);                
                 return $user;
             } else {
                 HTTPResponse::json(400, "Email no es valido.");  
@@ -52,10 +50,12 @@ class UserController {
     }
 
     public function login() {
-        $user = $this->crearDTO($registro = false);
+        $user = $this->crearDTO();
         if(!is_null($user)) {
             try {
-                if(UserFactory::getService()::findByUsuario($user)) {
+                $db_data = UserFactory::getService()::findByNombre($user);
+                if(password_verify($user->password(), $db_data->password())) {
+                    $this.insertToken($db_data);
                     HTTPResponse::json(201, "Sesion iniciada");
                 } else {
                     HTTPResponse::json(400, "Contrasenya incorrecta");
@@ -65,6 +65,11 @@ class UserController {
                 HTTPResponse::json($e->getCode(), "El email no esta registrado");
             }
         }
+    }
+
+    public function insertToken($user) {
+        $token = new TokenController();
+        $token->update($user);
     }
 
     public function logout($id) {
