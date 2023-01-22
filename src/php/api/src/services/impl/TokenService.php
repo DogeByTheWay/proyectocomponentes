@@ -1,10 +1,12 @@
 <?php
 
-namespace App\impl\services;
+namespace App\services\impl;
 
 use App\DTO\TokenDTO;
+use App\factories\TokenFactory;
+use App\services\ITokenService;
 
-class TokenService {
+class TokenService implements ITokenService{
     public static function findByToken(string $token): TokenDTO {
         return true;
     }

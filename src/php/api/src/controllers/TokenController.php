@@ -3,9 +3,10 @@ namespace App\controllers;
 
 use App\DTO\UserDTO;
 use App\DTO\TokenDTO;
-use App\factories\TokenFactory;
 use App\response\HTTPResponse;
+use App\factories\TokenFactory;
 use App\services\ITokenService;
+use App\controllers\TokenRefrescoController;
 
 class TokenController {
 

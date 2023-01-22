@@ -1,10 +1,12 @@
 <?php
 
-namespace App\impl\DAO;
+namespace App\DAO\impl;
 
+use App\db\orm\DB;
 use App\DTO\TokenDTO;
+use App\DAO\ITokenDAO;
 
-class TokenDAO {
+class TokenDAO implements ITokenDAO{
     public static function findByToken(string $token): TokenDTO {
         return true;
     }

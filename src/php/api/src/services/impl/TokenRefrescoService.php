@@ -1,19 +1,21 @@
 <?php
 
-namespace App\impl\services;
+namespace App\services\impl;
 
 use App\DTO\TokenRefrescoDTO;
 use App\factories\TokenFactory;
+use App\factories\TokenRefrescoFactory;
+use App\services\ITokenRefrescoService;
 
 
-class TokenRefrescoService {
+class TokenRefrescoService implements ITokenRefrescoService{
     public static function findByToken(string $token): TokenRefrescoDTO {
         return true;
     }
     public static function read(int $idUsuario): array  {
-        return TokenFactory::getDAO()::read($idUsuario);
+        return TokenRefrescoFactory::getDAO()::read($idUsuario);
     }
     public static function insert(TokenRefrescoDTO $token):int  {
-        return TokenFactory::getDAO()::insert($token);
+        return TokenRefrescoFactory::getDAO()::insert($token);
     }
 }

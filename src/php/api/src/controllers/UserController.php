@@ -55,7 +55,7 @@ class UserController {
             try {
                 $db_data = UserFactory::getService()::findByNombre($user);
                 if(password_verify($user->password(), $db_data->password())) {
-                    $this.insertToken($db_data);
+                    $this->insertToken($db_data);
                     HTTPResponse::json(201, "Sesion iniciada");
                 } else {
                     HTTPResponse::json(400, "Contrasenya incorrecta");
