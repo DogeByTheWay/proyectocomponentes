@@ -1,4 +1,4 @@
 /node_modules
 /src/web/css/main.css.map
-/src/php/api/vendor/**
-/src/php/api/.env
+/src/php/api/proyecto/vendor/**
+/src/php/api/proyecto/.env
