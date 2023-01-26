@@ -45,7 +45,7 @@ function del(clave,valor) {
 function getAll(clave) {
   return new Promise(function (resolve, reject) {
     let req = new XMLHttpRequest();
-    req.open("GET", `http://localhost:3000/${clave}`);
+    req.open("GET", `http://localhost:3000/${clave}`);//aqui se modificaria la url que vosotros accedais
     req.setRequestHeader("Content-type", "application/json;charset=utf-8");
     req.send();
     req.onload = function () {

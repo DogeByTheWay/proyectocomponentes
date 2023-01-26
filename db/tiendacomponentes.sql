@@ -127,21 +127,21 @@ INSERT INTO `carritos` (`id`, `idUsuario`, `estado`, `activo`) VALUES
 -- Estructura de tabla para la tabla `categorias`
 --
 
-CREATE TABLE `categorias` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+create table `Categorias`(
+`id` int auto_increment,
+`nombre` varchar(40),
+ primary key (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `categorias` (`id`, `nombre`) VALUES
-(1, 'Ordenadores'),
-(2, 'DiscosDuros'),
-(3, 'Componentes'),
-(4, 'Audio,Video');
-
+INSERT INTO `Categorias`(`id`,`nombre`) VALUES 
+(null,'Ordenadores'),
+(null,'DiscosDuros'),
+(null,'Componentes'),
+(null,'Audio,Video');
 -- --------------------------------------------------------
 
 --
@@ -169,31 +169,31 @@ INSERT INTO `productos` (`id`, `idCarrito`, `idArticulo`, `unidades`) VALUES
 --
 
 CREATE TABLE `subcategorias` (
-  `id` int(11) NOT NULL,
+  `id` int(11) auto_increment,
   `nombre` varchar(18) NOT NULL,
-  `categoria` int(11) NOT NULL
+  `categoria` int(11) NOT NULL,
+  primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `subcategorias`
 --
-
 INSERT INTO `subcategorias` (`id`, `nombre`, `categoria`) VALUES
-(1, 'Portatiles', 1),
-(2, 'PC', 1),
-(3, 'Memorias USB', 2),
-(4, 'Disco duro externo', 2),
-(5, 'Placas base', 3),
-(6, 'Procesador', 3),
-(7, 'Discos Duros', 3),
-(8, 'Tarjetas gráficas', 3),
-(9, 'RAM', 3),
-(10, 'Monitores', 4),
-(11, 'Proyectores', 4),
-(12, 'TV', 4),
-(13, 'Impresoras', 4),
-(14, 'Micrófonos', 4),
-(15, 'Altavoces', 4);
+(NULL, 'Portatiles', 1),
+(NULL, 'PC', 1),
+(NULL, 'Memorias USB', 2),
+(NULL, 'Disco duro externo', 2),
+(NULL, 'Placas base', 3),
+(NULL, 'Procesador', 3),
+(NULL, 'Discos Duros', 3),
+(NULL, 'Tarjetas gráficas', 3),
+(NULL, 'RAM', 3),
+(NULL, 'Monitores', 4),
+(NULL, 'Proyectores', 4),
+(NULL, 'TV', 4),
+(NULL, 'Impresoras', 4),
+(NULL, 'Micrófonos', 4),
+(NULL, 'Altavoces', 4);
 
 -- --------------------------------------------------------
 
@@ -276,8 +276,6 @@ ALTER TABLE `carritos`
 --
 -- Indices de la tabla `categorias`
 --
-ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `productos`
@@ -288,8 +286,7 @@ ALTER TABLE `productos`
 --
 -- Indices de la tabla `subcategorias`
 --
-ALTER TABLE `subcategorias`
-  ADD PRIMARY KEY (`id`);
+
 
 --
 -- Indices de la tabla `token`
