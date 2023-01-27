@@ -10,6 +10,8 @@ $router->get('/categorias', 'controllers\CategoriasController@all');
 $router->get('/categorias/(\d+)', 'controllers\CategoriasController@find');
 $router->get('/subcategorias', 'controllers\SubcategoriasController@all');
 $router->get('/subcategorias/(\d+)', 'controllers\SubcategoriasController@find');
+$router->get('/articulos', 'controllers\ArticulosController@all');
+$router->get('/articulos/(\d+)', 'controllers\ArticulosController@find');
 $router->get('/', function() { echo "Bienvenid@ a Tech'n'Save"; });
 $router->get('/usuarios', 'controllers\UserController@all');
 $router->get('/usuarios/(\d+)', 'controllers\UserController@find');

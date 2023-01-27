@@ -4,8 +4,6 @@ namespace App\services\impl;
 use App\services\ICategoriasService;
 use App\DTO\CategoriaDTO;
 use App\DAO\ICategoriasDAO;
-use App\DAO\impl\CategoriasStaticDAO;
-use App\DAO\impl\CategoriasJsonDAO;
 use App\factories\CategoriasFactory;
 use Exception;
  
