@@ -1,5 +1,20 @@
-var idUserActive = 0;
+var idUserActive = 0;  //IMPORTANTE
 var carritoActivoId = 0;
+
+function setLocalStorage(respuesta) {
+  localStorage.setItem("idUsuario", respuesta.idUsuario);
+  localStorage.setItem("token", respuesta.token);
+  localStorage.setItem("tokenRefresco", respuesta.tokenRefresco);
+  console.log(localStorage)
+}
+
+function getLocalStorage() {
+  let idUsuario = localStorage.getItem("idUsuario");
+  let token =localStorage.getItem("token");
+  let tokenRefresco =localStorage.getItem("tokenRefresco");
+  return { "idUsuario": idUsuario, "token": token, "tokenRefresco": tokenRefresco}
+}
+
 function abrirCesta() {
   let cesta = document.getElementById("cesta");
   cesta.open ? cesta.close() : cesta.showModal(), cargaPrecioCantidad();
@@ -42,7 +57,7 @@ function desactivaFormulario() {
 }
 
 window.onload = () => {
-  alreadyLoggedChecker();
+  alreadyLoggedChecker(); //IMPORTANTE
   cargacesta();
   cargaLogin();
   cargarContenido();
@@ -93,7 +108,7 @@ function tieneArticulos() {
   } else {
     alert("No hay articulos en el carrito.")
   }
-}
+} /*IMPORTANTE*/
 function actualizaCarroPagado() {
   getOne("carritos/activo/usuario/true", idUserActive).then(a => { patch("carritos", a[0].id, { estado: "pagado", activo: false }); location.reload(true) })
 }
@@ -101,7 +116,7 @@ function actualizaCarroPagado() {
 function cerrarHistorial() {
   document.getElementById("listaCesta").close();
 }
-
+//IMPORTANTE
 function alreadyLoggedChecker() {
   getAll("usuarios").then((data) => {
     let user = JSON.parse(data).find((u) => u.log == true);
@@ -136,7 +151,7 @@ function cargaPrecioCantidad() {
   document.getElementById("tarifa").innerHTML = iva + "€";
   document.getElementById("total").innerHTML = total + iva + "€";
 }
-
+//IMPORTANTE
 function recogeDatosLogin() {
   let user = document.getElementById("emailUser").value;
   let passwd = document.getElementById("passwdUser").value;
@@ -144,8 +159,13 @@ function recogeDatosLogin() {
     .then((usuarios) => compruebaDatosLogin(user, passwd, JSON.parse(usuarios)))
     .catch((error) => console.log(error));
 }
-
+//IMPORTANTE
 function compruebaDatosLogin(user, passwd, usuarios) {
+  /*nuevo
+  let body = {'id': user, 'password': passwd};
+  post("login", body).then(res => setLocalStorage(res)).catch(e => alert(e));
+*/
+
   let usuario = usuarios.find((u) => u.nombre == user && u.password == passwd);
   if (usuario != null) {
     patch("usuarios", `${usuario.id}`, { 'log': true }).then(location.reload(true));
@@ -605,7 +625,7 @@ function recuperaCarritoBoton(id) {
 function pintaCarritoActivo(a) {
         JSON.parse(a).forEach(articulo => { buscarArticuloEnProductos(articulo.idCarrito, articulo.idArticulo) });
       }
-
+  //IMPORTANTE
 function cargaLogout() {
         getOne("usuarios", idUserActive).then(usuario =>
           document.getElementById("logout").innerHTML = `<div>
@@ -664,7 +684,7 @@ function cargaLogin() {
     </div>
   </div>`;
       }
-
+//IMPORTANTE
 function cierraSesion() {
         patch("usuarios", idUserActive, { log: false }).then(location.reload())
       }

@@ -12,7 +12,9 @@ class TokenRefrescoDTO implements JsonSerializable{
         $this->activo = $activo;
         
 	}
-
+	public function id(): int {
+		return $this->id;
+	}
 	
 	public function idUsuario(): int {
 		return $this->idUsuario;

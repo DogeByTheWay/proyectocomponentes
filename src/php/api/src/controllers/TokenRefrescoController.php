@@ -24,30 +24,43 @@ class TokenRefrescoController {
         $token = password_hash($date, PASSWORD_DEFAULT, ['cost' => 5]);
         $data = new TokenRefrescoDTO(null,$idUsuario, $token, $date, true);
         try {
-            $$this->read($idUsuario);
+            $this->read($idUsuario);
             $tokenRefresco = TokenRefrescoFactory::getService()::insert($data);
             if($tokenRefresco > 0) {
                 
                 return $token;
             }
         } catch (\Throwable $e) {
-            HTTPResponse::json(400, $e->getMessage());
+            HTTPResponse::json(400, $e->getMessage() . " fallo insertar");
         }
     }
     
     public function read($idUsuario){
-        try {
-            $tokensAntiguos = TokenRefrescoFactory::getService()::read($idUsuario);    
-            foreach ($tokensAntiguos as $tokenRefresco) {                
-                if($tokenRefresco['activo'] == true) {
-                    array_replace($tokenRefresco, array('activo' => false));
-                }
-            }       
-
+       try {
+            $tokenAntiguo = TokenRefrescoFactory::getService()::read($idUsuario); 
+            $registros = count($tokenAntiguo);
+            $ultimo = $registros - 1;
+            if($registros > 0) {        
+                $token = new TokenRefrescoDTO($tokenAntiguo[$ultimo]->id, $tokenAntiguo[$ultimo]->idUsuario,
+                    $tokenAntiguo[$ultimo]->token, $tokenAntiguo[$ultimo]->expiraEn, 0);
+                TokenRefrescoFactory::getService()::update($token);                      
+            }
         } catch (\Throwable $th) {
-            HTTPResponse::json(404, $th->getMessage());
-        }
+            HTTPResponse::json(400, $th->getMessage() . " fallo al leer registros tokenRefresco");
+        }   
     }
-    
+ 
+    public function update(TokenRefrescoDTO $token) {
+        try {
+            if(TokenFactory::getService()::update($token) > 0) {
+
+            }
+
+        } catch (\Throwable $e) {
+            HTTPResponse::json(400, $e->getMessage() . " Fallo al actualizar tokenRefresco");
+        }
+        $result = new LocalStorageDTO($user->id(), $token, $tokenRefresco);            
+        return $result;
+    }
 
 }

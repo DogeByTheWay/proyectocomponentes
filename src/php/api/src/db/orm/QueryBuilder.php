@@ -46,6 +46,10 @@ class QueryBuilder {
         $this->where('id', '=', $id);
         return $this->getOne();
     }
+    public function findByIdUsuario(int $id) {
+        $this->where('idUsuario', '=', $id);
+        return $this->getOne();
+    }
 
     public function findByNombre(string $nombre) {
         $this->where('nombre', '=', $nombre);

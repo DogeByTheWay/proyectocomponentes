@@ -18,4 +18,8 @@ class TokenRefrescoService implements ITokenRefrescoService{
     public static function insert(TokenRefrescoDTO $token):int  {
         return TokenRefrescoFactory::getDAO()::insert($token);
     }
+    
+    public static function update(TokenRefrescoDTO $token): int {
+        return TokenRefrescoFactory::getDAO()::update($token);
+    }
 }

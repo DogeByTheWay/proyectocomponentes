@@ -3,18 +3,41 @@ namespace App\controllers;
 
 use App\DTO\UserDTO;
 use App\DTO\TokenDTO;
+use App\DTO\LocalStorageDTO;
 use App\response\HTTPResponse;
 use App\factories\TokenFactory;
 use App\services\ITokenService;
 use App\controllers\TokenRefrescoController;
 
 class TokenController {
+  
+    function insert(UserDTO $user) {
+        date_default_timezone_set('Europe/Madrid'); 
+        $date = strtotime("now + 10 seconds");
+        $str = $date;
+        $token = password_hash($str, PASSWORD_DEFAULT, ['cost' => 5]);
+        $data = new TokenDTO($user->id(), $token, $date);
+        try {
+            $count = TokenFactory::getService()::insert($data);
+        } catch (\Throwable $e) {
+            HTTPResponse::json(400, $e->getMessage() . " Fallo al insertar token");
+        }
+        try {
+            if( $count > 0) {
+                $tokenRefresco = $this->insertTokenRefresco($user->id());
+            };
 
-    private ITokenService $service;
-
-	function __construct() {
-        $this->service = TokenFactory::getService();
-	}
+        } catch (\Throwable $e) {
+            HTTPResponse::json(400, $e->getMessage() . " Fallo al insertar tokenRefresco");
+        }
+        $result = new LocalStorageDTO($user->id(), $token, $tokenRefresco);            
+        return $result;
+    }
+     
+    
+    public function findById(int $idUsuario): int {
+        return TokenFactory::getService()::findById($idUsuario); 
+        }
 
     
     public function update(UserDTO $user) {
@@ -24,16 +47,15 @@ class TokenController {
         $token = password_hash($str, PASSWORD_DEFAULT, ['cost' => 5]);
         $data = new TokenDTO($user->id(), $token, $date);
         try {
-            if(TokenFactory::getService()::insert($data) > 0) {
+            if(TokenFactory::getService()::update($data) > 0) {
                 $tokenRefresco = $this->insertTokenRefresco($user->id());
             };
 
         } catch (\Throwable $e) {
-            HTTPResponse::json(400, $e->getMessage());
+            HTTPResponse::json(400, $e->getMessage() . " Fallo al actualizar tokenRefresco");
         }
-     
-        $data = ["Token" => $token, 'TokenRefresco' => $tokenRefresco];
-        return $data;
+        $result = new LocalStorageDTO($user->id(), $token, $tokenRefresco);            
+        return $result;
     }
 
     public function insertTokenRefresco($idUsuario) {

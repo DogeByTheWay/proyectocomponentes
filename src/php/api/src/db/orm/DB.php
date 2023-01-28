@@ -55,7 +55,7 @@ class DB {
             $count = $ps->execute($params); 
             return $count;    
         } catch (\Throwable $th){
-            throw new \Exception("Error al insertar el recurso", 400);
+            throw new \Exception($th->getMessage() . "Error al insertar el recurso", 400);
         }
     }    
 }

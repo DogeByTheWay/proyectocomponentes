@@ -55,21 +55,26 @@ class UserController {
             try {
                 $db_data = UserFactory::getService()::findByNombre($user);
                 if(password_verify($user->password(), $db_data->password())) {
-                    $this->insertToken($db_data);
-                    HTTPResponse::json(201, "Sesion iniciada");
+                    $response = $this->insertToken($db_data);
+                    HTTPResponse::json(201, $response);
                 } else {
                     HTTPResponse::json(400, "Contrasenya incorrecta");
                 }
                 
             }catch(\Exception $e) {
-                HTTPResponse::json($e->getCode(), "El email no esta registrado");
+                HTTPResponse::json($e->getCode(), $e->getMessage() . "El email no esta registrado");
             }
         }
     }
 
     public function insertToken($user) {
         $token = new TokenController();
-        $token->update($user);
+        if($token->findById($user->id())) {
+            return $token->update($user);
+        } else {
+            return $token->insert($user);
+        }
+        
     }
 
     public function logout($id) {
