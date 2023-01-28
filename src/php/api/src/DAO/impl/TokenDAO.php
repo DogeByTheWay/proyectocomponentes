@@ -8,7 +8,13 @@ use App\DAO\ITokenDAO;
 
 class TokenDAO implements ITokenDAO{
     public static function findByToken(string $token): TokenDTO {
-        return true;
+        $db_data =  DB::table('token')->findByToken($token);
+        $result = new TokenDTO(
+            $db_data->idUsuario, 
+            $db_data->token, 
+            $db_data->expiraEn
+        );            
+        return $result; 
     }
     public static function findByIdUsuario(int $idUsuario): int  {
         try {

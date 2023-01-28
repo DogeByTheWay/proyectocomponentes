@@ -6,7 +6,7 @@ $router->setNamespace('\App');
 $router->post('/registro','controllers\UserController@registro');
 $router->post('/login', 'controllers\UserController@login');
 $router->get('/logout/(\d+)', 'controllers\UserController@logout');
-$router->get('/token/(.*)', 'controllers\TokenController@isExpired');
+$router->get('/token', 'controllers\TokenController@isExpired');
 
 $router->get('/', function() { echo "Bienvenid@ a Tech'n'Save"; });
 $router->get('/usuarios', 'controllers\UserController@all');

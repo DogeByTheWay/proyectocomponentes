@@ -10,10 +10,25 @@ use App\services\ITokenService;
 use App\controllers\TokenRefrescoController;
 
 class TokenController {
+
+    function isExpired() {
+        try {
+            $token = ltrim(getallheaders()['Authorization'], 'Bearer ');
+            $DTO = TokenFactory::getService()::findByToken($token); 
+            $now = strtotime('now');
+            if ($now < $DTO->expiraEn()) {
+                HTTPResponse::json(200,"Token todavia valido.");
+            } else {            
+                HTTPResponse::json(400,"Token expirado.");
+            }
+        } catch( \Throwable $e) {
+            HttpResponse::json(400, $e->getMessage() . "Token invalido");
+        }
+    }
   
     function insert(UserDTO $user) {
         date_default_timezone_set('Europe/Madrid'); 
-        $date = strtotime("now + 10 seconds");
+        $date = strtotime("now + 1000 seconds");
         $str = $date;
         $token = password_hash($str, PASSWORD_DEFAULT, ['cost' => 5]);
         $data = new TokenDTO($user->id(), $token, $date);
@@ -42,7 +57,7 @@ class TokenController {
     
     public function update(UserDTO $user) {
         date_default_timezone_set('Europe/Madrid'); 
-        $date = strtotime("now + 10 seconds");
+        $date = strtotime("now + 1000 seconds");
         $str = $date;
         $token = password_hash($str, PASSWORD_DEFAULT, ['cost' => 5]);
         $data = new TokenDTO($user->id(), $token, $date);

@@ -46,6 +46,12 @@ class QueryBuilder {
         $this->where('id', '=', $id);
         return $this->getOne();
     }
+    
+    public function findByToken(string $token) {
+        $this->where('token', '=', $token);
+        return $this->getOne();
+    }
+
     public function findByIdUsuario(int $id) {
         $this->where('idUsuario', '=', $id);
         return $this->getOne();
