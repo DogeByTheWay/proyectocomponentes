@@ -47,8 +47,7 @@ class DB {
     public static function update(string $sql, array $params): int {
         return self::executeNoResult($sql, $params);
     }
-    
-         
+             
     private static function executeNoResult(string $sql, array $params):int {
         $pdo = DBFactory::getConnection()::connect();
         try {
@@ -56,7 +55,7 @@ class DB {
             $count = $ps->execute($params); 
             return $count;    
         } catch (\Throwable $th){
-            throw new \Exception("Error al insertar el recurso", 400);
+            throw new \Exception($th->getMessage() . "Error al insertar el recurso", 400);
         }
     }    
 }

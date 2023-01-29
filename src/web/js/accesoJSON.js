@@ -7,7 +7,7 @@ function post(clave, body) {
     req.onload = function () {
       if (req.status == 200 || req.status == 201) {
         resolve(req.response);
-      } else reject("Error:" + req.statusText);
+      } else reject("Error:" + req.responseText);
     };
   });
 }
@@ -45,7 +45,7 @@ function del(clave,valor) {
 function getAll(clave) {
   return new Promise(function (resolve, reject) {
     let req = new XMLHttpRequest();
-    req.open("GET", `http://localhost:81/PROYECTO_GRUPAL/api/${clave}`);//aqui se modificaria la url que vosotros accedais
+    req.open("GET", `http://localhost:3000/${clave}`);//aqui se modificaria la url que vosotros accedais
     req.setRequestHeader("Content-type", "application/json;charset=utf-8");
     req.send();
     req.onload = function () {
@@ -59,7 +59,7 @@ function getAll(clave) {
 function getOne(clave,valor) {
   return new Promise(function (resolve, reject) {
     let req = new XMLHttpRequest();
-    req.open("GET", `http://localhost:81/PROYECTO_GRUPAL/api/${clave}/${valor}`);
+    req.open("GET", `http://localhost:3000/${clave}/${valor}`);
     req.responseType = "json";
     req.send();
     req.onload = function () {
@@ -69,6 +69,22 @@ function getOne(clave,valor) {
     };
   });
 }
+
+function validateToken(clave,valor) {
+  return new Promise(function (resolve, reject) {
+    let req = new XMLHttpRequest();
+    req.open("GET", `http://localhost:3000/${clave}`);
+    req.responseType = "json";
+    req.setRequestHeader("Authorization", "Bearer " + valor);
+    req.send();
+    req.onload = function () {
+      if (req.status == 200 || req.status == 201) {
+        resolve(req.response);
+      } else reject("Error:" + req.statusText);
+    };
+  });
+}
+
 function getOneRow(clave,valor,valor2) {
   return new Promise(function (resolve, reject) {
     let req = new XMLHttpRequest();

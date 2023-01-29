@@ -1,18 +1,16 @@
-var idUserActive = 0;  //IMPORTANTE
+var userActive = 0;  //IMPORTANTE
 var carritoActivoId = 0;
 
 function setLocalStorage(respuesta) {
-  localStorage.setItem("idUsuario", respuesta.idUsuario);
-  localStorage.setItem("token", respuesta.token);
-  localStorage.setItem("tokenRefresco", respuesta.tokenRefresco);
-  console.log(localStorage)
+  let storage=JSON.parse(respuesta)
+  localStorage.setItem("idUsuario", storage.idUsuario);
+  localStorage.setItem("token", storage.token);
+  localStorage.setItem("tokenRefresco", storage.tokenRefresco);
 }
 
-function getLocalStorage() {
-  let idUsuario = localStorage.getItem("idUsuario");
-  let token =localStorage.getItem("token");
-  let tokenRefresco =localStorage.getItem("tokenRefresco");
-  return { "idUsuario": idUsuario, "token": token, "tokenRefresco": tokenRefresco}
+function getDato(dato) {
+  let item=localStorage.getItem(dato);
+  return item;
 }
 
 function abrirCesta() {
@@ -110,7 +108,7 @@ function tieneArticulos() {
   }
 } /*IMPORTANTE*/
 function actualizaCarroPagado() {
-  getOne("carritos/activo/usuario/true", idUserActive).then(a => { patch("carritos", a[0].id, { estado: "pagado", activo: false }); location.reload(true) })
+  getOne("carritos/activo/usuario/true", userActive).then(a => { patch("carritos", a[0].id, { estado: "pagado", activo: false }); location.reload(true) })
 }
 
 function cerrarHistorial() {
@@ -118,21 +116,27 @@ function cerrarHistorial() {
 }
 //IMPORTANTE
 function alreadyLoggedChecker() {
-  getAll("usuarios").then((data) => {
-    let user = JSON.parse(data).find((u) => u.log == true);
-    user != null
-      ? pintaDatosUsuario(user)
-      : console.log("Nadie logeado");
-  });
+  let usuario=getDato("idUsuario");
+  let token=getDato("token");
+  let tokenRefresco=getDato("tokenRefresco");
+  if(usuario !=undefined){
+    validateToken("token",token)
+    .then(pintaDatosUsuario())
+    .catch(validateToken("tokenrefresco",tokenRefresco)
+    .then(pintaDatosUsuario())
+    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()}))
+  }
 }
 
-function pintaDatosUsuario(user) {
-  idUserActive = user.id;
-  cargaLogout();
-  document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${user.nombre}`;
-  document.getElementById("historyFeat").style.display = "block";
-  document.getElementById("loginBtn").onclick = abrirLogout;
-  cargaCarritoActivo(user.nombre);
+function pintaDatosUsuario() {
+  getOne("user",getDato("idUsuario")).then(usuario =>{userActive=usuario;
+    cargaLogout();
+    document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${usuario.nombre}`;
+    document.getElementById("historyFeat").style.display = "block";
+    document.getElementById("loginBtn").onclick = abrirLogout;
+    cargaCarritoActivo(usuario.nombre);
+  })
+  
 }
 
 function cargaPrecioCantidad() {
@@ -155,24 +159,8 @@ function cargaPrecioCantidad() {
 function recogeDatosLogin() {
   let user = document.getElementById("emailUser").value;
   let passwd = document.getElementById("passwdUser").value;
-  getAll("usuarios")
-    .then((usuarios) => compruebaDatosLogin(user, passwd, JSON.parse(usuarios)))
-    .catch((error) => console.log(error));
-}
-//IMPORTANTE
-function compruebaDatosLogin(user, passwd, usuarios) {
-  /*nuevo
-  let body = {'id': user, 'password': passwd};
-  post("login", body).then(res => setLocalStorage(res)).catch(e => alert(e));
-*/
-
-  let usuario = usuarios.find((u) => u.nombre == user && u.password == passwd);
-  if (usuario != null) {
-    patch("usuarios", `${usuario.id}`, { 'log': true }).then(location.reload(true));
-
-  } else {
-    alert("Error de credenciales");
-  }
+  let body = {'nombre': user, 'password': passwd};
+  post("login", body).then(res => {setLocalStorage(res);location.reload()}).catch(e => alert(e));
 }
 
 function pintarCategorias(a) {
@@ -442,7 +430,7 @@ function crearCarrito(id) {
     activo: true,
   };
   post("carritos", carro).then(
-    getOne("carritos/activo/usuario/true", idUserActive).then(a => carritoActivoId = a[0].id))
+    getOne("carritos/activo/usuario/true", userActive).then(a => carritoActivoId = a[0].id))
 }
 
 function buscarArticuloEnProductos(idCarrito, idArticulo) {
@@ -550,7 +538,7 @@ function eliminaCarrito(id) {
     .then(del("carritos", id).then(cargaHistorial())) 
     }
 function cargaHistorial() {
-        getAll(`carritos/idUsuario/${idUserActive}`).then(a => cargaCarritosUsuario(a));
+        getAll(`carritos/idUsuario/${userActive}`).then(a => cargaCarritosUsuario(a));
         document.getElementById("listaCesta").innerHTML = `
    <div>
      <b class="g--font-size-2xl">Lista de Carritos </b>
@@ -605,9 +593,9 @@ function recuperaDatosCarrito(id) {
         })
       }
 function recompra(id) {
-        crearCarrito(idUserActive);
+        crearCarrito(userActive);
         patch("carritos", carritoActivoId, { activo: false })
-          .then(getOne("carritos/activo/usuario/true", idUserActive).then(carro => {
+          .then(getOne("carritos/activo/usuario/true", userActive).then(carro => {
             getAll(`productos/idCarrito/${id}`).then(a => {
               document.getElementById("resumenProductos").innerHTML = "";
               JSON.parse(a).forEach(producto => { anyadirProducto(carro[0].id, producto.id); anyadirAcarrito(producto); })
@@ -631,7 +619,7 @@ function pintaCarritoActivo(a) {
       }
   //IMPORTANTE
 function cargaLogout() {
-        getOne("usuarios", idUserActive).then(usuario =>
+        getOne("usuarios", userActive).then(usuario =>
           document.getElementById("logout").innerHTML = `<div>
   <b class="g--font-size-2xl text-emerald-900">DATOS USUARIO <br><br>
   <p><b class="g--font-size-xl text-emerald-900">Nombre</b></p>
@@ -690,8 +678,9 @@ function cargaLogin() {
       }
 //IMPORTANTE
 function cierraSesion() {
-        patch("usuarios", idUserActive, { log: false }).then(location.reload())
-      }
+    localStorage.clear();
+    location.reload();
+}
 function cargaCarritoActivo(nombre) {
         getOne("usuarios/nombre", nombre)
           .then(a => getOne("carritos/activo/usuario/true", a[0].id)

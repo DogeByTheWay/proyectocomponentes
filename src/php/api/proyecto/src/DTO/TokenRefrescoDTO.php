@@ -4,7 +4,7 @@ use JsonSerializable;
 
 class TokenRefrescoDTO implements JsonSerializable{
 
-	function __construct(private ?int $id, private int $idUsuario, private string $token, private int $expiraEn, private bool $activo) 
+	function __construct(private ?int $id, private int $idUsuario, private string $token, private int $expiraEn, private int $activo) 
 	{
 	    $this->idUsuario = $idUsuario;
 	    $this->token = $token;
@@ -28,7 +28,7 @@ class TokenRefrescoDTO implements JsonSerializable{
 		return $this->expiraEn;
 	}
 
-	public function activo(): bool {
+	public function activo(): int {
 		return $this->activo;
 	}
 	
