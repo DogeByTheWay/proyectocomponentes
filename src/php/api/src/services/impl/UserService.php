@@ -19,4 +19,8 @@ class UserService implements IUserService {
     public static function insert(UserDTO $user): bool {
 		return UserFactory::getDAO()::insert($user);
     }
+    
+    public static function find(int $idUsuario): UserDTO {
+      return UserFactory::getDAO()::find($idUsuario);
+    }
 }

@@ -17,10 +17,29 @@ class TokenRefrescoController {
         $this->service = TokenRefrescoFactory::getService();
 	}
 
+    public function find() {        
+        try {
+            $tokenRefresco = ltrim(getallheaders()['Authorization'], 'Bearer ');
+            $DTO = TokenRefrescoFactory::getService()::findByToken($token); 
+            $now = strtotime('now');
+            if ($now < $DTO->expiraEn()) {
+                if($DTO->activo() == 1) {
+                    HTTPResponse::json(200,"Token todavia valido.");
+                } else {
+                    HTTPResponse::json(511,"Token hackeado.");
+                }                
+            } else {            
+                HTTPResponse::json(400,"Token expirado.");
+            }
+        } catch( \Throwable $e) {
+            HttpResponse::json(400, $e->getMessage() . "Token invalido");
+        }
+    }
+
     
     public function insert($idUsuario) {
         date_default_timezone_set('Europe/Madrid'); 
-        $date = strtotime("now + 30 seconds");
+        $date = strtotime("now + 3000 seconds");
         $token = password_hash($date, PASSWORD_DEFAULT, ['cost' => 5]);
         $data = new TokenRefrescoDTO(null,$idUsuario, $token, $date, true);
         try {

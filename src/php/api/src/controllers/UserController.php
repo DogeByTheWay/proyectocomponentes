@@ -77,6 +77,14 @@ class UserController {
         
     }
 
+    public function getUser($idUsuario) {
+        try {
+            HTTPResponse::json(200, UserFactory::getService()::find($idUsuario));
+        }catch(\Exception $e) {
+            HTTPResponse::json(404, "El id no esta registrado");
+        }
+    }
+
     public function logout($id) {
         try {
             UserFactory::getService()::findById($id);

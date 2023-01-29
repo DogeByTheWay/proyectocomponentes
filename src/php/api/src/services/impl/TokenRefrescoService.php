@@ -10,7 +10,7 @@ use App\services\ITokenRefrescoService;
 
 class TokenRefrescoService implements ITokenRefrescoService{
     public static function findByToken(string $token): TokenRefrescoDTO {
-        return true;
+        return TokenRefrescoFactory::getDAO()::findByToken($idUsuario);
     }
     public static function read(int $idUsuario): array  {
         return TokenRefrescoFactory::getDAO()::read($idUsuario);

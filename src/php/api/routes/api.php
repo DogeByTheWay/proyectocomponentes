@@ -7,7 +7,8 @@ $router->post('/registro','controllers\UserController@registro');
 $router->post('/login', 'controllers\UserController@login');
 $router->get('/logout/(\d+)', 'controllers\UserController@logout');
 $router->get('/token', 'controllers\TokenController@isExpired');
-
+$router->get('/tokenrefresco', 'controllers\TokenRefrescoController@find');
+$router->get('/user/(\d+)', 'controllers\UserController@getUser');
 $router->get('/', function() { echo "Bienvenid@ a Tech'n'Save"; });
 $router->get('/usuarios', 'controllers\UserController@all');
 $router->get('/usuarios/(\d+)', 'controllers\UserController@find');

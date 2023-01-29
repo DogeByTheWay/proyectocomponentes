@@ -23,4 +23,14 @@ class UserDAO implements IUserDAO {
     public static function findById(int $id): \stdClass {
         return DB::table('usuarios')->find($id);
     }
+    
+    public static function find(int $idUsuario): USerDTO {
+        $db_data =  DB::table('usuarios')->find($idUsuario);
+        $result = new UserDTO(
+            $db_data->id, 
+            $db_data->nombre, 
+            $db_data->password
+        );            
+        return $result; 
+    }
 }

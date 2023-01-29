@@ -8,7 +8,15 @@ use App\DAO\ITokenRefrescoDAO;
 
 class TokenRefrescoDAO implements ITokenRefrescoDAO{
     public static function findByToken(string $token): TokenRefrescoDTO {
-        return true;
+        $db_data =  DB::table('tokenrefresco')->findByToken($token);
+        $result = new TokenRefrescoDTO(
+            $db_data->id,
+            $db_data->idUsuario, 
+            $db_data->token, 
+            $db_data->expiraEn,
+            $db_data->activo
+        );            
+        return $result; 
     }
     public static function read(int $idUsuario): array {
         return DB::table('tokenrefresco')->where('idUsuario', '=', $idUsuario)->get();
