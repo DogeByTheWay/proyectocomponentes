@@ -1,0 +1,40 @@
+version: "3"
+services:
+    www:
+        build: .
+        ports:
+            - "3000:80"
+        volumes:
+            - ./src/php/html:/var/www/html/
+            - ./src/php/api:/var/www/
+        links:
+            - db
+        networks:
+            - default
+    db:
+        image: mysql:8.0.31
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: tiendacomponentes
+            MYSQL_USER: esteban
+            MYSQL_PASSWORD: 123
+            MYSQL_ROOT_PASSWORD: 123
+        volumes:
+            - ./db:/docker-entrypoint-initdb.d
+            - persistent:/var/lib/mysql
+        networks:
+            - default
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:5.2
+        links:
+            - db:db
+        ports:
+            - 8000:80
+        environment:
+            MYSQL_USER: esteban
+            MYSQL_PASSWORD: 123
+            MYSQL_ROOT_PASSWORD: 123
+volumes:
+    persistent:

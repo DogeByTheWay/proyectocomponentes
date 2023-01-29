@@ -270,7 +270,11 @@ function pintarOfertas(of) {
   ofertasFlash.innerHTML = resultado;
 
   Array.from(ofertasFlash.getElementsByClassName("c-card__img")).forEach((e) =>
-    e.addEventListener("click", () => buscarArticuloPorId(e.id))
+    e.addEventListener("click", () => {console.log("buscar"+e.id);
+      buscarArticuloPorId(e.id);
+      
+    })
+    
   );
   Array.from(ofertasFlash.getElementsByTagName("a")).forEach((e) =>
     e.addEventListener("click", () => isLogedCardToCarrito(e.id))
@@ -758,13 +762,14 @@ function cargacesta() {
   </div>`;
       }
 function buscarArticuloPorId(idArticulo) {
-        getOne("articulos/id", idArticulo)
-          .then((a) => buscarSubcategoriaNombre(a[0]))
+        getOne("articulos", idArticulo)
+          .then((a) => {console.log(a);
+            buscarSubcategoriaNombre(a);})
           .catch((e) => console.log(e));
       }
 function buscarSubcategoriaNombre(articulo) {
         getOne("subcategorias", articulo.subcategoria)
-          .then((a) => cargarProducto(articulo, a[0].nombre))
+          .then((a) => cargarProducto(articulo, a.nombre))
           .catch((e) => console.log(e));
       }
 function cargarProducto(articulo, subcategoriaNombre) {
