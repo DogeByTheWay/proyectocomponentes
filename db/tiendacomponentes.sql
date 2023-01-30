@@ -127,7 +127,7 @@ INSERT INTO `carritos` (`id`, `idUsuario`, `estado`, `activo`) VALUES
 -- Estructura de tabla para la tabla `categorias`
 --
 
-create table `Categorias`(
+create table `categorias`(
 `id` int auto_increment,
 `nombre` varchar(40),
  primary key (`id`)
@@ -137,7 +137,7 @@ create table `Categorias`(
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `Categorias`(`id`,`nombre`) VALUES 
+INSERT INTO `categorias`(`id`,`nombre`) VALUES 
 (null,'Ordenadores'),
 (null,'DiscosDuros'),
 (null,'Componentes'),
