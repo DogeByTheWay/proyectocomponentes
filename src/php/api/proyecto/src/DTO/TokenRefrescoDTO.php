@@ -31,6 +31,9 @@ class TokenRefrescoDTO implements JsonSerializable{
 	public function activo(): int {
 		return $this->activo;
 	}
+	public function setActivo(int $activo) {
+		$this->activo = $activo;
+	}
 	
 	function jsonSerialize(): mixed {
 		return [

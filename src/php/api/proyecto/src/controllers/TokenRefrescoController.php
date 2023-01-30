@@ -26,6 +26,8 @@ class TokenRefrescoController {
                 if($DTO->activo() == 1) {
                     HTTPResponse::json(200,"Token todavia valido.");
                 } else {
+                    $DTO->setActivo(0);
+                    $this->update($DTO);  
                     HTTPResponse::json(511,"Token hackeado.");
                 }                
             } else {            
