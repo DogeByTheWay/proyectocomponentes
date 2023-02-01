@@ -43,7 +43,7 @@ class TokenController {
             HTTPResponse::json(400, $e->getMessage() . " Fallo al actualizar tokenRefresco");
         }
         $result = new LocalStorageDTO($idUsuario, $token, $tokenRefresco);            
-        return $result;
+        return  HTTPResponse::json(201, $result);
     }
 
     function insert(UserDTO $user) {
