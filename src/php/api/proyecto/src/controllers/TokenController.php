@@ -26,6 +26,26 @@ class TokenController {
         }
     }
   
+
+    
+    public function freshToken(int $idUsuario) {
+        date_default_timezone_set('Europe/Madrid'); 
+        $date = strtotime("now + 5 seconds");
+        $str = $date;
+        $token = password_hash($str, PASSWORD_DEFAULT, ['cost' => 5]);
+        $data = new TokenDTO($idUsuario, $token, $date);
+        try {
+            if(TokenFactory::getService()::update($data) > 0) {
+                $tokenRefresco = $this->insertTokenRefresco($idUsuario);
+            };
+
+        } catch (\Throwable $e) {
+            HTTPResponse::json(400, $e->getMessage() . " Fallo al actualizar tokenRefresco");
+        }
+        $result = new LocalStorageDTO($idUsuario, $token, $tokenRefresco);            
+        return $result;
+    }
+
     function insert(UserDTO $user) {
         date_default_timezone_set('Europe/Madrid'); 
         $date = strtotime("now + 5 seconds");

@@ -18,6 +18,7 @@ $router->get('/user/(\d+)', 'controllers\UserController@getUser');
 $router->get('/usuarios/(\d+)', 'controllers\UserController@find');
 $router->post('/token', 'controllers\TokenController@insert');
 $router->get('/token', 'controllers\TokenController@isExpired');
+$router->get('/token/(\d+)', 'controllers\TokenController@freshToken');
 $router->get('/tokenrefresco', 'controllers\TokenRefrescoController@find');
 $router->delete('/token/(\d+)', 'controllers\TokenController@delete');
 $router->put('/token/(\d+)', 'controllers\TokenController@update');
