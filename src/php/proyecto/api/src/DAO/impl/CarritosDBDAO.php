@@ -28,15 +28,17 @@ class CarritosDBDAO implements ICarritosDAO
 
 
 
-    function findById(int $id): CarritoDTO
+    function findById(int $id): array
     {
-        $db_data = DB::table('carritos')->find($id);
-        $result = new CarritoDTO(
-            $db_data->id,
-            $db_data->idUsuario,
-            $db_data->estado,
-            $db_data->activo
-        );
+        $db_data = DB::table('carritos')->findByIdUsuarioCarrito($id);
+        foreach ($db_data as $carrito) {
+            $result[] = new CarritoDTO(
+                    $carrito->id,
+                    $carrito->idUsuario,
+                    $carrito->estado,
+                    $carrito->activo
+            );
+        }
 
         return $result;
     }

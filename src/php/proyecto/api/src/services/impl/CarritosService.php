@@ -21,7 +21,7 @@ class CarritosService implements ICarritosService {
     }
  
   
-    public function find($id): CarritoDTO {
+    public function find($id): array {
         return $this->dao->findById($id);
     }
 

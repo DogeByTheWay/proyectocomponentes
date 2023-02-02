@@ -527,7 +527,7 @@ function eliminaCarrito(id) {
     .then(del("carritos", id).then(cargaHistorial())) 
     }
 function cargaHistorial() {
-        getAll(`carritos/idUsuario/${userActive.idUsuario}`).then(a => cargaCarritosUsuario(a));
+        getAll(`carritos/${getDato("idUsuario")}`).then(a => cargaCarritosUsuario(a));
         document.getElementById("listaCesta").innerHTML = `
    <div>
      <b class="g--font-size-2xl">Lista de Carritos </b>
@@ -551,7 +551,7 @@ function cargaHistorial() {
 
       }
 function cargaCarritosUsuario(a) {
-
+console.log(JSON.parse(a))
         let pendiente = JSON.parse(a).filter(encontrado => encontrado.estado == "pendiente");
         let pagado = JSON.parse(a).filter(encontrado => encontrado.estado == "pagado");
 
@@ -582,7 +582,7 @@ function recuperaDatosCarrito(id) {
         })
       }
 function recompra(id) {
-        crearCarrito(userActive.idUsuario);
+        crearCarrito(getDato("idUsuario"));
         patch("carritos", carritoActivoId, { activo: false })
           .then(getOne("carritos/activo/usuario/true", userActive.idUsuario).then(carro => {
             getAll(`productos/idCarrito/${id}`).then(a => {
