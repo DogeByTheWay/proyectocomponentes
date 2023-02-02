@@ -21,7 +21,13 @@ class ArticulosService implements IArticulosService {
     }
  
   
+
     function find($id): ArticuloDTO {
-return $this->dao->findById($id);
+        return $this->dao->findById($id);
+    }
+
+    function findElemento($categoria,$id): array
+    {
+       return $this->dao->findByCategorias($categoria, $id);
     }
 }

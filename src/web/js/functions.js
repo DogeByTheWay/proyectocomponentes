@@ -207,7 +207,7 @@ function comprobarSubcategoria(Array2, idCategoria) {
 
   Array.from(encontrado).forEach((sub) => {
     resultado += `
-    <li class="c-nav__item subcategoria" id="sub${sub.id}">${sub.nombre}
+    <li class="c-nav__item subcategoria" id="sub${sub.id}"><a class="cursor-pointer">${sub.nombre}</a)
     </li>
    `;
   })
@@ -262,17 +262,22 @@ function pintarOfertas(of) {
   //console.log(art);
 }
 function obtenerArticulos(id, nombreCategoria) {
-  if (id.substring(0, 1) === "c") {
+  if (id.substring(0, 3) === "sub") {
     console.log("entra aqui1");
-    getOnePage(`articulos/categoriaPage`, id.substring(1)).then(
+    getAll(`articulos/subcategoria/${id.substring(3)}`).then(
+      (a) => {
+        pintarArticulos(JSON.parse(a), nombreCategoria);
+      }
+    );
+    /*getOnePage(`articulos/categoriaPage`, id.substring(1)).then(
       (articulos_headerArray) => {
         pintarPaginacion(articulos_headerArray, nombreCategoria);
       }
-    );
+    );*/
 
-  }   else if(id.substring(0, 3) === "sub"){
+  }   else if(id.substring(0, 1) === "c" ){
     console.log("entra aqui2");
-    getAll(`articulos/subcategoria/${id.substring(3)}`).then(
+    getAll(`articulos/categoria/${id.substring(1)}`).then(
       (a) => {
         pintarArticulos(JSON.parse(a), nombreCategoria);
       }
@@ -342,7 +347,7 @@ function pintarPaginacion(articulos_headerArray, nombreCategoria) {
   pintarArticulos(articulos_headerArray, nombreCategoria, textoPaginacion, urlFirst, urlPrev, urlNext, urlLast);
 }
 
-function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, urlPrev, urlNext, urlLast) {
+function pintarArticulos(articulos, nombreCategoria) {
   let main = document.getElementById("contenedorTodo");
   main.innerHTML = "";
   let texto = `
@@ -350,6 +355,7 @@ function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, 
     <b class="g--font-size-xl">${nombreCategoria}</b>
     <div class="l-horizontal-space-between">`;
   articulos.forEach((item) => {
+    console.log(item);
     texto += `<div class="c-card">    
                 <img id="${item.id} " src="assets/img/${item.id}.jpg" class="cursor:pointer c-card__img">
                 <div class="c-card__body">
@@ -361,33 +367,8 @@ function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, 
               </div>`;
   });
   texto += "</section>";
-  main.innerHTML = texto + textoPaginacion;
-  if (typeof urlFirst !== "undefined") {
-    document.getElementById("urlFirst").addEventListener("click", () => {
-      obtenerArticulosDesdeUrlHeader(urlFirst, nombreCategoria);
-    });
-  }
-  if (typeof urlPrev !== "undefined") {
-    document
-      .getElementById("urlPrev")
-      .addEventListener("click", () =>
-        obtenerArticulosDesdeUrlHeader(urlPrev, nombreCategoria)
-      );
-  }
-  if (typeof urlNext !== "undefined") {
-    document
-      .getElementById("urlNext")
-      .addEventListener("click", () =>
-        obtenerArticulosDesdeUrlHeader(urlNext, nombreCategoria)
-      );
-  }
-  if (typeof urlLast !== "undefined") {
-    document
-      .getElementById("urlLast")
-      .addEventListener("click", () =>
-        obtenerArticulosDesdeUrlHeader(urlLast, nombreCategoria)
-      );
-  }
+  main.innerHTML = texto ;
+
   Array.from(main.getElementsByClassName("c-card__img")).forEach((e) =>
     e.addEventListener("click", () => buscarArticuloPorId(e.id))
   );

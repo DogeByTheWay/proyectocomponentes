@@ -72,7 +72,7 @@ function getOne(clave,valor) {
 function getOneRow(clave,valor,valor2) {
   return new Promise(function (resolve, reject) {
     let req = new XMLHttpRequest();
-    req.open("GET", `http://localhost:3000/${clave}/${valor}/${valor2}`);
+    req.open("GET", `http://localhost:81/PROYECTO_GRUPAL/api/${clave}/${valor}/${valor2}`);
     req.responseType = "json";
     req.send();
     req.onload = function () {
@@ -86,7 +86,7 @@ function getOneRow(clave,valor,valor2) {
 function patch(clave, valor, body) {
   return new Promise(function (resolve, reject) {
     let req = new XMLHttpRequest();
-    req.open("PATCH", `http://localhost:3000/${clave}/${valor}`);
+    req.open("PATCH", `http://localhost:81/PROYECTO_GRUPAL/api/${clave}/${valor}`);
     req.setRequestHeader("Content-type", "application/json;charset=utf-8");
     req.send(JSON.stringify(body));
     req.onload = function () {
@@ -101,7 +101,7 @@ function patch(clave, valor, body) {
 function getOnePage(clave,valor) {
   return new Promise(function (resolve, reject) {
     let req = new XMLHttpRequest();
-    req.open("GET", `http://localhost:3000/${clave}/${valor}`);
+    req.open("GET", `http://localhost:81/PROYECTO_GRUPAL/api/${clave}/${valor}`);
     req.responseType = "json";
     req.send();
     req.onload = function () {

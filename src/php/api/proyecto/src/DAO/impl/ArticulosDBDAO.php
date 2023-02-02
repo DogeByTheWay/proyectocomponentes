@@ -50,4 +50,29 @@ class ArticulosDBDAO implements IArticulosDAO
         return $result;
     }
 
+    
+    function findByCategorias(string $categoria,int $id): array
+    {
+        $result = array();
+
+        $db_data = DB::table('articulos')->findElemento($categoria,$id);
+        foreach ($db_data as $articulo) {
+            $result[] = new ArticuloDTO(
+                    $articulo->id,
+                    $articulo->nombre,
+                    $articulo->descripcion,
+                    $articulo->precio,
+                    $articulo->oferta,
+                    $articulo->descuento,
+                    $articulo->categoria,
+                    $articulo->subcategoria
+
+            );
+        }
+
+        return $result;
+    }
+
+ 
+
 }

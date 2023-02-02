@@ -47,6 +47,11 @@ class QueryBuilder {
         return $this->getOne();
     }
 
+    public function findElemento(string $elemento,int $id) {
+        $this->where($elemento, '=', $id);
+        return $this->get();
+    }
+
     public function findUser(string $usuario) {
         $this->where('usuario', '=', $usuario);
         return $this->getOne();
