@@ -119,12 +119,13 @@ function alreadyLoggedChecker() {
   let usuario=getDato("idUsuario");
   let token=getDato("token");
   let tokenRefresco=getDato("tokenRefresco");
-  if(usuario !=undefined){
+  if(usuario !=null){
     validateToken("token",token)
     .then(pintaDatosUsuario())
-    .catch(e=>{validateToken("tokenrefresco",tokenRefresco)
-    .then(pintaDatosUsuario())
-    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})})
+    .catch(validateToken("tokenrefresco",tokenRefresco)
+    .catch(e=>{alert("Su sesion ha expirado");cierraSesion()})
+    );
+    
   }
 }
 
@@ -411,7 +412,7 @@ function isLogedCardToCarrito(articuloId) {
     validateToken("token",token)
     .then(buscarCarritoAModificar(articuloId, usuario))
     .catch(e=>{validateToken("tokenrefresco",tokenRefresco)
-    .then(buscarCarritoAModificar(articuloId, usuario))
+    .then(v=>{validateToken("token",usuario);buscarCarritoAModificar(articuloId, usuario)})
     .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})})
   }
 }
@@ -423,7 +424,9 @@ function isLogedToCarrito() {
     validateToken("token",token)
     .then(abrirCesta())
     .catch(e=>{validateToken("tokenrefresco",tokenRefresco)
-    .then(abrirCesta())
+    .then(getOne("token",usuario)
+    .then(respuesta=>{setLocalStorage(respuesta);abrirCesta()})
+    )
     .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})})
   }
 }
