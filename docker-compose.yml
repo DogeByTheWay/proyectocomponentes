@@ -1,16 +1,30 @@
 version: "3"
 services:
-    www:
-        build: .
+    app:
+        build: 
+            context: .
+            dockerfile: Dockerfile
         ports:
-            - "3000:80"
+            - "80:80"
         volumes:
-            - ./src/php/html:/var/www/html/
-            - ./src/php/api:/var/www/
+            - ./src/web:/home/app/web
         links:
             - db
         networks:
-            - default
+            - database_network_app
+    app-api:
+        build:
+            context: .
+            dockerfile: DockerfileAPI 
+        ports:
+            - "3000:80"
+        volumes:
+            - ./src/php/html:/var/www/html
+            - ./src/php/proyecto:/var/www
+        links:
+            - db
+        networks:
+            - database_network_app
     db:
         image: mysql:8.0.31
         command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
@@ -25,16 +39,10 @@ services:
             - ./db:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
-            - default
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin:5.2
-        links:
-            - db:db
-        ports:
-            - 8000:80
-        environment:
-            MYSQL_USER: esteban
-            MYSQL_PASSWORD: 123
-            MYSQL_ROOT_PASSWORD: 123
+            - database_network_app
 volumes:
     persistent:
+
+networks:
+    database_network_app:
+        driver: bridge

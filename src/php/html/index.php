@@ -1,2 +1,2 @@
 <?php
-include "../proyecto/index.php";
+include "../api/index.php";
