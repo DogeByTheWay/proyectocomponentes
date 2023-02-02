@@ -108,7 +108,7 @@ function tieneArticulos() {
   }
 } /*IMPORTANTE*/
 function actualizaCarroPagado() {
-  getOne("carritos/activo/usuario/true", userActive).then(a => { patch("carritos", a[0].id, { estado: "pagado", activo: false }); location.reload(true) })
+  getOne("carritos/activo/usuario/true", userActive.idUsuario).then(a => { patch("carritos", a[0].id, { estado: "pagado", activo: false }); location.reload(true) })
 }
 
 function cerrarHistorial() {
@@ -122,19 +122,19 @@ function alreadyLoggedChecker() {
   if(usuario !=undefined){
     validateToken("token",token)
     .then(pintaDatosUsuario())
-    .catch(validateToken("tokenrefresco",tokenRefresco)
+    .catch(e=>{validateToken("tokenrefresco",tokenRefresco)
     .then(pintaDatosUsuario())
-    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()}))
+    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})})
   }
 }
 
 function pintaDatosUsuario() {
   getOne("user",getDato("idUsuario")).then(usuario =>{userActive=usuario;
-    cargaLogout();
+    cargaLogout(usuario);
     document.getElementById("loginBtn").innerHTML = `<i class="fa-solid fa-user mr-3"></i>${usuario.nombre}`;
     document.getElementById("historyFeat").style.display = "block";
     document.getElementById("loginBtn").onclick = abrirLogout;
-    cargaCarritoActivo(usuario.nombre);
+    cargaCarritoActivo(usuario.id);
   })
   
 }
@@ -236,7 +236,6 @@ function comprobarSubcategoria(Array2, idCategoria) {
 function pintarOfertas(of) {
 
   let encontrado=  JSON.parse(of).filter((ofertas)=>ofertas.oferta==true);
-  console.log(encontrado);
   let ofertasFlash = document.getElementById("ofertasFlash");
 
   let resultado = "";
@@ -405,18 +404,28 @@ function pintarArticulos(articulos, nombreCategoria, textoPaginacion, urlFirst, 
 }
 
 function isLogedCardToCarrito(articuloId) {
-  getOne("usuarios/log", "true").then((usuario) =>
-    usuario.length != 0
-      ? buscarCarritoAModificar(articuloId, usuario[0].id)
-      : alert("Usuario no ha iniciado sesion.")
-  );
+  let usuario=getDato("idUsuario");
+  let token=getDato("token");
+  let tokenRefresco=getDato("tokenRefresco");
+  if(usuario !=undefined){
+    validateToken("token",token)
+    .then(buscarCarritoAModificar(articuloId, usuario))
+    .catch(e=>{validateToken("tokenrefresco",tokenRefresco)
+    .then(buscarCarritoAModificar(articuloId, usuario))
+    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})})
+  }
 }
 function isLogedToCarrito() {
-  getOne("usuarios/log", "true").then((usuario) =>
-    usuario.length == 0
-      ? alert("No puedes acceder al carrito si no estas logeado")
-      : abrirCesta()
-  );
+  let usuario=getDato("idUsuario");
+  let token=getDato("token");
+  let tokenRefresco=getDato("tokenRefresco");
+  if(usuario !=undefined){
+    validateToken("token",token)
+    .then(abrirCesta())
+    .catch(e=>{validateToken("tokenrefresco",tokenRefresco)
+    .then(abrirCesta())
+    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})})
+  }
 }
 function buscarCarritoAModificar(idArticulo, idUsuario) {
   getOneRow("carritos/activo/usuario", true, idUsuario)
@@ -430,7 +439,7 @@ function crearCarrito(id) {
     activo: true,
   };
   post("carritos", carro).then(
-    getOne("carritos/activo/usuario/true", userActive).then(a => carritoActivoId = a[0].id))
+    getOne("carritos/activo/usuario/true", userActive.idUsuario).then(a => carritoActivoId = a[0].id))
 }
 
 function buscarArticuloEnProductos(idCarrito, idArticulo) {
@@ -538,7 +547,7 @@ function eliminaCarrito(id) {
     .then(del("carritos", id).then(cargaHistorial())) 
     }
 function cargaHistorial() {
-        getAll(`carritos/idUsuario/${userActive}`).then(a => cargaCarritosUsuario(a));
+        getAll(`carritos/idUsuario/${userActive.idUsuario}`).then(a => cargaCarritosUsuario(a));
         document.getElementById("listaCesta").innerHTML = `
    <div>
      <b class="g--font-size-2xl">Lista de Carritos </b>
@@ -593,9 +602,9 @@ function recuperaDatosCarrito(id) {
         })
       }
 function recompra(id) {
-        crearCarrito(userActive);
+        crearCarrito(userActive.idUsuario);
         patch("carritos", carritoActivoId, { activo: false })
-          .then(getOne("carritos/activo/usuario/true", userActive).then(carro => {
+          .then(getOne("carritos/activo/usuario/true", userActive.idUsuario).then(carro => {
             getAll(`productos/idCarrito/${id}`).then(a => {
               document.getElementById("resumenProductos").innerHTML = "";
               JSON.parse(a).forEach(producto => { anyadirProducto(carro[0].id, producto.id); anyadirAcarrito(producto); })
@@ -618,8 +627,7 @@ function pintaCarritoActivo(a) {
         JSON.parse(a).forEach(articulo => { buscarArticuloEnProductos(articulo.idCarrito, articulo.idArticulo) });
       }
   //IMPORTANTE
-function cargaLogout() {
-        getOne("usuarios", userActive).then(usuario =>
+function cargaLogout(usuario) {
           document.getElementById("logout").innerHTML = `<div>
   <b class="g--font-size-2xl text-emerald-900">DATOS USUARIO <br><br>
   <p><b class="g--font-size-xl text-emerald-900">Nombre</b></p>
@@ -637,7 +645,7 @@ function cargaLogout() {
   </div><br>
     <a class="c-button" onclick="cierraSesion()">Cierra sesion</a>
   </div>`
-        )
+
       }
 function cargaLogin() {
         document.getElementById("login").innerHTML = `
@@ -681,9 +689,8 @@ function cierraSesion() {
     localStorage.clear();
     location.reload();
 }
-function cargaCarritoActivo(nombre) {
-        getOne("usuarios/nombre", nombre)
-          .then(a => getOne("carritos/activo/usuario/true", a[0].id)
+function cargaCarritoActivo(id) {
+    /*getOne("carritos/activo/usuario/true", id)
             .then(activo => {
               console.log(a)
               if (activo.length != 0) {
@@ -692,9 +699,8 @@ function cargaCarritoActivo(nombre) {
               } else {
                 crearCarrito(a[0].id);
               }
-            })
-          )
-      }
+            })*/
+}
 
 function cargacesta() {
         document.getElementById(
