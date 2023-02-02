@@ -119,13 +119,12 @@ function alreadyLoggedChecker() {
   let usuario=getDato("idUsuario");
   let token=getDato("token");
   let tokenRefresco=getDato("tokenRefresco");
-  if(usuario !=null){
+  if(usuario !=undefined){
     validateToken("token",token)
     .then(pintaDatosUsuario())
     .catch(validateToken("tokenrefresco",tokenRefresco)
-    .catch(e=>{alert("Su sesion ha expirado");cierraSesion()})
-    );
-    
+    .then(pintaDatosUsuario())
+    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()}))
   }
 }
 

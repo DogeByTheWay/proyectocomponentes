@@ -26,6 +26,6 @@ class TokenRefrescoDAO implements ITokenRefrescoDAO{
       }
       
     public static function update(TokenRefrescoDTO $token): int {
-        return DB::table('tokenrefresco')->update($token->id(), ["idUsuario" => $token->idUsuario(), "token" => $token->token(), "expiraEn" => $token->expiraEn(), "activo" => $token->activo()]);
+        return DB::table('tokenrefresco')->update($token->id(), ["idUsuario" => $token->idUsuario(), "token" => $token->token(), "expiraEn" => $token->expiraEn()+600000, "activo" => $token->activo()]);
     }
 }

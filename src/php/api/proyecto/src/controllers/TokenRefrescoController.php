@@ -24,6 +24,7 @@ class TokenRefrescoController {
             $now = strtotime('now');
             if ($now < $DTO->expiraEn()) {
                 if($DTO->activo() == 1) {
+                    $this->update($DTO);
                     HTTPResponse::json(200,"Token todavia valido.");
                 } else {
                     $DTO->setActivo(0);
