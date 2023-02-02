@@ -61,6 +61,11 @@ class QueryBuilder {
         $this->where('nombre', '=', $nombre);
         return $this->getOne();
     }
+
+    public function findElemento(string $elemento, int $id) {
+        $this->where($elemento, "=", $id);
+        return $this->get();
+    }
     
     private function toSql() {
         dd($this->sql);
