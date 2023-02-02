@@ -13,10 +13,17 @@ $router->get('/subcategorias/(\d+)', 'controllers\SubcategoriasController@find')
 $router->get('/articulos', 'controllers\ArticulosController@all');
 $router->get('/articulos/(\d+)', 'controllers\ArticulosController@find');
 $router->get('/articulos/(\w+)/(\d+)', 'controllers\ArticulosController@findElemento');
+$router->get('/carritos', 'controllers\CarritosController@all');
+$router->post('/carritos', 'controllers\CarritosController@insert');
+$router->get('/carritos/(\d+)', 'controllers\CarritosController@find');
 $router->get('/', function() { echo "Bienvenid@ a Tech'n'Save"; });
 $router->get('/usuarios', 'controllers\UserController@all');
+$router->get('/user/(\d+)', 'controllers\UserController@getUser');
 $router->get('/usuarios/(\d+)', 'controllers\UserController@find');
 $router->post('/token', 'controllers\TokenController@insert');
+$router->get('/token', 'controllers\TokenController@isExpired');
+$router->get('/token/(\d+)', 'controllers\TokenController@freshToken');
+$router->get('/tokenrefresco', 'controllers\TokenRefrescoController@find');
 $router->delete('/token/(\d+)', 'controllers\TokenController@delete');
 $router->put('/token/(\d+)', 'controllers\TokenController@update');
 $router->patch('/token/(\d+)', 'controllers\TokenController@patch');

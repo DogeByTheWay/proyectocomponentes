@@ -46,17 +46,22 @@ class QueryBuilder {
         $this->where('id', '=', $id);
         return $this->getOne();
     }
-
-    public function findElemento(string $elemento,int $id) {
-        $this->where($elemento, '=', $id);
-        return $this->get();
-    }
-
-    public function findUser(string $usuario) {
-        $this->where('usuario', '=', $usuario);
+    
+    public function findByToken(string $token) {
+        $this->where('token', '=', $token);
         return $this->getOne();
     }
 
+    public function findByIdUsuario(int $id) {
+        $this->where('idUsuario', '=', $id);
+        return $this->getOne();
+    }
+
+    public function findByNombre(string $nombre) {
+        $this->where('nombre', '=', $nombre);
+        return $this->getOne();
+    }
+    
     private function toSql() {
         dd($this->sql);
     }
@@ -85,6 +90,19 @@ class QueryBuilder {
         return DB::update($this->sql, $this->params);
         
     }
+    
+    public function updateToken($idUsuario, array $data) {
+        $this->where('idUsuario','=', $idUsuario);
+        $fieldsParams ="";
+        foreach ($data as $key => $value) {
+            $fieldsParams .= " $key=:$key,";
+            $this->params[":$key"] = $value;
+        }
+        $fieldsParams = rtrim($fieldsParams, ',');
+        $this->sql = "UPDATE $this->table SET $fieldsParams $this->where";
+        return DB::update($this->sql, $this->params);        
+    }
+
     public function delete(int $id) {
         $this->find($id);
         $this->sql= "DELETE FROM $this->table $this->where";
