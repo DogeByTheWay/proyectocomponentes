@@ -403,11 +403,8 @@ function isLogedToCarrito() {
   if(usuario !=undefined){
     validateToken("token",token)
     .then(abrirCesta())
-    .catch(e=>{validateToken("tokenrefresco",tokenRefresco)
-    .then(getOne("token",usuario)
-    .then(respuesta=>{setLocalStorage(respuesta);abrirCesta()})
-    )
-    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})})
+    .catch(e=>validateToken("tokenrefresco",tokenRefresco).then(abrirCesta()))    
+    .catch(e=>{alert("Tu sesión ha expirado, vuelve a iniciarte sesion");cierraSesion()})
   }
 }
 function buscarCarritoAModificar(idArticulo, idUsuario) {
